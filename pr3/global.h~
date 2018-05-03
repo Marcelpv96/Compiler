@@ -18,7 +18,6 @@ extern Symbol *insert(const char*, int);
 
 extern void init(void);
 extern void error(const char*);
-extern FILE *yyin;
 
 extern char *yytext;
 extern int yylineno;
