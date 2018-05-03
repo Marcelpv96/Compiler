@@ -56,4 +56,7 @@ Mkfile.old
 dkms.conf
 
 
+#temporal files
+*~
+
 # End of https://www.gitignore.io/api/c
