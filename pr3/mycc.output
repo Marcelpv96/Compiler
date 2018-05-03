@@ -1,0 +1,3069 @@
+Useless nonterminals
+
+   L
+   M
+   N
+
+
+Terminals which are not used
+
+   PA
+   NA
+   TA
+   DA
+   MA
+   AA
+   XA
+   OA
+   LA
+   RA
+   AR
+   PP
+   NN
+
+
+Useless rules
+
+   45 L: /* empty */
+
+   46 M: /* empty */
+
+   47 N: /* empty */
+
+
+State 36 conflicts: 18 shift/reduce
+State 37 conflicts: 18 shift/reduce
+State 38 conflicts: 18 shift/reduce
+State 39 conflicts: 18 shift/reduce
+State 60 conflicts: 18 shift/reduce
+State 68 conflicts: 18 shift/reduce
+State 69 conflicts: 18 shift/reduce
+State 70 conflicts: 18 shift/reduce
+State 71 conflicts: 18 shift/reduce
+State 72 conflicts: 18 shift/reduce
+State 73 conflicts: 18 shift/reduce
+State 74 conflicts: 18 shift/reduce
+State 75 conflicts: 18 shift/reduce
+State 76 conflicts: 18 shift/reduce
+State 77 conflicts: 18 shift/reduce
+State 78 conflicts: 18 shift/reduce
+State 79 conflicts: 18 shift/reduce
+State 80 conflicts: 18 shift/reduce
+State 81 conflicts: 18 shift/reduce
+State 82 conflicts: 18 shift/reduce
+State 83 conflicts: 18 shift/reduce
+State 84 conflicts: 18 shift/reduce
+State 85 conflicts: 18 shift/reduce
+State 92 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: stmts $end
+
+    1 stmts: stmts stmt
+    2      | /* empty */
+
+    3 stmt: ';'
+    4     | expr ';'
+    5     | IF '(' expr ')' stmt
+    6     | IF '(' expr ')' stmt ELSE stmt
+    7     | WHILE '(' expr ')' stmt
+    8     | DO stmt WHILE '(' expr ')' ';'
+    9     | FOR '(' expr ';' expr ';' expr ')' stmt
+   10     | RETURN expr ';'
+   11     | BREAK ';'
+   12     | '{' stmts '}'
+   13     | error ';'
+
+   14 expr: ID '=' expr
+   15     | expr OR expr
+   16     | expr AN expr
+   17     | expr '|' expr
+   18     | expr '^' expr
+   19     | expr '&' expr
+   20     | expr EQ expr
+   21     | expr NE expr
+   22     | expr '<' expr
+   23     | expr '>' expr
+   24     | expr LE expr
+   25     | expr GE expr
+   26     | expr LS expr
+   27     | expr RS expr
+   28     | expr '+' expr
+   29     | expr '-' expr
+   30     | expr '*' expr
+   31     | expr '/' expr
+   32     | expr '%' expr
+   33     | '!' expr
+   34     | '~' expr
+   35     | '+' expr
+   36     | '-' expr
+   37     | '(' expr ')'
+   38     | '$' INT8
+   39     | ID
+   40     | INT8
+   41     | INT16
+   42     | INT32
+   43     | FLT
+   44     | STR
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'!' (33) 33
+'$' (36) 38
+'%' (37) 32
+'&' (38) 19
+'(' (40) 5 6 7 8 9 37
+')' (41) 5 6 7 8 9 37
+'*' (42) 30
+'+' (43) 28 35
+'-' (45) 29 36
+'/' (47) 31
+';' (59) 3 4 8 9 10 11 13
+'<' (60) 22
+'=' (61) 14
+'>' (62) 23
+'^' (94) 18
+'{' (123) 12
+'|' (124) 17
+'}' (125) 12
+'~' (126) 34
+error (256) 13
+ID (258) 14 39
+INT8 (259) 38 40
+INT16 (260) 41
+INT32 (261) 42
+FLT (262) 43
+STR (263) 44
+BREAK (264) 11
+DO (265) 8
+ELSE (266) 6
+FOR (267) 9
+IF (268) 5 6
+RETURN (269) 10
+WHILE (270) 7 8
+PA (271)
+NA (272)
+TA (273)
+DA (274)
+MA (275)
+AA (276)
+XA (277)
+OA (278)
+LA (279)
+RA (280)
+OR (281) 15
+AN (282) 16
+EQ (283) 20
+NE (284) 21
+LE (285) 24
+GE (286) 25
+LS (287) 26
+RS (288) 27
+AR (289)
+PP (290)
+NN (291)
+
+
+Nonterminals, with rules where they appear
+
+$accept (56)
+    on left: 0
+stmts (57)
+    on left: 1 2, on right: 0 1 12
+stmt (58)
+    on left: 3 4 5 6 7 8 9 10 11 12 13, on right: 1 5 6 7 8 9
+expr (59)
+    on left: 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+    32 33 34 35 36 37 38 39 40 41 42 43 44, on right: 4 5 6 7 8 9 10
+    14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34
+    35 36 37
+
+
+state 0
+
+    0 $accept: . stmts $end
+
+    $default  reduce using rule 2 (stmts)
+
+    stmts  go to state 1
+
+
+state 1
+
+    0 $accept: stmts . $end
+    1 stmts: stmts . stmt
+
+    $end    shift, and go to state 2
+    error   shift, and go to state 3
+    ID      shift, and go to state 4
+    INT8    shift, and go to state 5
+    INT16   shift, and go to state 6
+    INT32   shift, and go to state 7
+    FLT     shift, and go to state 8
+    STR     shift, and go to state 9
+    BREAK   shift, and go to state 10
+    DO      shift, and go to state 11
+    FOR     shift, and go to state 12
+    IF      shift, and go to state 13
+    RETURN  shift, and go to state 14
+    WHILE   shift, and go to state 15
+    ';'     shift, and go to state 16
+    '('     shift, and go to state 17
+    '{'     shift, and go to state 18
+    '+'     shift, and go to state 19
+    '-'     shift, and go to state 20
+    '!'     shift, and go to state 21
+    '~'     shift, and go to state 22
+    '$'     shift, and go to state 23
+
+    stmt  go to state 24
+    expr  go to state 25
+
+
+state 2
+
+    0 $accept: stmts $end .
+
+    $default  accept
+
+
+state 3
+
+   13 stmt: error . ';'
+
+    ';'  shift, and go to state 26
+
+
+state 4
+
+   14 expr: ID . '=' expr
+   39     | ID .
+
+    '='  shift, and go to state 27
+
+    $default  reduce using rule 39 (expr)
+
+
+state 5
+
+   40 expr: INT8 .
+
+    $default  reduce using rule 40 (expr)
+
+
+state 6
+
+   41 expr: INT16 .
+
+    $default  reduce using rule 41 (expr)
+
+
+state 7
+
+   42 expr: INT32 .
+
+    $default  reduce using rule 42 (expr)
+
+
+state 8
+
+   43 expr: FLT .
+
+    $default  reduce using rule 43 (expr)
+
+
+state 9
+
+   44 expr: STR .
+
+    $default  reduce using rule 44 (expr)
+
+
+state 10
+
+   11 stmt: BREAK . ';'
+
+    ';'  shift, and go to state 28
+
+
+state 11
+
+    8 stmt: DO . stmt WHILE '(' expr ')' ';'
+
+    error   shift, and go to state 3
+    ID      shift, and go to state 4
+    INT8    shift, and go to state 5
+    INT16   shift, and go to state 6
+    INT32   shift, and go to state 7
+    FLT     shift, and go to state 8
+    STR     shift, and go to state 9
+    BREAK   shift, and go to state 10
+    DO      shift, and go to state 11
+    FOR     shift, and go to state 12
+    IF      shift, and go to state 13
+    RETURN  shift, and go to state 14
+    WHILE   shift, and go to state 15
+    ';'     shift, and go to state 16
+    '('     shift, and go to state 17
+    '{'     shift, and go to state 18
+    '+'     shift, and go to state 19
+    '-'     shift, and go to state 20
+    '!'     shift, and go to state 21
+    '~'     shift, and go to state 22
+    '$'     shift, and go to state 23
+
+    stmt  go to state 29
+    expr  go to state 25
+
+
+state 12
+
+    9 stmt: FOR . '(' expr ';' expr ';' expr ')' stmt
+
+    '('  shift, and go to state 30
+
+
+state 13
+
+    5 stmt: IF . '(' expr ')' stmt
+    6     | IF . '(' expr ')' stmt ELSE stmt
+
+    '('  shift, and go to state 31
+
+
+state 14
+
+   10 stmt: RETURN . expr ';'
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 32
+
+
+state 15
+
+    7 stmt: WHILE . '(' expr ')' stmt
+
+    '('  shift, and go to state 33
+
+
+state 16
+
+    3 stmt: ';' .
+
+    $default  reduce using rule 3 (stmt)
+
+
+state 17
+
+   37 expr: '(' . expr ')'
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 34
+
+
+state 18
+
+   12 stmt: '{' . stmts '}'
+
+    $default  reduce using rule 2 (stmts)
+
+    stmts  go to state 35
+
+
+state 19
+
+   35 expr: '+' . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 36
+
+
+state 20
+
+   36 expr: '-' . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 37
+
+
+state 21
+
+   33 expr: '!' . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 38
+
+
+state 22
+
+   34 expr: '~' . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 39
+
+
+state 23
+
+   38 expr: '$' . INT8
+
+    INT8  shift, and go to state 40
+
+
+state 24
+
+    1 stmts: stmts stmt .
+
+    $default  reduce using rule 1 (stmts)
+
+
+state 25
+
+    4 stmt: expr . ';'
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    ';'  shift, and go to state 49
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+
+state 26
+
+   13 stmt: error ';' .
+
+    $default  reduce using rule 13 (stmt)
+
+
+state 27
+
+   14 expr: ID '=' . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 60
+
+
+state 28
+
+   11 stmt: BREAK ';' .
+
+    $default  reduce using rule 11 (stmt)
+
+
+state 29
+
+    8 stmt: DO stmt . WHILE '(' expr ')' ';'
+
+    WHILE  shift, and go to state 61
+
+
+state 30
+
+    9 stmt: FOR '(' . expr ';' expr ';' expr ')' stmt
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 62
+
+
+state 31
+
+    5 stmt: IF '(' . expr ')' stmt
+    6     | IF '(' . expr ')' stmt ELSE stmt
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 63
+
+
+state 32
+
+   10 stmt: RETURN expr . ';'
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    ';'  shift, and go to state 64
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+
+state 33
+
+    7 stmt: WHILE '(' . expr ')' stmt
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 65
+
+
+state 34
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   37     | '(' expr . ')'
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    ')'  shift, and go to state 66
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+
+state 35
+
+    1 stmts: stmts . stmt
+   12 stmt: '{' stmts . '}'
+
+    error   shift, and go to state 3
+    ID      shift, and go to state 4
+    INT8    shift, and go to state 5
+    INT16   shift, and go to state 6
+    INT32   shift, and go to state 7
+    FLT     shift, and go to state 8
+    STR     shift, and go to state 9
+    BREAK   shift, and go to state 10
+    DO      shift, and go to state 11
+    FOR     shift, and go to state 12
+    IF      shift, and go to state 13
+    RETURN  shift, and go to state 14
+    WHILE   shift, and go to state 15
+    ';'     shift, and go to state 16
+    '('     shift, and go to state 17
+    '{'     shift, and go to state 18
+    '}'     shift, and go to state 67
+    '+'     shift, and go to state 19
+    '-'     shift, and go to state 20
+    '!'     shift, and go to state 21
+    '~'     shift, and go to state 22
+    '$'     shift, and go to state 23
+
+    stmt  go to state 24
+    expr  go to state 25
+
+
+state 36
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   35     | '+' expr .
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 35 (expr)]
+    AN        [reduce using rule 35 (expr)]
+    EQ        [reduce using rule 35 (expr)]
+    NE        [reduce using rule 35 (expr)]
+    LE        [reduce using rule 35 (expr)]
+    GE        [reduce using rule 35 (expr)]
+    LS        [reduce using rule 35 (expr)]
+    RS        [reduce using rule 35 (expr)]
+    '|'       [reduce using rule 35 (expr)]
+    '^'       [reduce using rule 35 (expr)]
+    '&'       [reduce using rule 35 (expr)]
+    '<'       [reduce using rule 35 (expr)]
+    '>'       [reduce using rule 35 (expr)]
+    '+'       [reduce using rule 35 (expr)]
+    '-'       [reduce using rule 35 (expr)]
+    '*'       [reduce using rule 35 (expr)]
+    '/'       [reduce using rule 35 (expr)]
+    '%'       [reduce using rule 35 (expr)]
+    $default  reduce using rule 35 (expr)
+
+
+state 37
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   36     | '-' expr .
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 36 (expr)]
+    AN        [reduce using rule 36 (expr)]
+    EQ        [reduce using rule 36 (expr)]
+    NE        [reduce using rule 36 (expr)]
+    LE        [reduce using rule 36 (expr)]
+    GE        [reduce using rule 36 (expr)]
+    LS        [reduce using rule 36 (expr)]
+    RS        [reduce using rule 36 (expr)]
+    '|'       [reduce using rule 36 (expr)]
+    '^'       [reduce using rule 36 (expr)]
+    '&'       [reduce using rule 36 (expr)]
+    '<'       [reduce using rule 36 (expr)]
+    '>'       [reduce using rule 36 (expr)]
+    '+'       [reduce using rule 36 (expr)]
+    '-'       [reduce using rule 36 (expr)]
+    '*'       [reduce using rule 36 (expr)]
+    '/'       [reduce using rule 36 (expr)]
+    '%'       [reduce using rule 36 (expr)]
+    $default  reduce using rule 36 (expr)
+
+
+state 38
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   33     | '!' expr .
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 33 (expr)]
+    AN        [reduce using rule 33 (expr)]
+    EQ        [reduce using rule 33 (expr)]
+    NE        [reduce using rule 33 (expr)]
+    LE        [reduce using rule 33 (expr)]
+    GE        [reduce using rule 33 (expr)]
+    LS        [reduce using rule 33 (expr)]
+    RS        [reduce using rule 33 (expr)]
+    '|'       [reduce using rule 33 (expr)]
+    '^'       [reduce using rule 33 (expr)]
+    '&'       [reduce using rule 33 (expr)]
+    '<'       [reduce using rule 33 (expr)]
+    '>'       [reduce using rule 33 (expr)]
+    '+'       [reduce using rule 33 (expr)]
+    '-'       [reduce using rule 33 (expr)]
+    '*'       [reduce using rule 33 (expr)]
+    '/'       [reduce using rule 33 (expr)]
+    '%'       [reduce using rule 33 (expr)]
+    $default  reduce using rule 33 (expr)
+
+
+state 39
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   34     | '~' expr .
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 34 (expr)]
+    AN        [reduce using rule 34 (expr)]
+    EQ        [reduce using rule 34 (expr)]
+    NE        [reduce using rule 34 (expr)]
+    LE        [reduce using rule 34 (expr)]
+    GE        [reduce using rule 34 (expr)]
+    LS        [reduce using rule 34 (expr)]
+    RS        [reduce using rule 34 (expr)]
+    '|'       [reduce using rule 34 (expr)]
+    '^'       [reduce using rule 34 (expr)]
+    '&'       [reduce using rule 34 (expr)]
+    '<'       [reduce using rule 34 (expr)]
+    '>'       [reduce using rule 34 (expr)]
+    '+'       [reduce using rule 34 (expr)]
+    '-'       [reduce using rule 34 (expr)]
+    '*'       [reduce using rule 34 (expr)]
+    '/'       [reduce using rule 34 (expr)]
+    '%'       [reduce using rule 34 (expr)]
+    $default  reduce using rule 34 (expr)
+
+
+state 40
+
+   38 expr: '$' INT8 .
+
+    $default  reduce using rule 38 (expr)
+
+
+state 41
+
+   15 expr: expr OR . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 68
+
+
+state 42
+
+   16 expr: expr AN . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 69
+
+
+state 43
+
+   20 expr: expr EQ . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 70
+
+
+state 44
+
+   21 expr: expr NE . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 71
+
+
+state 45
+
+   24 expr: expr LE . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 72
+
+
+state 46
+
+   25 expr: expr GE . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 73
+
+
+state 47
+
+   26 expr: expr LS . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 74
+
+
+state 48
+
+   27 expr: expr RS . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 75
+
+
+state 49
+
+    4 stmt: expr ';' .
+
+    $default  reduce using rule 4 (stmt)
+
+
+state 50
+
+   17 expr: expr '|' . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 76
+
+
+state 51
+
+   18 expr: expr '^' . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 77
+
+
+state 52
+
+   19 expr: expr '&' . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 78
+
+
+state 53
+
+   22 expr: expr '<' . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 79
+
+
+state 54
+
+   23 expr: expr '>' . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 80
+
+
+state 55
+
+   28 expr: expr '+' . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 81
+
+
+state 56
+
+   29 expr: expr '-' . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 82
+
+
+state 57
+
+   30 expr: expr '*' . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 83
+
+
+state 58
+
+   31 expr: expr '/' . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 84
+
+
+state 59
+
+   32 expr: expr '%' . expr
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 85
+
+
+state 60
+
+   14 expr: ID '=' expr .
+   15     | expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 14 (expr)]
+    AN        [reduce using rule 14 (expr)]
+    EQ        [reduce using rule 14 (expr)]
+    NE        [reduce using rule 14 (expr)]
+    LE        [reduce using rule 14 (expr)]
+    GE        [reduce using rule 14 (expr)]
+    LS        [reduce using rule 14 (expr)]
+    RS        [reduce using rule 14 (expr)]
+    '|'       [reduce using rule 14 (expr)]
+    '^'       [reduce using rule 14 (expr)]
+    '&'       [reduce using rule 14 (expr)]
+    '<'       [reduce using rule 14 (expr)]
+    '>'       [reduce using rule 14 (expr)]
+    '+'       [reduce using rule 14 (expr)]
+    '-'       [reduce using rule 14 (expr)]
+    '*'       [reduce using rule 14 (expr)]
+    '/'       [reduce using rule 14 (expr)]
+    '%'       [reduce using rule 14 (expr)]
+    $default  reduce using rule 14 (expr)
+
+
+state 61
+
+    8 stmt: DO stmt WHILE . '(' expr ')' ';'
+
+    '('  shift, and go to state 86
+
+
+state 62
+
+    9 stmt: FOR '(' expr . ';' expr ';' expr ')' stmt
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    ';'  shift, and go to state 87
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+
+state 63
+
+    5 stmt: IF '(' expr . ')' stmt
+    6     | IF '(' expr . ')' stmt ELSE stmt
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    ')'  shift, and go to state 88
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+
+state 64
+
+   10 stmt: RETURN expr ';' .
+
+    $default  reduce using rule 10 (stmt)
+
+
+state 65
+
+    7 stmt: WHILE '(' expr . ')' stmt
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    ')'  shift, and go to state 89
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+
+state 66
+
+   37 expr: '(' expr ')' .
+
+    $default  reduce using rule 37 (expr)
+
+
+state 67
+
+   12 stmt: '{' stmts '}' .
+
+    $default  reduce using rule 12 (stmt)
+
+
+state 68
+
+   15 expr: expr . OR expr
+   15     | expr OR expr .
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 15 (expr)]
+    AN        [reduce using rule 15 (expr)]
+    EQ        [reduce using rule 15 (expr)]
+    NE        [reduce using rule 15 (expr)]
+    LE        [reduce using rule 15 (expr)]
+    GE        [reduce using rule 15 (expr)]
+    LS        [reduce using rule 15 (expr)]
+    RS        [reduce using rule 15 (expr)]
+    '|'       [reduce using rule 15 (expr)]
+    '^'       [reduce using rule 15 (expr)]
+    '&'       [reduce using rule 15 (expr)]
+    '<'       [reduce using rule 15 (expr)]
+    '>'       [reduce using rule 15 (expr)]
+    '+'       [reduce using rule 15 (expr)]
+    '-'       [reduce using rule 15 (expr)]
+    '*'       [reduce using rule 15 (expr)]
+    '/'       [reduce using rule 15 (expr)]
+    '%'       [reduce using rule 15 (expr)]
+    $default  reduce using rule 15 (expr)
+
+
+state 69
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   16     | expr AN expr .
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 16 (expr)]
+    AN        [reduce using rule 16 (expr)]
+    EQ        [reduce using rule 16 (expr)]
+    NE        [reduce using rule 16 (expr)]
+    LE        [reduce using rule 16 (expr)]
+    GE        [reduce using rule 16 (expr)]
+    LS        [reduce using rule 16 (expr)]
+    RS        [reduce using rule 16 (expr)]
+    '|'       [reduce using rule 16 (expr)]
+    '^'       [reduce using rule 16 (expr)]
+    '&'       [reduce using rule 16 (expr)]
+    '<'       [reduce using rule 16 (expr)]
+    '>'       [reduce using rule 16 (expr)]
+    '+'       [reduce using rule 16 (expr)]
+    '-'       [reduce using rule 16 (expr)]
+    '*'       [reduce using rule 16 (expr)]
+    '/'       [reduce using rule 16 (expr)]
+    '%'       [reduce using rule 16 (expr)]
+    $default  reduce using rule 16 (expr)
+
+
+state 70
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   20     | expr EQ expr .
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 20 (expr)]
+    AN        [reduce using rule 20 (expr)]
+    EQ        [reduce using rule 20 (expr)]
+    NE        [reduce using rule 20 (expr)]
+    LE        [reduce using rule 20 (expr)]
+    GE        [reduce using rule 20 (expr)]
+    LS        [reduce using rule 20 (expr)]
+    RS        [reduce using rule 20 (expr)]
+    '|'       [reduce using rule 20 (expr)]
+    '^'       [reduce using rule 20 (expr)]
+    '&'       [reduce using rule 20 (expr)]
+    '<'       [reduce using rule 20 (expr)]
+    '>'       [reduce using rule 20 (expr)]
+    '+'       [reduce using rule 20 (expr)]
+    '-'       [reduce using rule 20 (expr)]
+    '*'       [reduce using rule 20 (expr)]
+    '/'       [reduce using rule 20 (expr)]
+    '%'       [reduce using rule 20 (expr)]
+    $default  reduce using rule 20 (expr)
+
+
+state 71
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   21     | expr NE expr .
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 21 (expr)]
+    AN        [reduce using rule 21 (expr)]
+    EQ        [reduce using rule 21 (expr)]
+    NE        [reduce using rule 21 (expr)]
+    LE        [reduce using rule 21 (expr)]
+    GE        [reduce using rule 21 (expr)]
+    LS        [reduce using rule 21 (expr)]
+    RS        [reduce using rule 21 (expr)]
+    '|'       [reduce using rule 21 (expr)]
+    '^'       [reduce using rule 21 (expr)]
+    '&'       [reduce using rule 21 (expr)]
+    '<'       [reduce using rule 21 (expr)]
+    '>'       [reduce using rule 21 (expr)]
+    '+'       [reduce using rule 21 (expr)]
+    '-'       [reduce using rule 21 (expr)]
+    '*'       [reduce using rule 21 (expr)]
+    '/'       [reduce using rule 21 (expr)]
+    '%'       [reduce using rule 21 (expr)]
+    $default  reduce using rule 21 (expr)
+
+
+state 72
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   24     | expr LE expr .
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 24 (expr)]
+    AN        [reduce using rule 24 (expr)]
+    EQ        [reduce using rule 24 (expr)]
+    NE        [reduce using rule 24 (expr)]
+    LE        [reduce using rule 24 (expr)]
+    GE        [reduce using rule 24 (expr)]
+    LS        [reduce using rule 24 (expr)]
+    RS        [reduce using rule 24 (expr)]
+    '|'       [reduce using rule 24 (expr)]
+    '^'       [reduce using rule 24 (expr)]
+    '&'       [reduce using rule 24 (expr)]
+    '<'       [reduce using rule 24 (expr)]
+    '>'       [reduce using rule 24 (expr)]
+    '+'       [reduce using rule 24 (expr)]
+    '-'       [reduce using rule 24 (expr)]
+    '*'       [reduce using rule 24 (expr)]
+    '/'       [reduce using rule 24 (expr)]
+    '%'       [reduce using rule 24 (expr)]
+    $default  reduce using rule 24 (expr)
+
+
+state 73
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   25     | expr GE expr .
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 25 (expr)]
+    AN        [reduce using rule 25 (expr)]
+    EQ        [reduce using rule 25 (expr)]
+    NE        [reduce using rule 25 (expr)]
+    LE        [reduce using rule 25 (expr)]
+    GE        [reduce using rule 25 (expr)]
+    LS        [reduce using rule 25 (expr)]
+    RS        [reduce using rule 25 (expr)]
+    '|'       [reduce using rule 25 (expr)]
+    '^'       [reduce using rule 25 (expr)]
+    '&'       [reduce using rule 25 (expr)]
+    '<'       [reduce using rule 25 (expr)]
+    '>'       [reduce using rule 25 (expr)]
+    '+'       [reduce using rule 25 (expr)]
+    '-'       [reduce using rule 25 (expr)]
+    '*'       [reduce using rule 25 (expr)]
+    '/'       [reduce using rule 25 (expr)]
+    '%'       [reduce using rule 25 (expr)]
+    $default  reduce using rule 25 (expr)
+
+
+state 74
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   26     | expr LS expr .
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 26 (expr)]
+    AN        [reduce using rule 26 (expr)]
+    EQ        [reduce using rule 26 (expr)]
+    NE        [reduce using rule 26 (expr)]
+    LE        [reduce using rule 26 (expr)]
+    GE        [reduce using rule 26 (expr)]
+    LS        [reduce using rule 26 (expr)]
+    RS        [reduce using rule 26 (expr)]
+    '|'       [reduce using rule 26 (expr)]
+    '^'       [reduce using rule 26 (expr)]
+    '&'       [reduce using rule 26 (expr)]
+    '<'       [reduce using rule 26 (expr)]
+    '>'       [reduce using rule 26 (expr)]
+    '+'       [reduce using rule 26 (expr)]
+    '-'       [reduce using rule 26 (expr)]
+    '*'       [reduce using rule 26 (expr)]
+    '/'       [reduce using rule 26 (expr)]
+    '%'       [reduce using rule 26 (expr)]
+    $default  reduce using rule 26 (expr)
+
+
+state 75
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   27     | expr RS expr .
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 27 (expr)]
+    AN        [reduce using rule 27 (expr)]
+    EQ        [reduce using rule 27 (expr)]
+    NE        [reduce using rule 27 (expr)]
+    LE        [reduce using rule 27 (expr)]
+    GE        [reduce using rule 27 (expr)]
+    LS        [reduce using rule 27 (expr)]
+    RS        [reduce using rule 27 (expr)]
+    '|'       [reduce using rule 27 (expr)]
+    '^'       [reduce using rule 27 (expr)]
+    '&'       [reduce using rule 27 (expr)]
+    '<'       [reduce using rule 27 (expr)]
+    '>'       [reduce using rule 27 (expr)]
+    '+'       [reduce using rule 27 (expr)]
+    '-'       [reduce using rule 27 (expr)]
+    '*'       [reduce using rule 27 (expr)]
+    '/'       [reduce using rule 27 (expr)]
+    '%'       [reduce using rule 27 (expr)]
+    $default  reduce using rule 27 (expr)
+
+
+state 76
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   17     | expr '|' expr .
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 17 (expr)]
+    AN        [reduce using rule 17 (expr)]
+    EQ        [reduce using rule 17 (expr)]
+    NE        [reduce using rule 17 (expr)]
+    LE        [reduce using rule 17 (expr)]
+    GE        [reduce using rule 17 (expr)]
+    LS        [reduce using rule 17 (expr)]
+    RS        [reduce using rule 17 (expr)]
+    '|'       [reduce using rule 17 (expr)]
+    '^'       [reduce using rule 17 (expr)]
+    '&'       [reduce using rule 17 (expr)]
+    '<'       [reduce using rule 17 (expr)]
+    '>'       [reduce using rule 17 (expr)]
+    '+'       [reduce using rule 17 (expr)]
+    '-'       [reduce using rule 17 (expr)]
+    '*'       [reduce using rule 17 (expr)]
+    '/'       [reduce using rule 17 (expr)]
+    '%'       [reduce using rule 17 (expr)]
+    $default  reduce using rule 17 (expr)
+
+
+state 77
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   18     | expr '^' expr .
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 18 (expr)]
+    AN        [reduce using rule 18 (expr)]
+    EQ        [reduce using rule 18 (expr)]
+    NE        [reduce using rule 18 (expr)]
+    LE        [reduce using rule 18 (expr)]
+    GE        [reduce using rule 18 (expr)]
+    LS        [reduce using rule 18 (expr)]
+    RS        [reduce using rule 18 (expr)]
+    '|'       [reduce using rule 18 (expr)]
+    '^'       [reduce using rule 18 (expr)]
+    '&'       [reduce using rule 18 (expr)]
+    '<'       [reduce using rule 18 (expr)]
+    '>'       [reduce using rule 18 (expr)]
+    '+'       [reduce using rule 18 (expr)]
+    '-'       [reduce using rule 18 (expr)]
+    '*'       [reduce using rule 18 (expr)]
+    '/'       [reduce using rule 18 (expr)]
+    '%'       [reduce using rule 18 (expr)]
+    $default  reduce using rule 18 (expr)
+
+
+state 78
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   19     | expr '&' expr .
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 19 (expr)]
+    AN        [reduce using rule 19 (expr)]
+    EQ        [reduce using rule 19 (expr)]
+    NE        [reduce using rule 19 (expr)]
+    LE        [reduce using rule 19 (expr)]
+    GE        [reduce using rule 19 (expr)]
+    LS        [reduce using rule 19 (expr)]
+    RS        [reduce using rule 19 (expr)]
+    '|'       [reduce using rule 19 (expr)]
+    '^'       [reduce using rule 19 (expr)]
+    '&'       [reduce using rule 19 (expr)]
+    '<'       [reduce using rule 19 (expr)]
+    '>'       [reduce using rule 19 (expr)]
+    '+'       [reduce using rule 19 (expr)]
+    '-'       [reduce using rule 19 (expr)]
+    '*'       [reduce using rule 19 (expr)]
+    '/'       [reduce using rule 19 (expr)]
+    '%'       [reduce using rule 19 (expr)]
+    $default  reduce using rule 19 (expr)
+
+
+state 79
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   22     | expr '<' expr .
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 22 (expr)]
+    AN        [reduce using rule 22 (expr)]
+    EQ        [reduce using rule 22 (expr)]
+    NE        [reduce using rule 22 (expr)]
+    LE        [reduce using rule 22 (expr)]
+    GE        [reduce using rule 22 (expr)]
+    LS        [reduce using rule 22 (expr)]
+    RS        [reduce using rule 22 (expr)]
+    '|'       [reduce using rule 22 (expr)]
+    '^'       [reduce using rule 22 (expr)]
+    '&'       [reduce using rule 22 (expr)]
+    '<'       [reduce using rule 22 (expr)]
+    '>'       [reduce using rule 22 (expr)]
+    '+'       [reduce using rule 22 (expr)]
+    '-'       [reduce using rule 22 (expr)]
+    '*'       [reduce using rule 22 (expr)]
+    '/'       [reduce using rule 22 (expr)]
+    '%'       [reduce using rule 22 (expr)]
+    $default  reduce using rule 22 (expr)
+
+
+state 80
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   23     | expr '>' expr .
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 23 (expr)]
+    AN        [reduce using rule 23 (expr)]
+    EQ        [reduce using rule 23 (expr)]
+    NE        [reduce using rule 23 (expr)]
+    LE        [reduce using rule 23 (expr)]
+    GE        [reduce using rule 23 (expr)]
+    LS        [reduce using rule 23 (expr)]
+    RS        [reduce using rule 23 (expr)]
+    '|'       [reduce using rule 23 (expr)]
+    '^'       [reduce using rule 23 (expr)]
+    '&'       [reduce using rule 23 (expr)]
+    '<'       [reduce using rule 23 (expr)]
+    '>'       [reduce using rule 23 (expr)]
+    '+'       [reduce using rule 23 (expr)]
+    '-'       [reduce using rule 23 (expr)]
+    '*'       [reduce using rule 23 (expr)]
+    '/'       [reduce using rule 23 (expr)]
+    '%'       [reduce using rule 23 (expr)]
+    $default  reduce using rule 23 (expr)
+
+
+state 81
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   28     | expr '+' expr .
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 28 (expr)]
+    AN        [reduce using rule 28 (expr)]
+    EQ        [reduce using rule 28 (expr)]
+    NE        [reduce using rule 28 (expr)]
+    LE        [reduce using rule 28 (expr)]
+    GE        [reduce using rule 28 (expr)]
+    LS        [reduce using rule 28 (expr)]
+    RS        [reduce using rule 28 (expr)]
+    '|'       [reduce using rule 28 (expr)]
+    '^'       [reduce using rule 28 (expr)]
+    '&'       [reduce using rule 28 (expr)]
+    '<'       [reduce using rule 28 (expr)]
+    '>'       [reduce using rule 28 (expr)]
+    '+'       [reduce using rule 28 (expr)]
+    '-'       [reduce using rule 28 (expr)]
+    '*'       [reduce using rule 28 (expr)]
+    '/'       [reduce using rule 28 (expr)]
+    '%'       [reduce using rule 28 (expr)]
+    $default  reduce using rule 28 (expr)
+
+
+state 82
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   29     | expr '-' expr .
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 29 (expr)]
+    AN        [reduce using rule 29 (expr)]
+    EQ        [reduce using rule 29 (expr)]
+    NE        [reduce using rule 29 (expr)]
+    LE        [reduce using rule 29 (expr)]
+    GE        [reduce using rule 29 (expr)]
+    LS        [reduce using rule 29 (expr)]
+    RS        [reduce using rule 29 (expr)]
+    '|'       [reduce using rule 29 (expr)]
+    '^'       [reduce using rule 29 (expr)]
+    '&'       [reduce using rule 29 (expr)]
+    '<'       [reduce using rule 29 (expr)]
+    '>'       [reduce using rule 29 (expr)]
+    '+'       [reduce using rule 29 (expr)]
+    '-'       [reduce using rule 29 (expr)]
+    '*'       [reduce using rule 29 (expr)]
+    '/'       [reduce using rule 29 (expr)]
+    '%'       [reduce using rule 29 (expr)]
+    $default  reduce using rule 29 (expr)
+
+
+state 83
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   30     | expr '*' expr .
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 30 (expr)]
+    AN        [reduce using rule 30 (expr)]
+    EQ        [reduce using rule 30 (expr)]
+    NE        [reduce using rule 30 (expr)]
+    LE        [reduce using rule 30 (expr)]
+    GE        [reduce using rule 30 (expr)]
+    LS        [reduce using rule 30 (expr)]
+    RS        [reduce using rule 30 (expr)]
+    '|'       [reduce using rule 30 (expr)]
+    '^'       [reduce using rule 30 (expr)]
+    '&'       [reduce using rule 30 (expr)]
+    '<'       [reduce using rule 30 (expr)]
+    '>'       [reduce using rule 30 (expr)]
+    '+'       [reduce using rule 30 (expr)]
+    '-'       [reduce using rule 30 (expr)]
+    '*'       [reduce using rule 30 (expr)]
+    '/'       [reduce using rule 30 (expr)]
+    '%'       [reduce using rule 30 (expr)]
+    $default  reduce using rule 30 (expr)
+
+
+state 84
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   31     | expr '/' expr .
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 31 (expr)]
+    AN        [reduce using rule 31 (expr)]
+    EQ        [reduce using rule 31 (expr)]
+    NE        [reduce using rule 31 (expr)]
+    LE        [reduce using rule 31 (expr)]
+    GE        [reduce using rule 31 (expr)]
+    LS        [reduce using rule 31 (expr)]
+    RS        [reduce using rule 31 (expr)]
+    '|'       [reduce using rule 31 (expr)]
+    '^'       [reduce using rule 31 (expr)]
+    '&'       [reduce using rule 31 (expr)]
+    '<'       [reduce using rule 31 (expr)]
+    '>'       [reduce using rule 31 (expr)]
+    '+'       [reduce using rule 31 (expr)]
+    '-'       [reduce using rule 31 (expr)]
+    '*'       [reduce using rule 31 (expr)]
+    '/'       [reduce using rule 31 (expr)]
+    '%'       [reduce using rule 31 (expr)]
+    $default  reduce using rule 31 (expr)
+
+
+state 85
+
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+   32     | expr '%' expr .
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+    OR        [reduce using rule 32 (expr)]
+    AN        [reduce using rule 32 (expr)]
+    EQ        [reduce using rule 32 (expr)]
+    NE        [reduce using rule 32 (expr)]
+    LE        [reduce using rule 32 (expr)]
+    GE        [reduce using rule 32 (expr)]
+    LS        [reduce using rule 32 (expr)]
+    RS        [reduce using rule 32 (expr)]
+    '|'       [reduce using rule 32 (expr)]
+    '^'       [reduce using rule 32 (expr)]
+    '&'       [reduce using rule 32 (expr)]
+    '<'       [reduce using rule 32 (expr)]
+    '>'       [reduce using rule 32 (expr)]
+    '+'       [reduce using rule 32 (expr)]
+    '-'       [reduce using rule 32 (expr)]
+    '*'       [reduce using rule 32 (expr)]
+    '/'       [reduce using rule 32 (expr)]
+    '%'       [reduce using rule 32 (expr)]
+    $default  reduce using rule 32 (expr)
+
+
+state 86
+
+    8 stmt: DO stmt WHILE '(' . expr ')' ';'
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 90
+
+
+state 87
+
+    9 stmt: FOR '(' expr ';' . expr ';' expr ')' stmt
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 91
+
+
+state 88
+
+    5 stmt: IF '(' expr ')' . stmt
+    6     | IF '(' expr ')' . stmt ELSE stmt
+
+    error   shift, and go to state 3
+    ID      shift, and go to state 4
+    INT8    shift, and go to state 5
+    INT16   shift, and go to state 6
+    INT32   shift, and go to state 7
+    FLT     shift, and go to state 8
+    STR     shift, and go to state 9
+    BREAK   shift, and go to state 10
+    DO      shift, and go to state 11
+    FOR     shift, and go to state 12
+    IF      shift, and go to state 13
+    RETURN  shift, and go to state 14
+    WHILE   shift, and go to state 15
+    ';'     shift, and go to state 16
+    '('     shift, and go to state 17
+    '{'     shift, and go to state 18
+    '+'     shift, and go to state 19
+    '-'     shift, and go to state 20
+    '!'     shift, and go to state 21
+    '~'     shift, and go to state 22
+    '$'     shift, and go to state 23
+
+    stmt  go to state 92
+    expr  go to state 25
+
+
+state 89
+
+    7 stmt: WHILE '(' expr ')' . stmt
+
+    error   shift, and go to state 3
+    ID      shift, and go to state 4
+    INT8    shift, and go to state 5
+    INT16   shift, and go to state 6
+    INT32   shift, and go to state 7
+    FLT     shift, and go to state 8
+    STR     shift, and go to state 9
+    BREAK   shift, and go to state 10
+    DO      shift, and go to state 11
+    FOR     shift, and go to state 12
+    IF      shift, and go to state 13
+    RETURN  shift, and go to state 14
+    WHILE   shift, and go to state 15
+    ';'     shift, and go to state 16
+    '('     shift, and go to state 17
+    '{'     shift, and go to state 18
+    '+'     shift, and go to state 19
+    '-'     shift, and go to state 20
+    '!'     shift, and go to state 21
+    '~'     shift, and go to state 22
+    '$'     shift, and go to state 23
+
+    stmt  go to state 93
+    expr  go to state 25
+
+
+state 90
+
+    8 stmt: DO stmt WHILE '(' expr . ')' ';'
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    ')'  shift, and go to state 94
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+
+state 91
+
+    9 stmt: FOR '(' expr ';' expr . ';' expr ')' stmt
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    ';'  shift, and go to state 95
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+
+state 92
+
+    5 stmt: IF '(' expr ')' stmt .
+    6     | IF '(' expr ')' stmt . ELSE stmt
+
+    ELSE  shift, and go to state 96
+
+    ELSE      [reduce using rule 5 (stmt)]
+    $default  reduce using rule 5 (stmt)
+
+
+state 93
+
+    7 stmt: WHILE '(' expr ')' stmt .
+
+    $default  reduce using rule 7 (stmt)
+
+
+state 94
+
+    8 stmt: DO stmt WHILE '(' expr ')' . ';'
+
+    ';'  shift, and go to state 97
+
+
+state 95
+
+    9 stmt: FOR '(' expr ';' expr ';' . expr ')' stmt
+
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '+'    shift, and go to state 19
+    '-'    shift, and go to state 20
+    '!'    shift, and go to state 21
+    '~'    shift, and go to state 22
+    '$'    shift, and go to state 23
+
+    expr  go to state 98
+
+
+state 96
+
+    6 stmt: IF '(' expr ')' stmt ELSE . stmt
+
+    error   shift, and go to state 3
+    ID      shift, and go to state 4
+    INT8    shift, and go to state 5
+    INT16   shift, and go to state 6
+    INT32   shift, and go to state 7
+    FLT     shift, and go to state 8
+    STR     shift, and go to state 9
+    BREAK   shift, and go to state 10
+    DO      shift, and go to state 11
+    FOR     shift, and go to state 12
+    IF      shift, and go to state 13
+    RETURN  shift, and go to state 14
+    WHILE   shift, and go to state 15
+    ';'     shift, and go to state 16
+    '('     shift, and go to state 17
+    '{'     shift, and go to state 18
+    '+'     shift, and go to state 19
+    '-'     shift, and go to state 20
+    '!'     shift, and go to state 21
+    '~'     shift, and go to state 22
+    '$'     shift, and go to state 23
+
+    stmt  go to state 99
+    expr  go to state 25
+
+
+state 97
+
+    8 stmt: DO stmt WHILE '(' expr ')' ';' .
+
+    $default  reduce using rule 8 (stmt)
+
+
+state 98
+
+    9 stmt: FOR '(' expr ';' expr ';' expr . ')' stmt
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '|' expr
+   18     | expr . '^' expr
+   19     | expr . '&' expr
+   20     | expr . EQ expr
+   21     | expr . NE expr
+   22     | expr . '<' expr
+   23     | expr . '>' expr
+   24     | expr . LE expr
+   25     | expr . GE expr
+   26     | expr . LS expr
+   27     | expr . RS expr
+   28     | expr . '+' expr
+   29     | expr . '-' expr
+   30     | expr . '*' expr
+   31     | expr . '/' expr
+   32     | expr . '%' expr
+
+    OR   shift, and go to state 41
+    AN   shift, and go to state 42
+    EQ   shift, and go to state 43
+    NE   shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    LS   shift, and go to state 47
+    RS   shift, and go to state 48
+    ')'  shift, and go to state 100
+    '|'  shift, and go to state 50
+    '^'  shift, and go to state 51
+    '&'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '>'  shift, and go to state 54
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+    '%'  shift, and go to state 59
+
+
+state 99
+
+    6 stmt: IF '(' expr ')' stmt ELSE stmt .
+
+    $default  reduce using rule 6 (stmt)
+
+
+state 100
+
+    9 stmt: FOR '(' expr ';' expr ';' expr ')' . stmt
+
+    error   shift, and go to state 3
+    ID      shift, and go to state 4
+    INT8    shift, and go to state 5
+    INT16   shift, and go to state 6
+    INT32   shift, and go to state 7
+    FLT     shift, and go to state 8
+    STR     shift, and go to state 9
+    BREAK   shift, and go to state 10
+    DO      shift, and go to state 11
+    FOR     shift, and go to state 12
+    IF      shift, and go to state 13
+    RETURN  shift, and go to state 14
+    WHILE   shift, and go to state 15
+    ';'     shift, and go to state 16
+    '('     shift, and go to state 17
+    '{'     shift, and go to state 18
+    '+'     shift, and go to state 19
+    '-'     shift, and go to state 20
+    '!'     shift, and go to state 21
+    '~'     shift, and go to state 22
+    '$'     shift, and go to state 23
+
+    stmt  go to state 101
+    expr  go to state 25
+
+
+state 101
+
+    9 stmt: FOR '(' expr ';' expr ';' expr ')' stmt .
+
+    $default  reduce using rule 9 (stmt)

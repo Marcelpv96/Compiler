@@ -27,22 +27,9 @@ int             {digit}+
 %%
 
 [ \t\v\n\f\r]                  /* skip white space */
-___                            /* TODO: TO BE COMPLETED: ignore inline and multiline comments */
+[\/\*.\*\/]                           /* TODO: TO BE COMPLETED: ignore inline and multiline comments */
 {id}                           { return install_id(); }
-___                            { /* TODO: TO BE COMPLETED */ return install_oct(); }
-___                            { /* TODO: TO BE COMPLETED */ return install_hex(); }
-___                            { /* TODO: TO BE COMPLETED */ return install_chr(); }
 {int}                          { return install_int(); }
-"+="                           { return PA; }
-"-="                           { return NA; }
-"*="                           { return TA; }
-"/="                           { return DA; }
-"%="                           { return MA; }
-"&="                           { return AA; }
-"^="                           { return XA; }
-"|="                           { return OA; }
-"<<="                          { return LA; }
-">>="                          { return RA; }
 "||"                           { return OR; }
 "&&"                           { return AN; }
 "=="                           { return EQ; }
