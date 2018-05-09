@@ -81,7 +81,7 @@ expr    : ID   '=' expr { emit(dup); emit2(istore, $1->localvar); }
         | expr GE  expr { /* TODO: TO BE COMPLETED */ error(">= operator not implemented"); }
         | expr LS  expr { /* TODO: TO BE COMPLETED */ error("<< operator not implemented"); }
         | expr RS  expr { /* TODO: TO BE COMPLETED */ error(">> operator not implemented"); }
-        | expr '+' expr { /* TODO: TO BE COMPLETED */ error("+ operator not implemented"); }
+        | expr '+' expr { emit(iadd); }
         | expr '-' expr { /* TODO: TO BE COMPLETED */ error("- operator not implemented"); }
         | expr '*' expr { /* TODO: TO BE COMPLETED */ error("* operator not implemented"); }
         | expr '/' expr { /* TODO: TO BE COMPLETED */ error("/ operator not implemented"); }

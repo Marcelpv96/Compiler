@@ -4,6 +4,8 @@
 
 /* TODO: define a symbol table/array, reuse project Pr1 */
 
+
+
 Symbol *lookup(const char *s)
 {
         /* TODO: TO BE COMPLETED */

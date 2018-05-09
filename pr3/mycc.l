@@ -22,6 +22,8 @@ static int install_oct();
 static int install_hex();
 static int install_chr();
 
+int line_num = 1; // current line to jump comments
+
 %}
 
 digit           [0-9]
@@ -31,8 +33,33 @@ int             {digit}+
 
 %%
 
+"/*"                BEGIN(comment);
+<comment>[^*\n]*        /* eat anything that's not a '*' */
+<comment>"*"+[^*/\n]*   /* eat up '*'s not followed by '/'s */
+<comment>\n             ++line_num;
+<comment>"*"+"/"        BEGIN(INITIAL);
+
+#include            BEGIN(incl);
+<incl>[ \t]*      /* eat the whitespace */
+<incl>[^ \t\n]+   { /* got the include file name */
+     yyin = fopen( yytext, "r" );
+	 yypush_buffer_state(yy_create_buffer( yyin, YY_BUF_SIZE ));
+     BEGIN(INITIAL);
+     }
+
+<<EOF>> {
+	yypop_buffer_state();
+
+     if ( !YY_CURRENT_BUFFER )
+         {
+         yyterminate();
+         }
+     }
+
+
 [ \t\v\n\f\r]                  /* skip white space */
 
+"return"					   { return RETURN;}
 {id}                           { return install_id(); }
 {int}                          { return install_int(); }
 "||"                           { return OR; }
