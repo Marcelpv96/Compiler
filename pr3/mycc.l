@@ -22,7 +22,8 @@ static int install_oct();
 static int install_hex();
 static int install_chr();
 
-int line_num = 1; // current line to jump comments
+
+static int line_num = 1; // current line to jump commentsgedi
 
 %}
 
@@ -89,8 +90,9 @@ static int install_id()
 
 	if (!yylval.sym)
 	{
-		yylval.sym = insert(yytext, ID);
+		yylval.sym = insert(yytext, (int) ID);
 		yylval.sym->localvar = localvar++;
+
 	}
 
 	return yylval.sym->token;

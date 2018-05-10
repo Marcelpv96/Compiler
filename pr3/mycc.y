@@ -94,7 +94,7 @@ expr    : ID   '=' expr { emit(dup); emit2(istore, $1->localvar); }
                         { /* TODO: TO BE COMPLETED */ error("unary - operator not implemented"); }
         | '(' expr ')'
         | '$' INT8      { emit(aload_1); emit2(bipush, $2); emit(iaload); }
-        | ID            { emit2(iload, $1->localvar); }
+        | ID            { emit2(iload,  $1->localvar); }
         | INT8          { emit2(bipush, $1); }
         | INT16         { emit3(sipush, $1); }
         | INT32         { emit2(ldc, constant_pool_add_Integer(&cf, $1)); }

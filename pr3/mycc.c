@@ -1611,7 +1611,7 @@ yyreduce:
 
   case 40:
 #line 97 "mycc.y" /* yacc.c:1646  */
-    { emit2(iload, (yyvsp[0].sym)->localvar); }
+    { emit2(iload,  (yyvsp[0].sym)->localvar); }
 #line 1616 "mycc.c" /* yacc.c:1646  */
     break;
 

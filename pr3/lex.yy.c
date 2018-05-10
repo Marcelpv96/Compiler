@@ -543,9 +543,10 @@ static int install_oct();
 static int install_hex();
 static int install_chr();
 
-int line_num = 1; // current line to jump comments
 
-#line 549 "lex.yy.c"
+static int line_num = 1; // current line to jump commentsgedi
+
+#line 550 "lex.yy.c"
 
 #define INITIAL 0
 #define incl 1
@@ -734,10 +735,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 34 "mycc.l"
+#line 35 "mycc.l"
 
 
-#line 741 "lex.yy.c"
+#line 742 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -832,43 +833,43 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 36 "mycc.l"
+#line 37 "mycc.l"
 BEGIN(comment);
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 37 "mycc.l"
+#line 38 "mycc.l"
 /* eat anything that's not a '*' */
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 38 "mycc.l"
+#line 39 "mycc.l"
 /* eat up '*'s not followed by '/'s */
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 39 "mycc.l"
+#line 40 "mycc.l"
 ++line_num;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 40 "mycc.l"
+#line 41 "mycc.l"
 BEGIN(INITIAL);
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 42 "mycc.l"
+#line 43 "mycc.l"
 BEGIN(incl);
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 43 "mycc.l"
+#line 44 "mycc.l"
 /* eat the whitespace */
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 44 "mycc.l"
+#line 45 "mycc.l"
 { /* got the include file name */
      yyin = fopen( yytext, "r" );
 	 yypush_buffer_state(yy_create_buffer(yyin,YY_BUF_SIZE ));
@@ -878,7 +879,7 @@ YY_RULE_SETUP
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(incl):
 case YY_STATE_EOF(comment):
-#line 50 "mycc.l"
+#line 51 "mycc.l"
 {
 	yypop_buffer_state();
 
@@ -891,115 +892,115 @@ case YY_STATE_EOF(comment):
 case 9:
 /* rule 9 can match eol */
 YY_RULE_SETUP
-#line 60 "mycc.l"
+#line 61 "mycc.l"
 /* skip white space */
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 62 "mycc.l"
+#line 63 "mycc.l"
 { return RETURN;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 63 "mycc.l"
+#line 64 "mycc.l"
 { return install_id(); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 64 "mycc.l"
+#line 65 "mycc.l"
 { return install_int(); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 65 "mycc.l"
+#line 66 "mycc.l"
 { return OR; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 66 "mycc.l"
+#line 67 "mycc.l"
 { return AN; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 67 "mycc.l"
+#line 68 "mycc.l"
 { return EQ; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 68 "mycc.l"
+#line 69 "mycc.l"
 { return NE; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 69 "mycc.l"
+#line 70 "mycc.l"
 { return LE; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 70 "mycc.l"
+#line 71 "mycc.l"
 { return GE; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 71 "mycc.l"
+#line 72 "mycc.l"
 { return LS; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 72 "mycc.l"
+#line 73 "mycc.l"
 { return RS; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 73 "mycc.l"
+#line 74 "mycc.l"
 { return PP; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 74 "mycc.l"
+#line 75 "mycc.l"
 { return NN; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 75 "mycc.l"
+#line 76 "mycc.l"
 { return AR; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 76 "mycc.l"
+#line 77 "mycc.l"
 { return '{'; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 77 "mycc.l"
+#line 78 "mycc.l"
 { return '}'; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 78 "mycc.l"
+#line 79 "mycc.l"
 { return '['; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 79 "mycc.l"
+#line 80 "mycc.l"
 { return ']'; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 80 "mycc.l"
+#line 81 "mycc.l"
 { return yytext[0]; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 81 "mycc.l"
+#line 82 "mycc.l"
 { yyerror("Unknown character ignored"); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 83 "mycc.l"
+#line 84 "mycc.l"
 ECHO;
 	YY_BREAK
-#line 1003 "lex.yy.c"
+#line 1004 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2007,7 +2008,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 83 "mycc.l"
+#line 84 "mycc.l"
 
 
 
@@ -2018,8 +2019,9 @@ static int install_id()
 
 	if (!yylval.sym)
 	{
-		yylval.sym = insert(yytext, ID);
+		yylval.sym = insert(yytext, (int) ID);
 		yylval.sym->localvar = localvar++;
+
 	}
 
 	return yylval.sym->token;
