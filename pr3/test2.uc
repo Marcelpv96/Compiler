@@ -1,1 +1,1 @@
-return $1 + $2;
+return 3 < 5;

@@ -75,8 +75,8 @@ expr    : ID   '=' expr { emit(dup); emit2(istore, $1->localvar); }
         | expr '&' expr { /* TODO: TO BE COMPLETED */ error("& operator not implemented"); }
         | expr EQ  expr { /* TODO: TO BE COMPLETED */ error("== operator not implemented"); }
         | expr NE  expr { /* TODO: TO BE COMPLETED */ error("!= operator not implemented"); }
-        | expr '<' expr { /* TODO: TO BE COMPLETED */ error("< operator not implemented"); }
-        | expr '>' expr { /* TODO: TO BE COMPLETED */ error("> operator not implemented"); }
+        | expr '<' expr { emit3(if_icmpge, 7); emit(iconst_1); emit3(goto_, 4); emit(iconst_0); }
+        | expr '>' expr { emit3(if_icmple, 7); emit(iconst_1); emit3(goto_, 4); emit(iconst_0); }
         | expr LE  expr { /* TODO: TO BE COMPLETED */ error("<= operator not implemented"); }
         | expr GE  expr { /* TODO: TO BE COMPLETED */ error(">= operator not implemented"); }
         | expr LS  expr { /* TODO: TO BE COMPLETED */ error("<< operator not implemented"); }

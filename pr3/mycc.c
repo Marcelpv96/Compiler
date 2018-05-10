@@ -1515,7 +1515,7 @@ yyreduce:
 
   case 23:
 #line 78 "mycc.y" /* yacc.c:1646  */
-    { /* TODO: TO BE COMPLETED */ error("< operator not implemented"); }
+    { emit3(if_icmpge, 7); emit(iconst_1); emit3(goto_, 4); emit(iconst_0); }
 #line 1520 "mycc.c" /* yacc.c:1646  */
     break;
 
