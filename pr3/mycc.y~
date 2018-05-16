@@ -49,12 +49,13 @@ stmts   : stmts stmt
 
 stmt    : ';'
         | expr ';'      { emit(pop); /* do not leave a value on the stack */ }
-        | IF '(' expr ')' stmt
-                        { /* TODO: TO BE COMPLETED */ error("if-then not implemented"); }
-        | IF '(' expr ')' stmt ELSE stmt
-                        { /* TODO: TO BE COMPLETED */ error("if-then-else not implemented"); }
-        | WHILE '(' expr ')' stmt
-                        { /* TODO: TO BE COMPLETED */ error("while-loop not implemented"); }
+        | IF '(' expr ')' M stmt
+                        { backpatch($5, pc - $5); emit3(goto_, 3); }
+        | IF '(' expr ')' M stmt L ELSE stmt
+                        { backpatch($5, $7 - $5); emit3(goto_, 3); backpatch($7, pc - $7);
+						  emit3(goto_, 3);}
+        | WHILE '(' expr ')' N stmt L
+                        { backpatch($5, pc - $5); emit3(goto_, 3); }
         | DO stmt WHILE '(' expr ')' ';'
                         { /* TODO: TO BE COMPLETED */ error("do-while-loop not implemented"); }
         | FOR '(' expr ';' expr ';' expr ')' stmt
@@ -102,14 +103,19 @@ expr    : ID   '=' expr { emit(dup); emit2(istore, $1->localvar); }
 	| STR		{ error("string constant not supported in Pr3"); }
         ;
 
+
+// On esta la inst.
 L       : /* empty */   { $$ = pc; }
         ;
 
+
+// On s'ha posat el equal
 M       : /* empty */   { $$ = pc;	/* location of inst. to backpatch */
 			  emit3(ifeq, 0);
 			}
         ;
 
+// On s'ha posat el goto
 N       : /* empty */   { $$ = pc;	/* location of inst. to backpatch */
 			  emit3(goto_, 0);
 			}
