@@ -49,12 +49,11 @@ stmts   : stmts stmt
 
 stmt    : ';'
         | expr ';'      { emit(pop); /* do not leave a value on the stack */ }
-        | IF '(' expr ')' M stmt 
+        | IF '(' expr ')' M stmt
                         { backpatch($5, pc - $5); emit3(goto_, 3); }
 //                        { backpatch($5, pc - $5); emit3(goto_, 3); }
-        | IF '(' expr ')' M stmt L ELSE stmt 
-                        { backpatch($5, $7 - $5); emit3(goto_, 3);
-						  backpatch($7, pc - $7); emit3(goto_, 3);}
+        | IF '(' expr ')' M stmt N ELSE L stmt L
+                        { backpatch($5, $9 - $5); emit3(goto_, 3); backpatch($7, $11 - $7);}
         | WHILE '(' L expr ')' M stmt N
                         { backpatch($6, pc - $6); backpatch($8, $3-$8); }
         | DO L  stmt WHILE '(' expr ')' M N ';'
@@ -72,28 +71,23 @@ stmt    : ';'
 expr    : ID   '=' expr { emit(dup); emit2(istore, $1->localvar); }
         | expr OR  expr { /* TODO: TO BE COMPLETED */ error("|| operator not implemented"); }
         | expr AN  expr { /* TODO: TO BE COMPLETED */ error("&& operator not implemented"); }
-        | expr '|' expr { /* TODO: TO BE COMPLETED */ error("| operator not implemented"); }
+        | expr '|' expr {  emit(ior); }
         | expr '^' expr { /* TODO: TO BE COMPLETED */ error("^ operator not implemented"); }
-        | expr '&' expr { /* TODO: TO BE COMPLETED */ error("& operator not implemented"); }
-        | expr EQ  expr { /* TODO: TO BE COMPLETED */ error("== operator not implemented"); }
-        | expr NE  expr { /* TODO: TO BE COMPLETED */ error("!= operator not implemented"); }
-        | expr '<' expr { emit3(if_icmpge, 7); emit(iconst_1); emit3(goto_, 4); emit(iconst_0); }
-        | expr '>' expr { emit3(if_icmple, 7); emit(iconst_1); emit3(goto_, 4); emit(iconst_0); }
-        | expr LE  expr { /* TODO: TO BE COMPLETED */ error("<= operator not implemented"); }
-        | expr GE  expr { /* TODO: TO BE COMPLETED */ error(">= operator not implemented"); }
+        | expr '&' expr { emit(iand); }
+        | expr EQ  expr { emit3(if_icmpeq, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
+        | expr NE  expr { emit3(if_icmpne, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
+        | expr '<' expr { emit3(if_icmplt, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
+        | expr '>' expr { emit3(if_icmpgt, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
+        | expr LE  expr { emit3(if_icmple, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
+        | expr GE  expr { emit3(if_icmpge, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
         | expr LS  expr { /* TODO: TO BE COMPLETED */ error("<< operator not implemented"); }
         | expr RS  expr { /* TODO: TO BE COMPLETED */ error(">> operator not implemented"); }
         | expr '+' expr { emit(iadd); }
-        | expr '-' expr { /* TODO: TO BE COMPLETED */ error("- operator not implemented"); }
-        | expr '*' expr { /* TODO: TO BE COMPLETED */ error("* operator not implemented"); }
-        | expr '/' expr { /* TODO: TO BE COMPLETED */ error("/ operator not implemented"); }
+        | expr '-' expr { emit(isub); }
+        | expr '*' expr { emit(imul); }
+        | expr '/' expr { emit(idiv); }
         | expr '%' expr { /* TODO: TO BE COMPLETED */ error("% operator not implemented"); }
-        | '!' expr      { /* TODO: TO BE COMPLETED */ error("! operator not implemented"); }
-        | '~' expr      { /* TODO: TO BE COMPLETED */ error("~ operator not implemented"); }
-        | '+' expr %prec '!' /* '+' at same precedence level as '!' */
-                        { /* TODO: TO BE COMPLETED */ error("unary + operator not implemented"); }
-        | '-' expr %prec '!' /* '-' at same precedence level as '!' */
-                        { /* TODO: TO BE COMPLETED */ error("unary - operator not implemented"); }
+        | '!' expr      { emit(ineg); }
         | '(' expr ')'
         | '$' INT8      { emit(aload_1); emit2(bipush, $2); emit(iaload); }
         | ID            { emit2(iload,  $1->localvar); }

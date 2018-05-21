@@ -1,4 +1,4 @@
-Terminales no usados en la gramática
+Terminals which are not used
 
    PA
    NA
@@ -15,43 +15,40 @@ Terminales no usados en la gramática
    NN
 
 
-Estat 36 conflictes: 18 canvi/reducció
-Estat 37 conflictes: 18 canvi/reducció
-Estat 38 conflictes: 18 canvi/reducció
-Estat 39 conflictes: 18 canvi/reducció
-Estat 60 conflictes: 18 canvi/reducció
-Estat 68 conflictes: 18 canvi/reducció
-Estat 69 conflictes: 18 canvi/reducció
-Estat 70 conflictes: 18 canvi/reducció
-Estat 71 conflictes: 18 canvi/reducció
-Estat 72 conflictes: 18 canvi/reducció
-Estat 73 conflictes: 18 canvi/reducció
-Estat 74 conflictes: 18 canvi/reducció
-Estat 75 conflictes: 18 canvi/reducció
-Estat 76 conflictes: 18 canvi/reducció
-Estat 77 conflictes: 18 canvi/reducció
-Estat 78 conflictes: 18 canvi/reducció
-Estat 79 conflictes: 18 canvi/reducció
-Estat 80 conflictes: 18 canvi/reducció
-Estat 81 conflictes: 18 canvi/reducció
-Estat 82 conflictes: 18 canvi/reducció
-Estat 83 conflictes: 18 canvi/reducció
-Estat 84 conflictes: 18 canvi/reducció
-Estat 85 conflictes: 18 canvi/reducció
-Estat 96 conflictes: 1 reducció/reducció
+State 33 conflicts: 18 shift/reduce
+State 54 conflicts: 18 shift/reduce
+State 62 conflicts: 18 shift/reduce
+State 63 conflicts: 18 shift/reduce
+State 64 conflicts: 18 shift/reduce
+State 65 conflicts: 18 shift/reduce
+State 66 conflicts: 18 shift/reduce
+State 67 conflicts: 18 shift/reduce
+State 68 conflicts: 18 shift/reduce
+State 69 conflicts: 18 shift/reduce
+State 70 conflicts: 18 shift/reduce
+State 71 conflicts: 18 shift/reduce
+State 72 conflicts: 18 shift/reduce
+State 73 conflicts: 18 shift/reduce
+State 74 conflicts: 18 shift/reduce
+State 75 conflicts: 18 shift/reduce
+State 76 conflicts: 18 shift/reduce
+State 77 conflicts: 18 shift/reduce
+State 78 conflicts: 18 shift/reduce
+State 79 conflicts: 18 shift/reduce
+State 90 conflicts: 1 reduce/reduce
 
 
-Gramática
+Grammar
 
     0 $accept: stmts $end
 
     1 stmts: stmts stmt
-    2      | %empty
+    2      | /* empty */
 
     3 stmt: ';'
     4     | expr ';'
     5     | IF '(' expr ')' M stmt
-    6     | IF '(' expr ')' M stmt L ELSE stmt
+    6     | IF '(' expr ')' M stmt N ELSE L stmt L
     7     | WHILE '(' L expr ')' M stmt N
     8     | DO L stmt WHILE '(' expr ')' M N ';'
     9     | FOR '(' expr ';' expr ';' expr ')' stmt
@@ -80,37 +77,34 @@ Gramática
    31     | expr '/' expr
    32     | expr '%' expr
    33     | '!' expr
-   34     | '~' expr
-   35     | '+' expr
-   36     | '-' expr
-   37     | '(' expr ')'
-   38     | '$' INT8
-   39     | ID
-   40     | INT8
-   41     | INT16
-   42     | INT32
-   43     | FLT
-   44     | STR
+   34     | '(' expr ')'
+   35     | '$' INT8
+   36     | ID
+   37     | INT8
+   38     | INT16
+   39     | INT32
+   40     | FLT
+   41     | STR
 
-   45 L: %empty
+   42 L: /* empty */
 
-   46 M: %empty
+   43 M: /* empty */
 
-   47 N: %empty
+   44 N: /* empty */
 
 
-Terminales con las reglas donde aparecen
+Terminals, with rules where they appear
 
 $end (0) 0
 '!' (33) 33
-'$' (36) 38
+'$' (36) 35
 '%' (37) 32
 '&' (38) 19
-'(' (40) 5 6 7 8 9 37
-')' (41) 5 6 7 8 9 37
+'(' (40) 5 6 7 8 9 34
+')' (41) 5 6 7 8 9 34
 '*' (42) 30
-'+' (43) 28 35
-'-' (45) 29 36
+'+' (43) 28
+'-' (45) 29
 '/' (47) 31
 ';' (59) 3 4 8 9 10 11 13
 '<' (60) 22
@@ -120,14 +114,13 @@ $end (0) 0
 '{' (123) 12
 '|' (124) 17
 '}' (125) 12
-'~' (126) 34
 error (256) 13
-ID (258) 14 39
-INT8 (259) 38 40
-INT16 (260) 41
-INT32 (261) 42
-FLT (262) 43
-STR (263) 44
+ID (258) 14 36
+INT8 (259) 35 37
+INT16 (260) 38
+INT32 (261) 39
+FLT (262) 40
+STR (263) 41
 BREAK (264) 11
 DO (265) 8
 ELSE (266) 6
@@ -158,317 +151,243 @@ PP (290)
 NN (291)
 
 
-No terminales con las reglas donde aparecen
+Nonterminals, with rules where they appear
 
-$accept (56)
-    en la izquierda: 0
-stmts (57)
-    en la izquierda: 1 2, en la derecha: 0 1 12
-stmt (58)
-    en la izquierda: 3 4 5 6 7 8 9 10 11 12 13, en la derecha: 1 5
-    6 7 8 9
-expr (59)
-    en la izquierda: 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
-    30 31 32 33 34 35 36 37 38 39 40 41 42 43 44, en la derecha: 4
-    5 6 7 8 9 10 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
-    31 32 33 34 35 36 37
-L (60)
-    en la izquierda: 45, en la derecha: 6 7 8
-M (61)
-    en la izquierda: 46, en la derecha: 5 6 7 8
-N (62)
-    en la izquierda: 47, en la derecha: 7 8
+$accept (55)
+    on left: 0
+stmts (56)
+    on left: 1 2, on right: 0 1 12
+stmt (57)
+    on left: 3 4 5 6 7 8 9 10 11 12 13, on right: 1 5 6 7 8 9
+expr (58)
+    on left: 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+    32 33 34 35 36 37 38 39 40 41, on right: 4 5 6 7 8 9 10 14 15 16
+    17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34
+L (59)
+    on left: 42, on right: 6 7 8
+M (60)
+    on left: 43, on right: 5 6 7 8
+N (61)
+    on left: 44, on right: 6 7 8
 
 
-Estado 0
+state 0
 
     0 $accept: . stmts $end
 
-    $default  reduce usando la regla 2 (stmts)
+    $default  reduce using rule 2 (stmts)
 
-    stmts  ir al estado 1
+    stmts  go to state 1
 
 
-Estado 1
+state 1
 
     0 $accept: stmts . $end
     1 stmts: stmts . stmt
 
-    $end    desplazar e ir al estado 2
-    error   desplazar e ir al estado 3
-    ID      desplazar e ir al estado 4
-    INT8    desplazar e ir al estado 5
-    INT16   desplazar e ir al estado 6
-    INT32   desplazar e ir al estado 7
-    FLT     desplazar e ir al estado 8
-    STR     desplazar e ir al estado 9
-    BREAK   desplazar e ir al estado 10
-    DO      desplazar e ir al estado 11
-    FOR     desplazar e ir al estado 12
-    IF      desplazar e ir al estado 13
-    RETURN  desplazar e ir al estado 14
-    WHILE   desplazar e ir al estado 15
-    ';'     desplazar e ir al estado 16
-    '('     desplazar e ir al estado 17
-    '{'     desplazar e ir al estado 18
-    '+'     desplazar e ir al estado 19
-    '-'     desplazar e ir al estado 20
-    '!'     desplazar e ir al estado 21
-    '~'     desplazar e ir al estado 22
-    '$'     desplazar e ir al estado 23
+    $end    shift, and go to state 2
+    error   shift, and go to state 3
+    ID      shift, and go to state 4
+    INT8    shift, and go to state 5
+    INT16   shift, and go to state 6
+    INT32   shift, and go to state 7
+    FLT     shift, and go to state 8
+    STR     shift, and go to state 9
+    BREAK   shift, and go to state 10
+    DO      shift, and go to state 11
+    FOR     shift, and go to state 12
+    IF      shift, and go to state 13
+    RETURN  shift, and go to state 14
+    WHILE   shift, and go to state 15
+    ';'     shift, and go to state 16
+    '('     shift, and go to state 17
+    '{'     shift, and go to state 18
+    '!'     shift, and go to state 19
+    '$'     shift, and go to state 20
 
-    stmt  ir al estado 24
-    expr  ir al estado 25
+    stmt  go to state 21
+    expr  go to state 22
 
 
-Estado 2
+state 2
 
     0 $accept: stmts $end .
 
-    $default  aceptar
+    $default  accept
 
 
-Estado 3
+state 3
 
    13 stmt: error . ';'
 
-    ';'  desplazar e ir al estado 26
+    ';'  shift, and go to state 23
 
 
-Estado 4
+state 4
 
    14 expr: ID . '=' expr
-   39     | ID .
+   36     | ID .
 
-    '='  desplazar e ir al estado 27
+    '='  shift, and go to state 24
 
-    $default  reduce usando la regla 39 (expr)
-
-
-Estado 5
-
-   40 expr: INT8 .
-
-    $default  reduce usando la regla 40 (expr)
+    $default  reduce using rule 36 (expr)
 
 
-Estado 6
+state 5
 
-   41 expr: INT16 .
+   37 expr: INT8 .
 
-    $default  reduce usando la regla 41 (expr)
-
-
-Estado 7
-
-   42 expr: INT32 .
-
-    $default  reduce usando la regla 42 (expr)
+    $default  reduce using rule 37 (expr)
 
 
-Estado 8
+state 6
 
-   43 expr: FLT .
+   38 expr: INT16 .
 
-    $default  reduce usando la regla 43 (expr)
-
-
-Estado 9
-
-   44 expr: STR .
-
-    $default  reduce usando la regla 44 (expr)
+    $default  reduce using rule 38 (expr)
 
 
-Estado 10
+state 7
+
+   39 expr: INT32 .
+
+    $default  reduce using rule 39 (expr)
+
+
+state 8
+
+   40 expr: FLT .
+
+    $default  reduce using rule 40 (expr)
+
+
+state 9
+
+   41 expr: STR .
+
+    $default  reduce using rule 41 (expr)
+
+
+state 10
 
    11 stmt: BREAK . ';'
 
-    ';'  desplazar e ir al estado 28
+    ';'  shift, and go to state 25
 
 
-Estado 11
+state 11
 
     8 stmt: DO . L stmt WHILE '(' expr ')' M N ';'
 
-    $default  reduce usando la regla 45 (L)
+    $default  reduce using rule 42 (L)
 
-    L  ir al estado 29
+    L  go to state 26
 
 
-Estado 12
+state 12
 
     9 stmt: FOR . '(' expr ';' expr ';' expr ')' stmt
 
-    '('  desplazar e ir al estado 30
+    '('  shift, and go to state 27
 
 
-Estado 13
+state 13
 
     5 stmt: IF . '(' expr ')' M stmt
-    6     | IF . '(' expr ')' M stmt L ELSE stmt
+    6     | IF . '(' expr ')' M stmt N ELSE L stmt L
 
-    '('  desplazar e ir al estado 31
+    '('  shift, and go to state 28
 
 
-Estado 14
+state 14
 
    10 stmt: RETURN . expr ';'
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 32
+    expr  go to state 29
 
 
-Estado 15
+state 15
 
     7 stmt: WHILE . '(' L expr ')' M stmt N
 
-    '('  desplazar e ir al estado 33
+    '('  shift, and go to state 30
 
 
-Estado 16
+state 16
 
     3 stmt: ';' .
 
-    $default  reduce usando la regla 3 (stmt)
+    $default  reduce using rule 3 (stmt)
 
 
-Estado 17
+state 17
 
-   37 expr: '(' . expr ')'
+   34 expr: '(' . expr ')'
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 34
+    expr  go to state 31
 
 
-Estado 18
+state 18
 
    12 stmt: '{' . stmts '}'
 
-    $default  reduce usando la regla 2 (stmts)
+    $default  reduce using rule 2 (stmts)
 
-    stmts  ir al estado 35
-
-
-Estado 19
-
-   35 expr: '+' . expr
-
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
-
-    expr  ir al estado 36
+    stmts  go to state 32
 
 
-Estado 20
-
-   36 expr: '-' . expr
-
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
-
-    expr  ir al estado 37
-
-
-Estado 21
+state 19
 
    33 expr: '!' . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 38
+    expr  go to state 33
 
 
-Estado 22
+state 20
 
-   34 expr: '~' . expr
+   35 expr: '$' . INT8
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
-
-    expr  ir al estado 39
+    INT8  shift, and go to state 34
 
 
-Estado 23
-
-   38 expr: '$' . INT8
-
-    INT8  desplazar e ir al estado 40
-
-
-Estado 24
+state 21
 
     1 stmts: stmts stmt .
 
-    $default  reduce usando la regla 1 (stmts)
+    $default  reduce using rule 1 (stmts)
 
 
-Estado 25
+state 22
 
     4 stmt: expr . ';'
    15 expr: expr . OR expr
@@ -490,133 +409,121 @@ Estado 25
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    ';'  desplazar e ir al estado 49
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    ';'  shift, and go to state 43
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
 
-Estado 26
+state 23
 
    13 stmt: error ';' .
 
-    $default  reduce usando la regla 13 (stmt)
+    $default  reduce using rule 13 (stmt)
 
 
-Estado 27
+state 24
 
    14 expr: ID '=' . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 60
+    expr  go to state 54
 
 
-Estado 28
+state 25
 
    11 stmt: BREAK ';' .
 
-    $default  reduce usando la regla 11 (stmt)
+    $default  reduce using rule 11 (stmt)
 
 
-Estado 29
+state 26
 
     8 stmt: DO L . stmt WHILE '(' expr ')' M N ';'
 
-    error   desplazar e ir al estado 3
-    ID      desplazar e ir al estado 4
-    INT8    desplazar e ir al estado 5
-    INT16   desplazar e ir al estado 6
-    INT32   desplazar e ir al estado 7
-    FLT     desplazar e ir al estado 8
-    STR     desplazar e ir al estado 9
-    BREAK   desplazar e ir al estado 10
-    DO      desplazar e ir al estado 11
-    FOR     desplazar e ir al estado 12
-    IF      desplazar e ir al estado 13
-    RETURN  desplazar e ir al estado 14
-    WHILE   desplazar e ir al estado 15
-    ';'     desplazar e ir al estado 16
-    '('     desplazar e ir al estado 17
-    '{'     desplazar e ir al estado 18
-    '+'     desplazar e ir al estado 19
-    '-'     desplazar e ir al estado 20
-    '!'     desplazar e ir al estado 21
-    '~'     desplazar e ir al estado 22
-    '$'     desplazar e ir al estado 23
+    error   shift, and go to state 3
+    ID      shift, and go to state 4
+    INT8    shift, and go to state 5
+    INT16   shift, and go to state 6
+    INT32   shift, and go to state 7
+    FLT     shift, and go to state 8
+    STR     shift, and go to state 9
+    BREAK   shift, and go to state 10
+    DO      shift, and go to state 11
+    FOR     shift, and go to state 12
+    IF      shift, and go to state 13
+    RETURN  shift, and go to state 14
+    WHILE   shift, and go to state 15
+    ';'     shift, and go to state 16
+    '('     shift, and go to state 17
+    '{'     shift, and go to state 18
+    '!'     shift, and go to state 19
+    '$'     shift, and go to state 20
 
-    stmt  ir al estado 61
-    expr  ir al estado 25
+    stmt  go to state 55
+    expr  go to state 22
 
 
-Estado 30
+state 27
 
     9 stmt: FOR '(' . expr ';' expr ';' expr ')' stmt
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 62
+    expr  go to state 56
 
 
-Estado 31
+state 28
 
     5 stmt: IF '(' . expr ')' M stmt
-    6     | IF '(' . expr ')' M stmt L ELSE stmt
+    6     | IF '(' . expr ')' M stmt N ELSE L stmt L
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 63
+    expr  go to state 57
 
 
-Estado 32
+state 29
 
    10 stmt: RETURN expr . ';'
    15 expr: expr . OR expr
@@ -638,37 +545,37 @@ Estado 32
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    ';'  desplazar e ir al estado 64
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    ';'  shift, and go to state 58
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
 
-Estado 33
+state 30
 
     7 stmt: WHILE '(' . L expr ')' M stmt N
 
-    $default  reduce usando la regla 45 (L)
+    $default  reduce using rule 42 (L)
 
-    L  ir al estado 65
+    L  go to state 59
 
 
-Estado 34
+state 31
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -688,186 +595,59 @@ Estado 34
    30     | expr . '*' expr
    31     | expr . '/' expr
    32     | expr . '%' expr
-   37     | '(' expr . ')'
+   34     | '(' expr . ')'
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    ')'  desplazar e ir al estado 66
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    ')'  shift, and go to state 60
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
 
-Estado 35
+state 32
 
     1 stmts: stmts . stmt
    12 stmt: '{' stmts . '}'
 
-    error   desplazar e ir al estado 3
-    ID      desplazar e ir al estado 4
-    INT8    desplazar e ir al estado 5
-    INT16   desplazar e ir al estado 6
-    INT32   desplazar e ir al estado 7
-    FLT     desplazar e ir al estado 8
-    STR     desplazar e ir al estado 9
-    BREAK   desplazar e ir al estado 10
-    DO      desplazar e ir al estado 11
-    FOR     desplazar e ir al estado 12
-    IF      desplazar e ir al estado 13
-    RETURN  desplazar e ir al estado 14
-    WHILE   desplazar e ir al estado 15
-    ';'     desplazar e ir al estado 16
-    '('     desplazar e ir al estado 17
-    '{'     desplazar e ir al estado 18
-    '}'     desplazar e ir al estado 67
-    '+'     desplazar e ir al estado 19
-    '-'     desplazar e ir al estado 20
-    '!'     desplazar e ir al estado 21
-    '~'     desplazar e ir al estado 22
-    '$'     desplazar e ir al estado 23
+    error   shift, and go to state 3
+    ID      shift, and go to state 4
+    INT8    shift, and go to state 5
+    INT16   shift, and go to state 6
+    INT32   shift, and go to state 7
+    FLT     shift, and go to state 8
+    STR     shift, and go to state 9
+    BREAK   shift, and go to state 10
+    DO      shift, and go to state 11
+    FOR     shift, and go to state 12
+    IF      shift, and go to state 13
+    RETURN  shift, and go to state 14
+    WHILE   shift, and go to state 15
+    ';'     shift, and go to state 16
+    '('     shift, and go to state 17
+    '{'     shift, and go to state 18
+    '}'     shift, and go to state 61
+    '!'     shift, and go to state 19
+    '$'     shift, and go to state 20
 
-    stmt  ir al estado 24
-    expr  ir al estado 25
+    stmt  go to state 21
+    expr  go to state 22
 
 
-Estado 36
-
-   15 expr: expr . OR expr
-   16     | expr . AN expr
-   17     | expr . '|' expr
-   18     | expr . '^' expr
-   19     | expr . '&' expr
-   20     | expr . EQ expr
-   21     | expr . NE expr
-   22     | expr . '<' expr
-   23     | expr . '>' expr
-   24     | expr . LE expr
-   25     | expr . GE expr
-   26     | expr . LS expr
-   27     | expr . RS expr
-   28     | expr . '+' expr
-   29     | expr . '-' expr
-   30     | expr . '*' expr
-   31     | expr . '/' expr
-   32     | expr . '%' expr
-   35     | '+' expr .
-
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
-
-    OR        [reduce usando la regla 35 (expr)]
-    AN        [reduce usando la regla 35 (expr)]
-    EQ        [reduce usando la regla 35 (expr)]
-    NE        [reduce usando la regla 35 (expr)]
-    LE        [reduce usando la regla 35 (expr)]
-    GE        [reduce usando la regla 35 (expr)]
-    LS        [reduce usando la regla 35 (expr)]
-    RS        [reduce usando la regla 35 (expr)]
-    '|'       [reduce usando la regla 35 (expr)]
-    '^'       [reduce usando la regla 35 (expr)]
-    '&'       [reduce usando la regla 35 (expr)]
-    '<'       [reduce usando la regla 35 (expr)]
-    '>'       [reduce usando la regla 35 (expr)]
-    '+'       [reduce usando la regla 35 (expr)]
-    '-'       [reduce usando la regla 35 (expr)]
-    '*'       [reduce usando la regla 35 (expr)]
-    '/'       [reduce usando la regla 35 (expr)]
-    '%'       [reduce usando la regla 35 (expr)]
-    $default  reduce usando la regla 35 (expr)
-
-
-Estado 37
-
-   15 expr: expr . OR expr
-   16     | expr . AN expr
-   17     | expr . '|' expr
-   18     | expr . '^' expr
-   19     | expr . '&' expr
-   20     | expr . EQ expr
-   21     | expr . NE expr
-   22     | expr . '<' expr
-   23     | expr . '>' expr
-   24     | expr . LE expr
-   25     | expr . GE expr
-   26     | expr . LS expr
-   27     | expr . RS expr
-   28     | expr . '+' expr
-   29     | expr . '-' expr
-   30     | expr . '*' expr
-   31     | expr . '/' expr
-   32     | expr . '%' expr
-   36     | '-' expr .
-
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
-
-    OR        [reduce usando la regla 36 (expr)]
-    AN        [reduce usando la regla 36 (expr)]
-    EQ        [reduce usando la regla 36 (expr)]
-    NE        [reduce usando la regla 36 (expr)]
-    LE        [reduce usando la regla 36 (expr)]
-    GE        [reduce usando la regla 36 (expr)]
-    LS        [reduce usando la regla 36 (expr)]
-    RS        [reduce usando la regla 36 (expr)]
-    '|'       [reduce usando la regla 36 (expr)]
-    '^'       [reduce usando la regla 36 (expr)]
-    '&'       [reduce usando la regla 36 (expr)]
-    '<'       [reduce usando la regla 36 (expr)]
-    '>'       [reduce usando la regla 36 (expr)]
-    '+'       [reduce usando la regla 36 (expr)]
-    '-'       [reduce usando la regla 36 (expr)]
-    '*'       [reduce usando la regla 36 (expr)]
-    '/'       [reduce usando la regla 36 (expr)]
-    '%'       [reduce usando la regla 36 (expr)]
-    $default  reduce usando la regla 36 (expr)
-
-
-Estado 38
+state 33
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -889,483 +669,367 @@ Estado 38
    32     | expr . '%' expr
    33     | '!' expr .
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 33 (expr)]
-    AN        [reduce usando la regla 33 (expr)]
-    EQ        [reduce usando la regla 33 (expr)]
-    NE        [reduce usando la regla 33 (expr)]
-    LE        [reduce usando la regla 33 (expr)]
-    GE        [reduce usando la regla 33 (expr)]
-    LS        [reduce usando la regla 33 (expr)]
-    RS        [reduce usando la regla 33 (expr)]
-    '|'       [reduce usando la regla 33 (expr)]
-    '^'       [reduce usando la regla 33 (expr)]
-    '&'       [reduce usando la regla 33 (expr)]
-    '<'       [reduce usando la regla 33 (expr)]
-    '>'       [reduce usando la regla 33 (expr)]
-    '+'       [reduce usando la regla 33 (expr)]
-    '-'       [reduce usando la regla 33 (expr)]
-    '*'       [reduce usando la regla 33 (expr)]
-    '/'       [reduce usando la regla 33 (expr)]
-    '%'       [reduce usando la regla 33 (expr)]
-    $default  reduce usando la regla 33 (expr)
-
-
-Estado 39
-
-   15 expr: expr . OR expr
-   16     | expr . AN expr
-   17     | expr . '|' expr
-   18     | expr . '^' expr
-   19     | expr . '&' expr
-   20     | expr . EQ expr
-   21     | expr . NE expr
-   22     | expr . '<' expr
-   23     | expr . '>' expr
-   24     | expr . LE expr
-   25     | expr . GE expr
-   26     | expr . LS expr
-   27     | expr . RS expr
-   28     | expr . '+' expr
-   29     | expr . '-' expr
-   30     | expr . '*' expr
-   31     | expr . '/' expr
-   32     | expr . '%' expr
-   34     | '~' expr .
-
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
-
-    OR        [reduce usando la regla 34 (expr)]
-    AN        [reduce usando la regla 34 (expr)]
-    EQ        [reduce usando la regla 34 (expr)]
-    NE        [reduce usando la regla 34 (expr)]
-    LE        [reduce usando la regla 34 (expr)]
-    GE        [reduce usando la regla 34 (expr)]
-    LS        [reduce usando la regla 34 (expr)]
-    RS        [reduce usando la regla 34 (expr)]
-    '|'       [reduce usando la regla 34 (expr)]
-    '^'       [reduce usando la regla 34 (expr)]
-    '&'       [reduce usando la regla 34 (expr)]
-    '<'       [reduce usando la regla 34 (expr)]
-    '>'       [reduce usando la regla 34 (expr)]
-    '+'       [reduce usando la regla 34 (expr)]
-    '-'       [reduce usando la regla 34 (expr)]
-    '*'       [reduce usando la regla 34 (expr)]
-    '/'       [reduce usando la regla 34 (expr)]
-    '%'       [reduce usando la regla 34 (expr)]
-    $default  reduce usando la regla 34 (expr)
+    OR        [reduce using rule 33 (expr)]
+    AN        [reduce using rule 33 (expr)]
+    EQ        [reduce using rule 33 (expr)]
+    NE        [reduce using rule 33 (expr)]
+    LE        [reduce using rule 33 (expr)]
+    GE        [reduce using rule 33 (expr)]
+    LS        [reduce using rule 33 (expr)]
+    RS        [reduce using rule 33 (expr)]
+    '|'       [reduce using rule 33 (expr)]
+    '^'       [reduce using rule 33 (expr)]
+    '&'       [reduce using rule 33 (expr)]
+    '<'       [reduce using rule 33 (expr)]
+    '>'       [reduce using rule 33 (expr)]
+    '+'       [reduce using rule 33 (expr)]
+    '-'       [reduce using rule 33 (expr)]
+    '*'       [reduce using rule 33 (expr)]
+    '/'       [reduce using rule 33 (expr)]
+    '%'       [reduce using rule 33 (expr)]
+    $default  reduce using rule 33 (expr)
 
 
-Estado 40
+state 34
 
-   38 expr: '$' INT8 .
+   35 expr: '$' INT8 .
 
-    $default  reduce usando la regla 38 (expr)
+    $default  reduce using rule 35 (expr)
 
 
-Estado 41
+state 35
 
    15 expr: expr OR . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 68
+    expr  go to state 62
 
 
-Estado 42
+state 36
 
    16 expr: expr AN . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 69
+    expr  go to state 63
 
 
-Estado 43
+state 37
 
    20 expr: expr EQ . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 70
+    expr  go to state 64
 
 
-Estado 44
+state 38
 
    21 expr: expr NE . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 71
+    expr  go to state 65
 
 
-Estado 45
+state 39
 
    24 expr: expr LE . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 72
+    expr  go to state 66
 
 
-Estado 46
+state 40
 
    25 expr: expr GE . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 73
+    expr  go to state 67
 
 
-Estado 47
+state 41
 
    26 expr: expr LS . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 74
+    expr  go to state 68
 
 
-Estado 48
+state 42
 
    27 expr: expr RS . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 75
+    expr  go to state 69
 
 
-Estado 49
+state 43
 
     4 stmt: expr ';' .
 
-    $default  reduce usando la regla 4 (stmt)
+    $default  reduce using rule 4 (stmt)
 
 
-Estado 50
+state 44
 
    17 expr: expr '|' . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 76
+    expr  go to state 70
 
 
-Estado 51
+state 45
 
    18 expr: expr '^' . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 77
+    expr  go to state 71
 
 
-Estado 52
+state 46
 
    19 expr: expr '&' . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 78
+    expr  go to state 72
 
 
-Estado 53
+state 47
 
    22 expr: expr '<' . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 79
+    expr  go to state 73
 
 
-Estado 54
+state 48
 
    23 expr: expr '>' . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 80
+    expr  go to state 74
 
 
-Estado 55
+state 49
 
    28 expr: expr '+' . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 81
+    expr  go to state 75
 
 
-Estado 56
+state 50
 
    29 expr: expr '-' . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 82
+    expr  go to state 76
 
 
-Estado 57
+state 51
 
    30 expr: expr '*' . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 83
+    expr  go to state 77
 
 
-Estado 58
+state 52
 
    31 expr: expr '/' . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 84
+    expr  go to state 78
 
 
-Estado 59
+state 53
 
    32 expr: expr '%' . expr
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 85
+    expr  go to state 79
 
 
-Estado 60
+state 54
 
    14 expr: ID '=' expr .
    15     | expr . OR expr
@@ -1387,54 +1051,54 @@ Estado 60
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 14 (expr)]
-    AN        [reduce usando la regla 14 (expr)]
-    EQ        [reduce usando la regla 14 (expr)]
-    NE        [reduce usando la regla 14 (expr)]
-    LE        [reduce usando la regla 14 (expr)]
-    GE        [reduce usando la regla 14 (expr)]
-    LS        [reduce usando la regla 14 (expr)]
-    RS        [reduce usando la regla 14 (expr)]
-    '|'       [reduce usando la regla 14 (expr)]
-    '^'       [reduce usando la regla 14 (expr)]
-    '&'       [reduce usando la regla 14 (expr)]
-    '<'       [reduce usando la regla 14 (expr)]
-    '>'       [reduce usando la regla 14 (expr)]
-    '+'       [reduce usando la regla 14 (expr)]
-    '-'       [reduce usando la regla 14 (expr)]
-    '*'       [reduce usando la regla 14 (expr)]
-    '/'       [reduce usando la regla 14 (expr)]
-    '%'       [reduce usando la regla 14 (expr)]
-    $default  reduce usando la regla 14 (expr)
+    OR        [reduce using rule 14 (expr)]
+    AN        [reduce using rule 14 (expr)]
+    EQ        [reduce using rule 14 (expr)]
+    NE        [reduce using rule 14 (expr)]
+    LE        [reduce using rule 14 (expr)]
+    GE        [reduce using rule 14 (expr)]
+    LS        [reduce using rule 14 (expr)]
+    RS        [reduce using rule 14 (expr)]
+    '|'       [reduce using rule 14 (expr)]
+    '^'       [reduce using rule 14 (expr)]
+    '&'       [reduce using rule 14 (expr)]
+    '<'       [reduce using rule 14 (expr)]
+    '>'       [reduce using rule 14 (expr)]
+    '+'       [reduce using rule 14 (expr)]
+    '-'       [reduce using rule 14 (expr)]
+    '*'       [reduce using rule 14 (expr)]
+    '/'       [reduce using rule 14 (expr)]
+    '%'       [reduce using rule 14 (expr)]
+    $default  reduce using rule 14 (expr)
 
 
-Estado 61
+state 55
 
     8 stmt: DO L stmt . WHILE '(' expr ')' M N ';'
 
-    WHILE  desplazar e ir al estado 86
+    WHILE  shift, and go to state 80
 
 
-Estado 62
+state 56
 
     9 stmt: FOR '(' expr . ';' expr ';' expr ')' stmt
    15 expr: expr . OR expr
@@ -1456,31 +1120,31 @@ Estado 62
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    ';'  desplazar e ir al estado 87
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    ';'  shift, and go to state 81
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
 
-Estado 63
+state 57
 
     5 stmt: IF '(' expr . ')' M stmt
-    6     | IF '(' expr . ')' M stmt L ELSE stmt
+    6     | IF '(' expr . ')' M stmt N ELSE L stmt L
    15 expr: expr . OR expr
    16     | expr . AN expr
    17     | expr . '|' expr
@@ -1500,69 +1164,66 @@ Estado 63
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    ')'  desplazar e ir al estado 88
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    ')'  shift, and go to state 82
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
 
-Estado 64
+state 58
 
    10 stmt: RETURN expr ';' .
 
-    $default  reduce usando la regla 10 (stmt)
+    $default  reduce using rule 10 (stmt)
 
 
-Estado 65
+state 59
 
     7 stmt: WHILE '(' L . expr ')' M stmt N
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 89
+    expr  go to state 83
 
 
-Estado 66
+state 60
 
-   37 expr: '(' expr ')' .
+   34 expr: '(' expr ')' .
 
-    $default  reduce usando la regla 37 (expr)
+    $default  reduce using rule 34 (expr)
 
 
-Estado 67
+state 61
 
    12 stmt: '{' stmts '}' .
 
-    $default  reduce usando la regla 12 (stmt)
+    $default  reduce using rule 12 (stmt)
 
 
-Estado 68
+state 62
 
    15 expr: expr . OR expr
    15     | expr OR expr .
@@ -1584,47 +1245,47 @@ Estado 68
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 15 (expr)]
-    AN        [reduce usando la regla 15 (expr)]
-    EQ        [reduce usando la regla 15 (expr)]
-    NE        [reduce usando la regla 15 (expr)]
-    LE        [reduce usando la regla 15 (expr)]
-    GE        [reduce usando la regla 15 (expr)]
-    LS        [reduce usando la regla 15 (expr)]
-    RS        [reduce usando la regla 15 (expr)]
-    '|'       [reduce usando la regla 15 (expr)]
-    '^'       [reduce usando la regla 15 (expr)]
-    '&'       [reduce usando la regla 15 (expr)]
-    '<'       [reduce usando la regla 15 (expr)]
-    '>'       [reduce usando la regla 15 (expr)]
-    '+'       [reduce usando la regla 15 (expr)]
-    '-'       [reduce usando la regla 15 (expr)]
-    '*'       [reduce usando la regla 15 (expr)]
-    '/'       [reduce usando la regla 15 (expr)]
-    '%'       [reduce usando la regla 15 (expr)]
-    $default  reduce usando la regla 15 (expr)
+    OR        [reduce using rule 15 (expr)]
+    AN        [reduce using rule 15 (expr)]
+    EQ        [reduce using rule 15 (expr)]
+    NE        [reduce using rule 15 (expr)]
+    LE        [reduce using rule 15 (expr)]
+    GE        [reduce using rule 15 (expr)]
+    LS        [reduce using rule 15 (expr)]
+    RS        [reduce using rule 15 (expr)]
+    '|'       [reduce using rule 15 (expr)]
+    '^'       [reduce using rule 15 (expr)]
+    '&'       [reduce using rule 15 (expr)]
+    '<'       [reduce using rule 15 (expr)]
+    '>'       [reduce using rule 15 (expr)]
+    '+'       [reduce using rule 15 (expr)]
+    '-'       [reduce using rule 15 (expr)]
+    '*'       [reduce using rule 15 (expr)]
+    '/'       [reduce using rule 15 (expr)]
+    '%'       [reduce using rule 15 (expr)]
+    $default  reduce using rule 15 (expr)
 
 
-Estado 69
+state 63
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -1646,47 +1307,47 @@ Estado 69
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 16 (expr)]
-    AN        [reduce usando la regla 16 (expr)]
-    EQ        [reduce usando la regla 16 (expr)]
-    NE        [reduce usando la regla 16 (expr)]
-    LE        [reduce usando la regla 16 (expr)]
-    GE        [reduce usando la regla 16 (expr)]
-    LS        [reduce usando la regla 16 (expr)]
-    RS        [reduce usando la regla 16 (expr)]
-    '|'       [reduce usando la regla 16 (expr)]
-    '^'       [reduce usando la regla 16 (expr)]
-    '&'       [reduce usando la regla 16 (expr)]
-    '<'       [reduce usando la regla 16 (expr)]
-    '>'       [reduce usando la regla 16 (expr)]
-    '+'       [reduce usando la regla 16 (expr)]
-    '-'       [reduce usando la regla 16 (expr)]
-    '*'       [reduce usando la regla 16 (expr)]
-    '/'       [reduce usando la regla 16 (expr)]
-    '%'       [reduce usando la regla 16 (expr)]
-    $default  reduce usando la regla 16 (expr)
+    OR        [reduce using rule 16 (expr)]
+    AN        [reduce using rule 16 (expr)]
+    EQ        [reduce using rule 16 (expr)]
+    NE        [reduce using rule 16 (expr)]
+    LE        [reduce using rule 16 (expr)]
+    GE        [reduce using rule 16 (expr)]
+    LS        [reduce using rule 16 (expr)]
+    RS        [reduce using rule 16 (expr)]
+    '|'       [reduce using rule 16 (expr)]
+    '^'       [reduce using rule 16 (expr)]
+    '&'       [reduce using rule 16 (expr)]
+    '<'       [reduce using rule 16 (expr)]
+    '>'       [reduce using rule 16 (expr)]
+    '+'       [reduce using rule 16 (expr)]
+    '-'       [reduce using rule 16 (expr)]
+    '*'       [reduce using rule 16 (expr)]
+    '/'       [reduce using rule 16 (expr)]
+    '%'       [reduce using rule 16 (expr)]
+    $default  reduce using rule 16 (expr)
 
 
-Estado 70
+state 64
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -1708,47 +1369,47 @@ Estado 70
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 20 (expr)]
-    AN        [reduce usando la regla 20 (expr)]
-    EQ        [reduce usando la regla 20 (expr)]
-    NE        [reduce usando la regla 20 (expr)]
-    LE        [reduce usando la regla 20 (expr)]
-    GE        [reduce usando la regla 20 (expr)]
-    LS        [reduce usando la regla 20 (expr)]
-    RS        [reduce usando la regla 20 (expr)]
-    '|'       [reduce usando la regla 20 (expr)]
-    '^'       [reduce usando la regla 20 (expr)]
-    '&'       [reduce usando la regla 20 (expr)]
-    '<'       [reduce usando la regla 20 (expr)]
-    '>'       [reduce usando la regla 20 (expr)]
-    '+'       [reduce usando la regla 20 (expr)]
-    '-'       [reduce usando la regla 20 (expr)]
-    '*'       [reduce usando la regla 20 (expr)]
-    '/'       [reduce usando la regla 20 (expr)]
-    '%'       [reduce usando la regla 20 (expr)]
-    $default  reduce usando la regla 20 (expr)
+    OR        [reduce using rule 20 (expr)]
+    AN        [reduce using rule 20 (expr)]
+    EQ        [reduce using rule 20 (expr)]
+    NE        [reduce using rule 20 (expr)]
+    LE        [reduce using rule 20 (expr)]
+    GE        [reduce using rule 20 (expr)]
+    LS        [reduce using rule 20 (expr)]
+    RS        [reduce using rule 20 (expr)]
+    '|'       [reduce using rule 20 (expr)]
+    '^'       [reduce using rule 20 (expr)]
+    '&'       [reduce using rule 20 (expr)]
+    '<'       [reduce using rule 20 (expr)]
+    '>'       [reduce using rule 20 (expr)]
+    '+'       [reduce using rule 20 (expr)]
+    '-'       [reduce using rule 20 (expr)]
+    '*'       [reduce using rule 20 (expr)]
+    '/'       [reduce using rule 20 (expr)]
+    '%'       [reduce using rule 20 (expr)]
+    $default  reduce using rule 20 (expr)
 
 
-Estado 71
+state 65
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -1770,47 +1431,47 @@ Estado 71
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 21 (expr)]
-    AN        [reduce usando la regla 21 (expr)]
-    EQ        [reduce usando la regla 21 (expr)]
-    NE        [reduce usando la regla 21 (expr)]
-    LE        [reduce usando la regla 21 (expr)]
-    GE        [reduce usando la regla 21 (expr)]
-    LS        [reduce usando la regla 21 (expr)]
-    RS        [reduce usando la regla 21 (expr)]
-    '|'       [reduce usando la regla 21 (expr)]
-    '^'       [reduce usando la regla 21 (expr)]
-    '&'       [reduce usando la regla 21 (expr)]
-    '<'       [reduce usando la regla 21 (expr)]
-    '>'       [reduce usando la regla 21 (expr)]
-    '+'       [reduce usando la regla 21 (expr)]
-    '-'       [reduce usando la regla 21 (expr)]
-    '*'       [reduce usando la regla 21 (expr)]
-    '/'       [reduce usando la regla 21 (expr)]
-    '%'       [reduce usando la regla 21 (expr)]
-    $default  reduce usando la regla 21 (expr)
+    OR        [reduce using rule 21 (expr)]
+    AN        [reduce using rule 21 (expr)]
+    EQ        [reduce using rule 21 (expr)]
+    NE        [reduce using rule 21 (expr)]
+    LE        [reduce using rule 21 (expr)]
+    GE        [reduce using rule 21 (expr)]
+    LS        [reduce using rule 21 (expr)]
+    RS        [reduce using rule 21 (expr)]
+    '|'       [reduce using rule 21 (expr)]
+    '^'       [reduce using rule 21 (expr)]
+    '&'       [reduce using rule 21 (expr)]
+    '<'       [reduce using rule 21 (expr)]
+    '>'       [reduce using rule 21 (expr)]
+    '+'       [reduce using rule 21 (expr)]
+    '-'       [reduce using rule 21 (expr)]
+    '*'       [reduce using rule 21 (expr)]
+    '/'       [reduce using rule 21 (expr)]
+    '%'       [reduce using rule 21 (expr)]
+    $default  reduce using rule 21 (expr)
 
 
-Estado 72
+state 66
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -1832,47 +1493,47 @@ Estado 72
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 24 (expr)]
-    AN        [reduce usando la regla 24 (expr)]
-    EQ        [reduce usando la regla 24 (expr)]
-    NE        [reduce usando la regla 24 (expr)]
-    LE        [reduce usando la regla 24 (expr)]
-    GE        [reduce usando la regla 24 (expr)]
-    LS        [reduce usando la regla 24 (expr)]
-    RS        [reduce usando la regla 24 (expr)]
-    '|'       [reduce usando la regla 24 (expr)]
-    '^'       [reduce usando la regla 24 (expr)]
-    '&'       [reduce usando la regla 24 (expr)]
-    '<'       [reduce usando la regla 24 (expr)]
-    '>'       [reduce usando la regla 24 (expr)]
-    '+'       [reduce usando la regla 24 (expr)]
-    '-'       [reduce usando la regla 24 (expr)]
-    '*'       [reduce usando la regla 24 (expr)]
-    '/'       [reduce usando la regla 24 (expr)]
-    '%'       [reduce usando la regla 24 (expr)]
-    $default  reduce usando la regla 24 (expr)
+    OR        [reduce using rule 24 (expr)]
+    AN        [reduce using rule 24 (expr)]
+    EQ        [reduce using rule 24 (expr)]
+    NE        [reduce using rule 24 (expr)]
+    LE        [reduce using rule 24 (expr)]
+    GE        [reduce using rule 24 (expr)]
+    LS        [reduce using rule 24 (expr)]
+    RS        [reduce using rule 24 (expr)]
+    '|'       [reduce using rule 24 (expr)]
+    '^'       [reduce using rule 24 (expr)]
+    '&'       [reduce using rule 24 (expr)]
+    '<'       [reduce using rule 24 (expr)]
+    '>'       [reduce using rule 24 (expr)]
+    '+'       [reduce using rule 24 (expr)]
+    '-'       [reduce using rule 24 (expr)]
+    '*'       [reduce using rule 24 (expr)]
+    '/'       [reduce using rule 24 (expr)]
+    '%'       [reduce using rule 24 (expr)]
+    $default  reduce using rule 24 (expr)
 
 
-Estado 73
+state 67
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -1894,47 +1555,47 @@ Estado 73
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 25 (expr)]
-    AN        [reduce usando la regla 25 (expr)]
-    EQ        [reduce usando la regla 25 (expr)]
-    NE        [reduce usando la regla 25 (expr)]
-    LE        [reduce usando la regla 25 (expr)]
-    GE        [reduce usando la regla 25 (expr)]
-    LS        [reduce usando la regla 25 (expr)]
-    RS        [reduce usando la regla 25 (expr)]
-    '|'       [reduce usando la regla 25 (expr)]
-    '^'       [reduce usando la regla 25 (expr)]
-    '&'       [reduce usando la regla 25 (expr)]
-    '<'       [reduce usando la regla 25 (expr)]
-    '>'       [reduce usando la regla 25 (expr)]
-    '+'       [reduce usando la regla 25 (expr)]
-    '-'       [reduce usando la regla 25 (expr)]
-    '*'       [reduce usando la regla 25 (expr)]
-    '/'       [reduce usando la regla 25 (expr)]
-    '%'       [reduce usando la regla 25 (expr)]
-    $default  reduce usando la regla 25 (expr)
+    OR        [reduce using rule 25 (expr)]
+    AN        [reduce using rule 25 (expr)]
+    EQ        [reduce using rule 25 (expr)]
+    NE        [reduce using rule 25 (expr)]
+    LE        [reduce using rule 25 (expr)]
+    GE        [reduce using rule 25 (expr)]
+    LS        [reduce using rule 25 (expr)]
+    RS        [reduce using rule 25 (expr)]
+    '|'       [reduce using rule 25 (expr)]
+    '^'       [reduce using rule 25 (expr)]
+    '&'       [reduce using rule 25 (expr)]
+    '<'       [reduce using rule 25 (expr)]
+    '>'       [reduce using rule 25 (expr)]
+    '+'       [reduce using rule 25 (expr)]
+    '-'       [reduce using rule 25 (expr)]
+    '*'       [reduce using rule 25 (expr)]
+    '/'       [reduce using rule 25 (expr)]
+    '%'       [reduce using rule 25 (expr)]
+    $default  reduce using rule 25 (expr)
 
 
-Estado 74
+state 68
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -1956,47 +1617,47 @@ Estado 74
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 26 (expr)]
-    AN        [reduce usando la regla 26 (expr)]
-    EQ        [reduce usando la regla 26 (expr)]
-    NE        [reduce usando la regla 26 (expr)]
-    LE        [reduce usando la regla 26 (expr)]
-    GE        [reduce usando la regla 26 (expr)]
-    LS        [reduce usando la regla 26 (expr)]
-    RS        [reduce usando la regla 26 (expr)]
-    '|'       [reduce usando la regla 26 (expr)]
-    '^'       [reduce usando la regla 26 (expr)]
-    '&'       [reduce usando la regla 26 (expr)]
-    '<'       [reduce usando la regla 26 (expr)]
-    '>'       [reduce usando la regla 26 (expr)]
-    '+'       [reduce usando la regla 26 (expr)]
-    '-'       [reduce usando la regla 26 (expr)]
-    '*'       [reduce usando la regla 26 (expr)]
-    '/'       [reduce usando la regla 26 (expr)]
-    '%'       [reduce usando la regla 26 (expr)]
-    $default  reduce usando la regla 26 (expr)
+    OR        [reduce using rule 26 (expr)]
+    AN        [reduce using rule 26 (expr)]
+    EQ        [reduce using rule 26 (expr)]
+    NE        [reduce using rule 26 (expr)]
+    LE        [reduce using rule 26 (expr)]
+    GE        [reduce using rule 26 (expr)]
+    LS        [reduce using rule 26 (expr)]
+    RS        [reduce using rule 26 (expr)]
+    '|'       [reduce using rule 26 (expr)]
+    '^'       [reduce using rule 26 (expr)]
+    '&'       [reduce using rule 26 (expr)]
+    '<'       [reduce using rule 26 (expr)]
+    '>'       [reduce using rule 26 (expr)]
+    '+'       [reduce using rule 26 (expr)]
+    '-'       [reduce using rule 26 (expr)]
+    '*'       [reduce using rule 26 (expr)]
+    '/'       [reduce using rule 26 (expr)]
+    '%'       [reduce using rule 26 (expr)]
+    $default  reduce using rule 26 (expr)
 
 
-Estado 75
+state 69
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -2018,47 +1679,47 @@ Estado 75
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 27 (expr)]
-    AN        [reduce usando la regla 27 (expr)]
-    EQ        [reduce usando la regla 27 (expr)]
-    NE        [reduce usando la regla 27 (expr)]
-    LE        [reduce usando la regla 27 (expr)]
-    GE        [reduce usando la regla 27 (expr)]
-    LS        [reduce usando la regla 27 (expr)]
-    RS        [reduce usando la regla 27 (expr)]
-    '|'       [reduce usando la regla 27 (expr)]
-    '^'       [reduce usando la regla 27 (expr)]
-    '&'       [reduce usando la regla 27 (expr)]
-    '<'       [reduce usando la regla 27 (expr)]
-    '>'       [reduce usando la regla 27 (expr)]
-    '+'       [reduce usando la regla 27 (expr)]
-    '-'       [reduce usando la regla 27 (expr)]
-    '*'       [reduce usando la regla 27 (expr)]
-    '/'       [reduce usando la regla 27 (expr)]
-    '%'       [reduce usando la regla 27 (expr)]
-    $default  reduce usando la regla 27 (expr)
+    OR        [reduce using rule 27 (expr)]
+    AN        [reduce using rule 27 (expr)]
+    EQ        [reduce using rule 27 (expr)]
+    NE        [reduce using rule 27 (expr)]
+    LE        [reduce using rule 27 (expr)]
+    GE        [reduce using rule 27 (expr)]
+    LS        [reduce using rule 27 (expr)]
+    RS        [reduce using rule 27 (expr)]
+    '|'       [reduce using rule 27 (expr)]
+    '^'       [reduce using rule 27 (expr)]
+    '&'       [reduce using rule 27 (expr)]
+    '<'       [reduce using rule 27 (expr)]
+    '>'       [reduce using rule 27 (expr)]
+    '+'       [reduce using rule 27 (expr)]
+    '-'       [reduce using rule 27 (expr)]
+    '*'       [reduce using rule 27 (expr)]
+    '/'       [reduce using rule 27 (expr)]
+    '%'       [reduce using rule 27 (expr)]
+    $default  reduce using rule 27 (expr)
 
 
-Estado 76
+state 70
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -2080,47 +1741,47 @@ Estado 76
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 17 (expr)]
-    AN        [reduce usando la regla 17 (expr)]
-    EQ        [reduce usando la regla 17 (expr)]
-    NE        [reduce usando la regla 17 (expr)]
-    LE        [reduce usando la regla 17 (expr)]
-    GE        [reduce usando la regla 17 (expr)]
-    LS        [reduce usando la regla 17 (expr)]
-    RS        [reduce usando la regla 17 (expr)]
-    '|'       [reduce usando la regla 17 (expr)]
-    '^'       [reduce usando la regla 17 (expr)]
-    '&'       [reduce usando la regla 17 (expr)]
-    '<'       [reduce usando la regla 17 (expr)]
-    '>'       [reduce usando la regla 17 (expr)]
-    '+'       [reduce usando la regla 17 (expr)]
-    '-'       [reduce usando la regla 17 (expr)]
-    '*'       [reduce usando la regla 17 (expr)]
-    '/'       [reduce usando la regla 17 (expr)]
-    '%'       [reduce usando la regla 17 (expr)]
-    $default  reduce usando la regla 17 (expr)
+    OR        [reduce using rule 17 (expr)]
+    AN        [reduce using rule 17 (expr)]
+    EQ        [reduce using rule 17 (expr)]
+    NE        [reduce using rule 17 (expr)]
+    LE        [reduce using rule 17 (expr)]
+    GE        [reduce using rule 17 (expr)]
+    LS        [reduce using rule 17 (expr)]
+    RS        [reduce using rule 17 (expr)]
+    '|'       [reduce using rule 17 (expr)]
+    '^'       [reduce using rule 17 (expr)]
+    '&'       [reduce using rule 17 (expr)]
+    '<'       [reduce using rule 17 (expr)]
+    '>'       [reduce using rule 17 (expr)]
+    '+'       [reduce using rule 17 (expr)]
+    '-'       [reduce using rule 17 (expr)]
+    '*'       [reduce using rule 17 (expr)]
+    '/'       [reduce using rule 17 (expr)]
+    '%'       [reduce using rule 17 (expr)]
+    $default  reduce using rule 17 (expr)
 
 
-Estado 77
+state 71
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -2142,47 +1803,47 @@ Estado 77
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 18 (expr)]
-    AN        [reduce usando la regla 18 (expr)]
-    EQ        [reduce usando la regla 18 (expr)]
-    NE        [reduce usando la regla 18 (expr)]
-    LE        [reduce usando la regla 18 (expr)]
-    GE        [reduce usando la regla 18 (expr)]
-    LS        [reduce usando la regla 18 (expr)]
-    RS        [reduce usando la regla 18 (expr)]
-    '|'       [reduce usando la regla 18 (expr)]
-    '^'       [reduce usando la regla 18 (expr)]
-    '&'       [reduce usando la regla 18 (expr)]
-    '<'       [reduce usando la regla 18 (expr)]
-    '>'       [reduce usando la regla 18 (expr)]
-    '+'       [reduce usando la regla 18 (expr)]
-    '-'       [reduce usando la regla 18 (expr)]
-    '*'       [reduce usando la regla 18 (expr)]
-    '/'       [reduce usando la regla 18 (expr)]
-    '%'       [reduce usando la regla 18 (expr)]
-    $default  reduce usando la regla 18 (expr)
+    OR        [reduce using rule 18 (expr)]
+    AN        [reduce using rule 18 (expr)]
+    EQ        [reduce using rule 18 (expr)]
+    NE        [reduce using rule 18 (expr)]
+    LE        [reduce using rule 18 (expr)]
+    GE        [reduce using rule 18 (expr)]
+    LS        [reduce using rule 18 (expr)]
+    RS        [reduce using rule 18 (expr)]
+    '|'       [reduce using rule 18 (expr)]
+    '^'       [reduce using rule 18 (expr)]
+    '&'       [reduce using rule 18 (expr)]
+    '<'       [reduce using rule 18 (expr)]
+    '>'       [reduce using rule 18 (expr)]
+    '+'       [reduce using rule 18 (expr)]
+    '-'       [reduce using rule 18 (expr)]
+    '*'       [reduce using rule 18 (expr)]
+    '/'       [reduce using rule 18 (expr)]
+    '%'       [reduce using rule 18 (expr)]
+    $default  reduce using rule 18 (expr)
 
 
-Estado 78
+state 72
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -2204,47 +1865,47 @@ Estado 78
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 19 (expr)]
-    AN        [reduce usando la regla 19 (expr)]
-    EQ        [reduce usando la regla 19 (expr)]
-    NE        [reduce usando la regla 19 (expr)]
-    LE        [reduce usando la regla 19 (expr)]
-    GE        [reduce usando la regla 19 (expr)]
-    LS        [reduce usando la regla 19 (expr)]
-    RS        [reduce usando la regla 19 (expr)]
-    '|'       [reduce usando la regla 19 (expr)]
-    '^'       [reduce usando la regla 19 (expr)]
-    '&'       [reduce usando la regla 19 (expr)]
-    '<'       [reduce usando la regla 19 (expr)]
-    '>'       [reduce usando la regla 19 (expr)]
-    '+'       [reduce usando la regla 19 (expr)]
-    '-'       [reduce usando la regla 19 (expr)]
-    '*'       [reduce usando la regla 19 (expr)]
-    '/'       [reduce usando la regla 19 (expr)]
-    '%'       [reduce usando la regla 19 (expr)]
-    $default  reduce usando la regla 19 (expr)
+    OR        [reduce using rule 19 (expr)]
+    AN        [reduce using rule 19 (expr)]
+    EQ        [reduce using rule 19 (expr)]
+    NE        [reduce using rule 19 (expr)]
+    LE        [reduce using rule 19 (expr)]
+    GE        [reduce using rule 19 (expr)]
+    LS        [reduce using rule 19 (expr)]
+    RS        [reduce using rule 19 (expr)]
+    '|'       [reduce using rule 19 (expr)]
+    '^'       [reduce using rule 19 (expr)]
+    '&'       [reduce using rule 19 (expr)]
+    '<'       [reduce using rule 19 (expr)]
+    '>'       [reduce using rule 19 (expr)]
+    '+'       [reduce using rule 19 (expr)]
+    '-'       [reduce using rule 19 (expr)]
+    '*'       [reduce using rule 19 (expr)]
+    '/'       [reduce using rule 19 (expr)]
+    '%'       [reduce using rule 19 (expr)]
+    $default  reduce using rule 19 (expr)
 
 
-Estado 79
+state 73
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -2266,47 +1927,47 @@ Estado 79
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 22 (expr)]
-    AN        [reduce usando la regla 22 (expr)]
-    EQ        [reduce usando la regla 22 (expr)]
-    NE        [reduce usando la regla 22 (expr)]
-    LE        [reduce usando la regla 22 (expr)]
-    GE        [reduce usando la regla 22 (expr)]
-    LS        [reduce usando la regla 22 (expr)]
-    RS        [reduce usando la regla 22 (expr)]
-    '|'       [reduce usando la regla 22 (expr)]
-    '^'       [reduce usando la regla 22 (expr)]
-    '&'       [reduce usando la regla 22 (expr)]
-    '<'       [reduce usando la regla 22 (expr)]
-    '>'       [reduce usando la regla 22 (expr)]
-    '+'       [reduce usando la regla 22 (expr)]
-    '-'       [reduce usando la regla 22 (expr)]
-    '*'       [reduce usando la regla 22 (expr)]
-    '/'       [reduce usando la regla 22 (expr)]
-    '%'       [reduce usando la regla 22 (expr)]
-    $default  reduce usando la regla 22 (expr)
+    OR        [reduce using rule 22 (expr)]
+    AN        [reduce using rule 22 (expr)]
+    EQ        [reduce using rule 22 (expr)]
+    NE        [reduce using rule 22 (expr)]
+    LE        [reduce using rule 22 (expr)]
+    GE        [reduce using rule 22 (expr)]
+    LS        [reduce using rule 22 (expr)]
+    RS        [reduce using rule 22 (expr)]
+    '|'       [reduce using rule 22 (expr)]
+    '^'       [reduce using rule 22 (expr)]
+    '&'       [reduce using rule 22 (expr)]
+    '<'       [reduce using rule 22 (expr)]
+    '>'       [reduce using rule 22 (expr)]
+    '+'       [reduce using rule 22 (expr)]
+    '-'       [reduce using rule 22 (expr)]
+    '*'       [reduce using rule 22 (expr)]
+    '/'       [reduce using rule 22 (expr)]
+    '%'       [reduce using rule 22 (expr)]
+    $default  reduce using rule 22 (expr)
 
 
-Estado 80
+state 74
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -2328,47 +1989,47 @@ Estado 80
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 23 (expr)]
-    AN        [reduce usando la regla 23 (expr)]
-    EQ        [reduce usando la regla 23 (expr)]
-    NE        [reduce usando la regla 23 (expr)]
-    LE        [reduce usando la regla 23 (expr)]
-    GE        [reduce usando la regla 23 (expr)]
-    LS        [reduce usando la regla 23 (expr)]
-    RS        [reduce usando la regla 23 (expr)]
-    '|'       [reduce usando la regla 23 (expr)]
-    '^'       [reduce usando la regla 23 (expr)]
-    '&'       [reduce usando la regla 23 (expr)]
-    '<'       [reduce usando la regla 23 (expr)]
-    '>'       [reduce usando la regla 23 (expr)]
-    '+'       [reduce usando la regla 23 (expr)]
-    '-'       [reduce usando la regla 23 (expr)]
-    '*'       [reduce usando la regla 23 (expr)]
-    '/'       [reduce usando la regla 23 (expr)]
-    '%'       [reduce usando la regla 23 (expr)]
-    $default  reduce usando la regla 23 (expr)
+    OR        [reduce using rule 23 (expr)]
+    AN        [reduce using rule 23 (expr)]
+    EQ        [reduce using rule 23 (expr)]
+    NE        [reduce using rule 23 (expr)]
+    LE        [reduce using rule 23 (expr)]
+    GE        [reduce using rule 23 (expr)]
+    LS        [reduce using rule 23 (expr)]
+    RS        [reduce using rule 23 (expr)]
+    '|'       [reduce using rule 23 (expr)]
+    '^'       [reduce using rule 23 (expr)]
+    '&'       [reduce using rule 23 (expr)]
+    '<'       [reduce using rule 23 (expr)]
+    '>'       [reduce using rule 23 (expr)]
+    '+'       [reduce using rule 23 (expr)]
+    '-'       [reduce using rule 23 (expr)]
+    '*'       [reduce using rule 23 (expr)]
+    '/'       [reduce using rule 23 (expr)]
+    '%'       [reduce using rule 23 (expr)]
+    $default  reduce using rule 23 (expr)
 
 
-Estado 81
+state 75
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -2390,47 +2051,47 @@ Estado 81
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 28 (expr)]
-    AN        [reduce usando la regla 28 (expr)]
-    EQ        [reduce usando la regla 28 (expr)]
-    NE        [reduce usando la regla 28 (expr)]
-    LE        [reduce usando la regla 28 (expr)]
-    GE        [reduce usando la regla 28 (expr)]
-    LS        [reduce usando la regla 28 (expr)]
-    RS        [reduce usando la regla 28 (expr)]
-    '|'       [reduce usando la regla 28 (expr)]
-    '^'       [reduce usando la regla 28 (expr)]
-    '&'       [reduce usando la regla 28 (expr)]
-    '<'       [reduce usando la regla 28 (expr)]
-    '>'       [reduce usando la regla 28 (expr)]
-    '+'       [reduce usando la regla 28 (expr)]
-    '-'       [reduce usando la regla 28 (expr)]
-    '*'       [reduce usando la regla 28 (expr)]
-    '/'       [reduce usando la regla 28 (expr)]
-    '%'       [reduce usando la regla 28 (expr)]
-    $default  reduce usando la regla 28 (expr)
+    OR        [reduce using rule 28 (expr)]
+    AN        [reduce using rule 28 (expr)]
+    EQ        [reduce using rule 28 (expr)]
+    NE        [reduce using rule 28 (expr)]
+    LE        [reduce using rule 28 (expr)]
+    GE        [reduce using rule 28 (expr)]
+    LS        [reduce using rule 28 (expr)]
+    RS        [reduce using rule 28 (expr)]
+    '|'       [reduce using rule 28 (expr)]
+    '^'       [reduce using rule 28 (expr)]
+    '&'       [reduce using rule 28 (expr)]
+    '<'       [reduce using rule 28 (expr)]
+    '>'       [reduce using rule 28 (expr)]
+    '+'       [reduce using rule 28 (expr)]
+    '-'       [reduce using rule 28 (expr)]
+    '*'       [reduce using rule 28 (expr)]
+    '/'       [reduce using rule 28 (expr)]
+    '%'       [reduce using rule 28 (expr)]
+    $default  reduce using rule 28 (expr)
 
 
-Estado 82
+state 76
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -2452,47 +2113,47 @@ Estado 82
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 29 (expr)]
-    AN        [reduce usando la regla 29 (expr)]
-    EQ        [reduce usando la regla 29 (expr)]
-    NE        [reduce usando la regla 29 (expr)]
-    LE        [reduce usando la regla 29 (expr)]
-    GE        [reduce usando la regla 29 (expr)]
-    LS        [reduce usando la regla 29 (expr)]
-    RS        [reduce usando la regla 29 (expr)]
-    '|'       [reduce usando la regla 29 (expr)]
-    '^'       [reduce usando la regla 29 (expr)]
-    '&'       [reduce usando la regla 29 (expr)]
-    '<'       [reduce usando la regla 29 (expr)]
-    '>'       [reduce usando la regla 29 (expr)]
-    '+'       [reduce usando la regla 29 (expr)]
-    '-'       [reduce usando la regla 29 (expr)]
-    '*'       [reduce usando la regla 29 (expr)]
-    '/'       [reduce usando la regla 29 (expr)]
-    '%'       [reduce usando la regla 29 (expr)]
-    $default  reduce usando la regla 29 (expr)
+    OR        [reduce using rule 29 (expr)]
+    AN        [reduce using rule 29 (expr)]
+    EQ        [reduce using rule 29 (expr)]
+    NE        [reduce using rule 29 (expr)]
+    LE        [reduce using rule 29 (expr)]
+    GE        [reduce using rule 29 (expr)]
+    LS        [reduce using rule 29 (expr)]
+    RS        [reduce using rule 29 (expr)]
+    '|'       [reduce using rule 29 (expr)]
+    '^'       [reduce using rule 29 (expr)]
+    '&'       [reduce using rule 29 (expr)]
+    '<'       [reduce using rule 29 (expr)]
+    '>'       [reduce using rule 29 (expr)]
+    '+'       [reduce using rule 29 (expr)]
+    '-'       [reduce using rule 29 (expr)]
+    '*'       [reduce using rule 29 (expr)]
+    '/'       [reduce using rule 29 (expr)]
+    '%'       [reduce using rule 29 (expr)]
+    $default  reduce using rule 29 (expr)
 
 
-Estado 83
+state 77
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -2514,47 +2175,47 @@ Estado 83
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 30 (expr)]
-    AN        [reduce usando la regla 30 (expr)]
-    EQ        [reduce usando la regla 30 (expr)]
-    NE        [reduce usando la regla 30 (expr)]
-    LE        [reduce usando la regla 30 (expr)]
-    GE        [reduce usando la regla 30 (expr)]
-    LS        [reduce usando la regla 30 (expr)]
-    RS        [reduce usando la regla 30 (expr)]
-    '|'       [reduce usando la regla 30 (expr)]
-    '^'       [reduce usando la regla 30 (expr)]
-    '&'       [reduce usando la regla 30 (expr)]
-    '<'       [reduce usando la regla 30 (expr)]
-    '>'       [reduce usando la regla 30 (expr)]
-    '+'       [reduce usando la regla 30 (expr)]
-    '-'       [reduce usando la regla 30 (expr)]
-    '*'       [reduce usando la regla 30 (expr)]
-    '/'       [reduce usando la regla 30 (expr)]
-    '%'       [reduce usando la regla 30 (expr)]
-    $default  reduce usando la regla 30 (expr)
+    OR        [reduce using rule 30 (expr)]
+    AN        [reduce using rule 30 (expr)]
+    EQ        [reduce using rule 30 (expr)]
+    NE        [reduce using rule 30 (expr)]
+    LE        [reduce using rule 30 (expr)]
+    GE        [reduce using rule 30 (expr)]
+    LS        [reduce using rule 30 (expr)]
+    RS        [reduce using rule 30 (expr)]
+    '|'       [reduce using rule 30 (expr)]
+    '^'       [reduce using rule 30 (expr)]
+    '&'       [reduce using rule 30 (expr)]
+    '<'       [reduce using rule 30 (expr)]
+    '>'       [reduce using rule 30 (expr)]
+    '+'       [reduce using rule 30 (expr)]
+    '-'       [reduce using rule 30 (expr)]
+    '*'       [reduce using rule 30 (expr)]
+    '/'       [reduce using rule 30 (expr)]
+    '%'       [reduce using rule 30 (expr)]
+    $default  reduce using rule 30 (expr)
 
 
-Estado 84
+state 78
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -2576,47 +2237,47 @@ Estado 84
    31     | expr '/' expr .
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 31 (expr)]
-    AN        [reduce usando la regla 31 (expr)]
-    EQ        [reduce usando la regla 31 (expr)]
-    NE        [reduce usando la regla 31 (expr)]
-    LE        [reduce usando la regla 31 (expr)]
-    GE        [reduce usando la regla 31 (expr)]
-    LS        [reduce usando la regla 31 (expr)]
-    RS        [reduce usando la regla 31 (expr)]
-    '|'       [reduce usando la regla 31 (expr)]
-    '^'       [reduce usando la regla 31 (expr)]
-    '&'       [reduce usando la regla 31 (expr)]
-    '<'       [reduce usando la regla 31 (expr)]
-    '>'       [reduce usando la regla 31 (expr)]
-    '+'       [reduce usando la regla 31 (expr)]
-    '-'       [reduce usando la regla 31 (expr)]
-    '*'       [reduce usando la regla 31 (expr)]
-    '/'       [reduce usando la regla 31 (expr)]
-    '%'       [reduce usando la regla 31 (expr)]
-    $default  reduce usando la regla 31 (expr)
+    OR        [reduce using rule 31 (expr)]
+    AN        [reduce using rule 31 (expr)]
+    EQ        [reduce using rule 31 (expr)]
+    NE        [reduce using rule 31 (expr)]
+    LE        [reduce using rule 31 (expr)]
+    GE        [reduce using rule 31 (expr)]
+    LS        [reduce using rule 31 (expr)]
+    RS        [reduce using rule 31 (expr)]
+    '|'       [reduce using rule 31 (expr)]
+    '^'       [reduce using rule 31 (expr)]
+    '&'       [reduce using rule 31 (expr)]
+    '<'       [reduce using rule 31 (expr)]
+    '>'       [reduce using rule 31 (expr)]
+    '+'       [reduce using rule 31 (expr)]
+    '-'       [reduce using rule 31 (expr)]
+    '*'       [reduce using rule 31 (expr)]
+    '/'       [reduce using rule 31 (expr)]
+    '%'       [reduce using rule 31 (expr)]
+    $default  reduce using rule 31 (expr)
 
 
-Estado 85
+state 79
 
    15 expr: expr . OR expr
    16     | expr . AN expr
@@ -2638,84 +2299,81 @@ Estado 85
    32     | expr . '%' expr
    32     | expr '%' expr .
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
-    OR        [reduce usando la regla 32 (expr)]
-    AN        [reduce usando la regla 32 (expr)]
-    EQ        [reduce usando la regla 32 (expr)]
-    NE        [reduce usando la regla 32 (expr)]
-    LE        [reduce usando la regla 32 (expr)]
-    GE        [reduce usando la regla 32 (expr)]
-    LS        [reduce usando la regla 32 (expr)]
-    RS        [reduce usando la regla 32 (expr)]
-    '|'       [reduce usando la regla 32 (expr)]
-    '^'       [reduce usando la regla 32 (expr)]
-    '&'       [reduce usando la regla 32 (expr)]
-    '<'       [reduce usando la regla 32 (expr)]
-    '>'       [reduce usando la regla 32 (expr)]
-    '+'       [reduce usando la regla 32 (expr)]
-    '-'       [reduce usando la regla 32 (expr)]
-    '*'       [reduce usando la regla 32 (expr)]
-    '/'       [reduce usando la regla 32 (expr)]
-    '%'       [reduce usando la regla 32 (expr)]
-    $default  reduce usando la regla 32 (expr)
+    OR        [reduce using rule 32 (expr)]
+    AN        [reduce using rule 32 (expr)]
+    EQ        [reduce using rule 32 (expr)]
+    NE        [reduce using rule 32 (expr)]
+    LE        [reduce using rule 32 (expr)]
+    GE        [reduce using rule 32 (expr)]
+    LS        [reduce using rule 32 (expr)]
+    RS        [reduce using rule 32 (expr)]
+    '|'       [reduce using rule 32 (expr)]
+    '^'       [reduce using rule 32 (expr)]
+    '&'       [reduce using rule 32 (expr)]
+    '<'       [reduce using rule 32 (expr)]
+    '>'       [reduce using rule 32 (expr)]
+    '+'       [reduce using rule 32 (expr)]
+    '-'       [reduce using rule 32 (expr)]
+    '*'       [reduce using rule 32 (expr)]
+    '/'       [reduce using rule 32 (expr)]
+    '%'       [reduce using rule 32 (expr)]
+    $default  reduce using rule 32 (expr)
 
 
-Estado 86
+state 80
 
     8 stmt: DO L stmt WHILE . '(' expr ')' M N ';'
 
-    '('  desplazar e ir al estado 90
+    '('  shift, and go to state 84
 
 
-Estado 87
+state 81
 
     9 stmt: FOR '(' expr ';' . expr ';' expr ')' stmt
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 91
+    expr  go to state 85
 
 
-Estado 88
+state 82
 
     5 stmt: IF '(' expr ')' . M stmt
-    6     | IF '(' expr ')' . M stmt L ELSE stmt
+    6     | IF '(' expr ')' . M stmt N ELSE L stmt L
 
-    $default  reduce usando la regla 46 (M)
+    $default  reduce using rule 43 (M)
 
-    M  ir al estado 92
+    M  go to state 86
 
 
-Estado 89
+state 83
 
     7 stmt: WHILE '(' L expr . ')' M stmt N
    15 expr: expr . OR expr
@@ -2737,48 +2395,45 @@ Estado 89
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    ')'  desplazar e ir al estado 93
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    ')'  shift, and go to state 87
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
 
-Estado 90
+state 84
 
     8 stmt: DO L stmt WHILE '(' . expr ')' M N ';'
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 94
+    expr  go to state 88
 
 
-Estado 91
+state 85
 
     9 stmt: FOR '(' expr ';' expr . ';' expr ')' stmt
    15 expr: expr . OR expr
@@ -2800,68 +2455,65 @@ Estado 91
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    ';'  desplazar e ir al estado 95
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    ';'  shift, and go to state 89
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
 
-Estado 92
+state 86
 
     5 stmt: IF '(' expr ')' M . stmt
-    6     | IF '(' expr ')' M . stmt L ELSE stmt
+    6     | IF '(' expr ')' M . stmt N ELSE L stmt L
 
-    error   desplazar e ir al estado 3
-    ID      desplazar e ir al estado 4
-    INT8    desplazar e ir al estado 5
-    INT16   desplazar e ir al estado 6
-    INT32   desplazar e ir al estado 7
-    FLT     desplazar e ir al estado 8
-    STR     desplazar e ir al estado 9
-    BREAK   desplazar e ir al estado 10
-    DO      desplazar e ir al estado 11
-    FOR     desplazar e ir al estado 12
-    IF      desplazar e ir al estado 13
-    RETURN  desplazar e ir al estado 14
-    WHILE   desplazar e ir al estado 15
-    ';'     desplazar e ir al estado 16
-    '('     desplazar e ir al estado 17
-    '{'     desplazar e ir al estado 18
-    '+'     desplazar e ir al estado 19
-    '-'     desplazar e ir al estado 20
-    '!'     desplazar e ir al estado 21
-    '~'     desplazar e ir al estado 22
-    '$'     desplazar e ir al estado 23
+    error   shift, and go to state 3
+    ID      shift, and go to state 4
+    INT8    shift, and go to state 5
+    INT16   shift, and go to state 6
+    INT32   shift, and go to state 7
+    FLT     shift, and go to state 8
+    STR     shift, and go to state 9
+    BREAK   shift, and go to state 10
+    DO      shift, and go to state 11
+    FOR     shift, and go to state 12
+    IF      shift, and go to state 13
+    RETURN  shift, and go to state 14
+    WHILE   shift, and go to state 15
+    ';'     shift, and go to state 16
+    '('     shift, and go to state 17
+    '{'     shift, and go to state 18
+    '!'     shift, and go to state 19
+    '$'     shift, and go to state 20
 
-    stmt  ir al estado 96
-    expr  ir al estado 25
+    stmt  go to state 90
+    expr  go to state 22
 
 
-Estado 93
+state 87
 
     7 stmt: WHILE '(' L expr ')' . M stmt N
 
-    $default  reduce usando la regla 46 (M)
+    $default  reduce using rule 43 (M)
 
-    M  ir al estado 97
+    M  go to state 91
 
 
-Estado 94
+state 88
 
     8 stmt: DO L stmt WHILE '(' expr . ')' M N ';'
    15 expr: expr . OR expr
@@ -2883,99 +2535,93 @@ Estado 94
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    ')'  desplazar e ir al estado 98
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    ')'  shift, and go to state 92
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
 
-Estado 95
+state 89
 
     9 stmt: FOR '(' expr ';' expr ';' . expr ')' stmt
 
-    ID     desplazar e ir al estado 4
-    INT8   desplazar e ir al estado 5
-    INT16  desplazar e ir al estado 6
-    INT32  desplazar e ir al estado 7
-    FLT    desplazar e ir al estado 8
-    STR    desplazar e ir al estado 9
-    '('    desplazar e ir al estado 17
-    '+'    desplazar e ir al estado 19
-    '-'    desplazar e ir al estado 20
-    '!'    desplazar e ir al estado 21
-    '~'    desplazar e ir al estado 22
-    '$'    desplazar e ir al estado 23
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    expr  ir al estado 99
+    expr  go to state 93
 
 
-Estado 96
+state 90
 
     5 stmt: IF '(' expr ')' M stmt .
-    6     | IF '(' expr ')' M stmt . L ELSE stmt
+    6     | IF '(' expr ')' M stmt . N ELSE L stmt L
 
-    ELSE      reduce usando la regla 5 (stmt)
-    ELSE      [reduce usando la regla 45 (L)]
-    $default  reduce usando la regla 5 (stmt)
+    ELSE      reduce using rule 5 (stmt)
+    ELSE      [reduce using rule 44 (N)]
+    $default  reduce using rule 5 (stmt)
 
-    L  ir al estado 100
+    N  go to state 94
 
 
-Estado 97
+state 91
 
     7 stmt: WHILE '(' L expr ')' M . stmt N
 
-    error   desplazar e ir al estado 3
-    ID      desplazar e ir al estado 4
-    INT8    desplazar e ir al estado 5
-    INT16   desplazar e ir al estado 6
-    INT32   desplazar e ir al estado 7
-    FLT     desplazar e ir al estado 8
-    STR     desplazar e ir al estado 9
-    BREAK   desplazar e ir al estado 10
-    DO      desplazar e ir al estado 11
-    FOR     desplazar e ir al estado 12
-    IF      desplazar e ir al estado 13
-    RETURN  desplazar e ir al estado 14
-    WHILE   desplazar e ir al estado 15
-    ';'     desplazar e ir al estado 16
-    '('     desplazar e ir al estado 17
-    '{'     desplazar e ir al estado 18
-    '+'     desplazar e ir al estado 19
-    '-'     desplazar e ir al estado 20
-    '!'     desplazar e ir al estado 21
-    '~'     desplazar e ir al estado 22
-    '$'     desplazar e ir al estado 23
+    error   shift, and go to state 3
+    ID      shift, and go to state 4
+    INT8    shift, and go to state 5
+    INT16   shift, and go to state 6
+    INT32   shift, and go to state 7
+    FLT     shift, and go to state 8
+    STR     shift, and go to state 9
+    BREAK   shift, and go to state 10
+    DO      shift, and go to state 11
+    FOR     shift, and go to state 12
+    IF      shift, and go to state 13
+    RETURN  shift, and go to state 14
+    WHILE   shift, and go to state 15
+    ';'     shift, and go to state 16
+    '('     shift, and go to state 17
+    '{'     shift, and go to state 18
+    '!'     shift, and go to state 19
+    '$'     shift, and go to state 20
 
-    stmt  ir al estado 101
-    expr  ir al estado 25
+    stmt  go to state 95
+    expr  go to state 22
 
 
-Estado 98
+state 92
 
     8 stmt: DO L stmt WHILE '(' expr ')' . M N ';'
 
-    $default  reduce usando la regla 46 (M)
+    $default  reduce using rule 43 (M)
 
-    M  ir al estado 102
+    M  go to state 96
 
 
-Estado 99
+state 93
 
     9 stmt: FOR '(' expr ';' expr ';' expr . ')' stmt
    15 expr: expr . OR expr
@@ -2997,142 +2643,154 @@ Estado 99
    31     | expr . '/' expr
    32     | expr . '%' expr
 
-    OR   desplazar e ir al estado 41
-    AN   desplazar e ir al estado 42
-    EQ   desplazar e ir al estado 43
-    NE   desplazar e ir al estado 44
-    LE   desplazar e ir al estado 45
-    GE   desplazar e ir al estado 46
-    LS   desplazar e ir al estado 47
-    RS   desplazar e ir al estado 48
-    ')'  desplazar e ir al estado 103
-    '|'  desplazar e ir al estado 50
-    '^'  desplazar e ir al estado 51
-    '&'  desplazar e ir al estado 52
-    '<'  desplazar e ir al estado 53
-    '>'  desplazar e ir al estado 54
-    '+'  desplazar e ir al estado 55
-    '-'  desplazar e ir al estado 56
-    '*'  desplazar e ir al estado 57
-    '/'  desplazar e ir al estado 58
-    '%'  desplazar e ir al estado 59
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    LS   shift, and go to state 41
+    RS   shift, and go to state 42
+    ')'  shift, and go to state 97
+    '|'  shift, and go to state 44
+    '^'  shift, and go to state 45
+    '&'  shift, and go to state 46
+    '<'  shift, and go to state 47
+    '>'  shift, and go to state 48
+    '+'  shift, and go to state 49
+    '-'  shift, and go to state 50
+    '*'  shift, and go to state 51
+    '/'  shift, and go to state 52
+    '%'  shift, and go to state 53
 
 
-Estado 100
+state 94
 
-    6 stmt: IF '(' expr ')' M stmt L . ELSE stmt
+    6 stmt: IF '(' expr ')' M stmt N . ELSE L stmt L
 
-    ELSE  desplazar e ir al estado 104
+    ELSE  shift, and go to state 98
 
 
-Estado 101
+state 95
 
     7 stmt: WHILE '(' L expr ')' M stmt . N
 
-    $default  reduce usando la regla 47 (N)
+    $default  reduce using rule 44 (N)
 
-    N  ir al estado 105
+    N  go to state 99
 
 
-Estado 102
+state 96
 
     8 stmt: DO L stmt WHILE '(' expr ')' M . N ';'
 
-    $default  reduce usando la regla 47 (N)
+    $default  reduce using rule 44 (N)
 
-    N  ir al estado 106
+    N  go to state 100
 
 
-Estado 103
+state 97
 
     9 stmt: FOR '(' expr ';' expr ';' expr ')' . stmt
 
-    error   desplazar e ir al estado 3
-    ID      desplazar e ir al estado 4
-    INT8    desplazar e ir al estado 5
-    INT16   desplazar e ir al estado 6
-    INT32   desplazar e ir al estado 7
-    FLT     desplazar e ir al estado 8
-    STR     desplazar e ir al estado 9
-    BREAK   desplazar e ir al estado 10
-    DO      desplazar e ir al estado 11
-    FOR     desplazar e ir al estado 12
-    IF      desplazar e ir al estado 13
-    RETURN  desplazar e ir al estado 14
-    WHILE   desplazar e ir al estado 15
-    ';'     desplazar e ir al estado 16
-    '('     desplazar e ir al estado 17
-    '{'     desplazar e ir al estado 18
-    '+'     desplazar e ir al estado 19
-    '-'     desplazar e ir al estado 20
-    '!'     desplazar e ir al estado 21
-    '~'     desplazar e ir al estado 22
-    '$'     desplazar e ir al estado 23
+    error   shift, and go to state 3
+    ID      shift, and go to state 4
+    INT8    shift, and go to state 5
+    INT16   shift, and go to state 6
+    INT32   shift, and go to state 7
+    FLT     shift, and go to state 8
+    STR     shift, and go to state 9
+    BREAK   shift, and go to state 10
+    DO      shift, and go to state 11
+    FOR     shift, and go to state 12
+    IF      shift, and go to state 13
+    RETURN  shift, and go to state 14
+    WHILE   shift, and go to state 15
+    ';'     shift, and go to state 16
+    '('     shift, and go to state 17
+    '{'     shift, and go to state 18
+    '!'     shift, and go to state 19
+    '$'     shift, and go to state 20
 
-    stmt  ir al estado 107
-    expr  ir al estado 25
+    stmt  go to state 101
+    expr  go to state 22
 
 
-Estado 104
+state 98
 
-    6 stmt: IF '(' expr ')' M stmt L ELSE . stmt
+    6 stmt: IF '(' expr ')' M stmt N ELSE . L stmt L
 
-    error   desplazar e ir al estado 3
-    ID      desplazar e ir al estado 4
-    INT8    desplazar e ir al estado 5
-    INT16   desplazar e ir al estado 6
-    INT32   desplazar e ir al estado 7
-    FLT     desplazar e ir al estado 8
-    STR     desplazar e ir al estado 9
-    BREAK   desplazar e ir al estado 10
-    DO      desplazar e ir al estado 11
-    FOR     desplazar e ir al estado 12
-    IF      desplazar e ir al estado 13
-    RETURN  desplazar e ir al estado 14
-    WHILE   desplazar e ir al estado 15
-    ';'     desplazar e ir al estado 16
-    '('     desplazar e ir al estado 17
-    '{'     desplazar e ir al estado 18
-    '+'     desplazar e ir al estado 19
-    '-'     desplazar e ir al estado 20
-    '!'     desplazar e ir al estado 21
-    '~'     desplazar e ir al estado 22
-    '$'     desplazar e ir al estado 23
+    $default  reduce using rule 42 (L)
 
-    stmt  ir al estado 108
-    expr  ir al estado 25
+    L  go to state 102
 
 
-Estado 105
+state 99
 
     7 stmt: WHILE '(' L expr ')' M stmt N .
 
-    $default  reduce usando la regla 7 (stmt)
+    $default  reduce using rule 7 (stmt)
 
 
-Estado 106
+state 100
 
     8 stmt: DO L stmt WHILE '(' expr ')' M N . ';'
 
-    ';'  desplazar e ir al estado 109
+    ';'  shift, and go to state 103
 
 
-Estado 107
+state 101
 
     9 stmt: FOR '(' expr ';' expr ';' expr ')' stmt .
 
-    $default  reduce usando la regla 9 (stmt)
+    $default  reduce using rule 9 (stmt)
 
 
-Estado 108
+state 102
 
-    6 stmt: IF '(' expr ')' M stmt L ELSE stmt .
+    6 stmt: IF '(' expr ')' M stmt N ELSE L . stmt L
 
-    $default  reduce usando la regla 6 (stmt)
+    error   shift, and go to state 3
+    ID      shift, and go to state 4
+    INT8    shift, and go to state 5
+    INT16   shift, and go to state 6
+    INT32   shift, and go to state 7
+    FLT     shift, and go to state 8
+    STR     shift, and go to state 9
+    BREAK   shift, and go to state 10
+    DO      shift, and go to state 11
+    FOR     shift, and go to state 12
+    IF      shift, and go to state 13
+    RETURN  shift, and go to state 14
+    WHILE   shift, and go to state 15
+    ';'     shift, and go to state 16
+    '('     shift, and go to state 17
+    '{'     shift, and go to state 18
+    '!'     shift, and go to state 19
+    '$'     shift, and go to state 20
+
+    stmt  go to state 104
+    expr  go to state 22
 
 
-Estado 109
+state 103
 
     8 stmt: DO L stmt WHILE '(' expr ')' M N ';' .
 
-    $default  reduce usando la regla 8 (stmt)
+    $default  reduce using rule 8 (stmt)
+
+
+state 104
+
+    6 stmt: IF '(' expr ')' M stmt N ELSE L stmt . L
+
+    $default  reduce using rule 42 (L)
+
+    L  go to state 105
+
+
+state 105
+
+    6 stmt: IF '(' expr ')' M stmt N ELSE L stmt L .
+
+    $default  reduce using rule 6 (stmt)

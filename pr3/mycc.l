@@ -69,8 +69,7 @@ int             {digit}+
 "!="                           { return NE; }
 "<="                           { return LE; }
 ">="                           { return GE; }
-"<<"                           { return LS; }
-">>"                           { return RS; }
+"else"                         { return ELSE; }
 "++"                           { return PP; }
 "--"                           { return NN; }
 "->"                           { return AR; }
