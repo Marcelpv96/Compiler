@@ -58,8 +58,8 @@ stmt    : ';'
                         { backpatch($6, pc - $6); backpatch($8, $3-$8); }
         | DO L  stmt WHILE '(' expr ')' M N ';'
                         { backpatch($8, pc - $8);  backpatch($9, $2-$9);}
-        | FOR '(' expr ';' expr M ';' expr ')' stmt
-                        { error("break not implemented"); }
+        | FOR '(' expr ';' L expr M ';' expr ')' stmt N
+                        { backpatch($7, $12 - $7); backpatch($12, $5-$12);  }
         | RETURN expr ';'
                         { emit(istore_2); /* return val goes in local var 2 */ }
         | BREAK ';'
