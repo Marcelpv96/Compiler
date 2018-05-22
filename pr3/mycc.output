@@ -47,7 +47,7 @@ Grammar
     6     | IF '(' expr ')' M stmt N ELSE L stmt L
     7     | WHILE '(' L expr ')' M stmt N
     8     | DO L stmt WHILE '(' expr ')' M N ';'
-    9     | FOR '(' expr ';' expr M ';' expr ')' stmt
+    9     | FOR '(' expr ';' L expr M ';' expr ')' stmt N
    10     | RETURN expr ';'
    11     | BREAK ';'
    12     | '{' stmts '}'
@@ -156,11 +156,11 @@ expr (56)
     32 33 34 35 36 37 38 39, on right: 4 5 6 7 8 9 10 14 15 16 17 18
     19 20 21 22 23 24 25 26 27 28 29 30 31 32
 L (57)
-    on left: 40, on right: 6 7 8
+    on left: 40, on right: 6 7 8 9
 M (58)
     on left: 41, on right: 5 6 7 8 9
 N (59)
-    on left: 42, on right: 6 7 8
+    on left: 42, on right: 6 7 8 9
 
 
 state 0
@@ -278,7 +278,7 @@ state 11
 
 state 12
 
-    9 stmt: FOR . '(' expr ';' expr M ';' expr ')' stmt
+    9 stmt: FOR . '(' expr ';' L expr M ';' expr ')' stmt N
 
     '('  shift, and go to state 27
 
@@ -478,7 +478,7 @@ state 26
 
 state 27
 
-    9 stmt: FOR '(' . expr ';' expr M ';' expr ')' stmt
+    9 stmt: FOR '(' . expr ';' L expr M ';' expr ')' stmt N
 
     ID     shift, and go to state 4
     INT8   shift, and go to state 5
@@ -1014,7 +1014,7 @@ state 53
 
 state 54
 
-    9 stmt: FOR '(' expr . ';' expr M ';' expr ')' stmt
+    9 stmt: FOR '(' expr . ';' L expr M ';' expr ')' stmt N
    15 expr: expr . OR expr
    16     | expr . AN expr
    17     | expr . '^' expr
@@ -1936,19 +1936,11 @@ state 76
 
 state 77
 
-    9 stmt: FOR '(' expr ';' . expr M ';' expr ')' stmt
+    9 stmt: FOR '(' expr ';' . L expr M ';' expr ')' stmt N
 
-    ID     shift, and go to state 4
-    INT8   shift, and go to state 5
-    INT16  shift, and go to state 6
-    INT32  shift, and go to state 7
-    FLT    shift, and go to state 8
-    STR    shift, and go to state 9
-    '('    shift, and go to state 17
-    '!'    shift, and go to state 19
-    '$'    shift, and go to state 20
+    $default  reduce using rule 40 (L)
 
-    expr  go to state 81
+    L  go to state 81
 
 
 state 78
@@ -2019,44 +2011,19 @@ state 80
 
 state 81
 
-    9 stmt: FOR '(' expr ';' expr . M ';' expr ')' stmt
-   15 expr: expr . OR expr
-   16     | expr . AN expr
-   17     | expr . '^' expr
-   18     | expr . EQ expr
-   19     | expr . NE expr
-   20     | expr . '<' expr
-   21     | expr . '>' expr
-   22     | expr . LE expr
-   23     | expr . GE expr
-   24     | expr . '+' expr
-   25     | expr . PP ';'
-   26     | expr . NN ';'
-   27     | expr . '-' expr
-   28     | expr . '*' expr
-   29     | expr . '/' expr
-   30     | expr . '%' expr
+    9 stmt: FOR '(' expr ';' L . expr M ';' expr ')' stmt N
 
-    OR   shift, and go to state 35
-    AN   shift, and go to state 36
-    EQ   shift, and go to state 37
-    NE   shift, and go to state 38
-    LE   shift, and go to state 39
-    GE   shift, and go to state 40
-    PP   shift, and go to state 41
-    NN   shift, and go to state 42
-    '^'  shift, and go to state 44
-    '<'  shift, and go to state 45
-    '>'  shift, and go to state 46
-    '+'  shift, and go to state 47
-    '-'  shift, and go to state 48
-    '*'  shift, and go to state 49
-    '/'  shift, and go to state 50
-    '%'  shift, and go to state 51
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
 
-    $default  reduce using rule 41 (M)
-
-    M  go to state 85
+    expr  go to state 85
 
 
 state 82
@@ -2137,9 +2104,44 @@ state 84
 
 state 85
 
-    9 stmt: FOR '(' expr ';' expr M . ';' expr ')' stmt
+    9 stmt: FOR '(' expr ';' L expr . M ';' expr ')' stmt N
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '^' expr
+   18     | expr . EQ expr
+   19     | expr . NE expr
+   20     | expr . '<' expr
+   21     | expr . '>' expr
+   22     | expr . LE expr
+   23     | expr . GE expr
+   24     | expr . '+' expr
+   25     | expr . PP ';'
+   26     | expr . NN ';'
+   27     | expr . '-' expr
+   28     | expr . '*' expr
+   29     | expr . '/' expr
+   30     | expr . '%' expr
 
-    ';'  shift, and go to state 89
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    PP   shift, and go to state 41
+    NN   shift, and go to state 42
+    '^'  shift, and go to state 44
+    '<'  shift, and go to state 45
+    '>'  shift, and go to state 46
+    '+'  shift, and go to state 47
+    '-'  shift, and go to state 48
+    '*'  shift, and go to state 49
+    '/'  shift, and go to state 50
+    '%'  shift, and go to state 51
+
+    $default  reduce using rule 41 (M)
+
+    M  go to state 89
 
 
 state 86
@@ -2192,19 +2194,9 @@ state 88
 
 state 89
 
-    9 stmt: FOR '(' expr ';' expr M ';' . expr ')' stmt
+    9 stmt: FOR '(' expr ';' L expr M . ';' expr ')' stmt N
 
-    ID     shift, and go to state 4
-    INT8   shift, and go to state 5
-    INT16  shift, and go to state 6
-    INT32  shift, and go to state 7
-    FLT    shift, and go to state 8
-    STR    shift, and go to state 9
-    '('    shift, and go to state 17
-    '!'    shift, and go to state 19
-    '$'    shift, and go to state 20
-
-    expr  go to state 93
+    ';'  shift, and go to state 93
 
 
 state 90
@@ -2234,41 +2226,19 @@ state 92
 
 state 93
 
-    9 stmt: FOR '(' expr ';' expr M ';' expr . ')' stmt
-   15 expr: expr . OR expr
-   16     | expr . AN expr
-   17     | expr . '^' expr
-   18     | expr . EQ expr
-   19     | expr . NE expr
-   20     | expr . '<' expr
-   21     | expr . '>' expr
-   22     | expr . LE expr
-   23     | expr . GE expr
-   24     | expr . '+' expr
-   25     | expr . PP ';'
-   26     | expr . NN ';'
-   27     | expr . '-' expr
-   28     | expr . '*' expr
-   29     | expr . '/' expr
-   30     | expr . '%' expr
+    9 stmt: FOR '(' expr ';' L expr M ';' . expr ')' stmt N
 
-    OR   shift, and go to state 35
-    AN   shift, and go to state 36
-    EQ   shift, and go to state 37
-    NE   shift, and go to state 38
-    LE   shift, and go to state 39
-    GE   shift, and go to state 40
-    PP   shift, and go to state 41
-    NN   shift, and go to state 42
-    ')'  shift, and go to state 97
-    '^'  shift, and go to state 44
-    '<'  shift, and go to state 45
-    '>'  shift, and go to state 46
-    '+'  shift, and go to state 47
-    '-'  shift, and go to state 48
-    '*'  shift, and go to state 49
-    '/'  shift, and go to state 50
-    '%'  shift, and go to state 51
+    ID     shift, and go to state 4
+    INT8   shift, and go to state 5
+    INT16  shift, and go to state 6
+    INT32  shift, and go to state 7
+    FLT    shift, and go to state 8
+    STR    shift, and go to state 9
+    '('    shift, and go to state 17
+    '!'    shift, and go to state 19
+    '$'    shift, and go to state 20
+
+    expr  go to state 97
 
 
 state 94
@@ -2296,29 +2266,41 @@ state 96
 
 state 97
 
-    9 stmt: FOR '(' expr ';' expr M ';' expr ')' . stmt
+    9 stmt: FOR '(' expr ';' L expr M ';' expr . ')' stmt N
+   15 expr: expr . OR expr
+   16     | expr . AN expr
+   17     | expr . '^' expr
+   18     | expr . EQ expr
+   19     | expr . NE expr
+   20     | expr . '<' expr
+   21     | expr . '>' expr
+   22     | expr . LE expr
+   23     | expr . GE expr
+   24     | expr . '+' expr
+   25     | expr . PP ';'
+   26     | expr . NN ';'
+   27     | expr . '-' expr
+   28     | expr . '*' expr
+   29     | expr . '/' expr
+   30     | expr . '%' expr
 
-    error   shift, and go to state 3
-    ID      shift, and go to state 4
-    INT8    shift, and go to state 5
-    INT16   shift, and go to state 6
-    INT32   shift, and go to state 7
-    FLT     shift, and go to state 8
-    STR     shift, and go to state 9
-    BREAK   shift, and go to state 10
-    DO      shift, and go to state 11
-    FOR     shift, and go to state 12
-    IF      shift, and go to state 13
-    RETURN  shift, and go to state 14
-    WHILE   shift, and go to state 15
-    ';'     shift, and go to state 16
-    '('     shift, and go to state 17
-    '{'     shift, and go to state 18
-    '!'     shift, and go to state 19
-    '$'     shift, and go to state 20
-
-    stmt  go to state 100
-    expr  go to state 22
+    OR   shift, and go to state 35
+    AN   shift, and go to state 36
+    EQ   shift, and go to state 37
+    NE   shift, and go to state 38
+    LE   shift, and go to state 39
+    GE   shift, and go to state 40
+    PP   shift, and go to state 41
+    NN   shift, and go to state 42
+    ')'  shift, and go to state 100
+    '^'  shift, and go to state 44
+    '<'  shift, and go to state 45
+    '>'  shift, and go to state 46
+    '+'  shift, and go to state 47
+    '-'  shift, and go to state 48
+    '*'  shift, and go to state 49
+    '/'  shift, and go to state 50
+    '%'  shift, and go to state 51
 
 
 state 98
@@ -2357,9 +2339,29 @@ state 99
 
 state 100
 
-    9 stmt: FOR '(' expr ';' expr M ';' expr ')' stmt .
+    9 stmt: FOR '(' expr ';' L expr M ';' expr ')' . stmt N
 
-    $default  reduce using rule 9 (stmt)
+    error   shift, and go to state 3
+    ID      shift, and go to state 4
+    INT8    shift, and go to state 5
+    INT16   shift, and go to state 6
+    INT32   shift, and go to state 7
+    FLT     shift, and go to state 8
+    STR     shift, and go to state 9
+    BREAK   shift, and go to state 10
+    DO      shift, and go to state 11
+    FOR     shift, and go to state 12
+    IF      shift, and go to state 13
+    RETURN  shift, and go to state 14
+    WHILE   shift, and go to state 15
+    ';'     shift, and go to state 16
+    '('     shift, and go to state 17
+    '{'     shift, and go to state 18
+    '!'     shift, and go to state 19
+    '$'     shift, and go to state 20
+
+    stmt  go to state 102
+    expr  go to state 22
 
 
 state 101
@@ -2368,11 +2370,27 @@ state 101
 
     $default  reduce using rule 40 (L)
 
-    L  go to state 102
+    L  go to state 103
 
 
 state 102
 
+    9 stmt: FOR '(' expr ';' L expr M ';' expr ')' stmt . N
+
+    $default  reduce using rule 42 (N)
+
+    N  go to state 104
+
+
+state 103
+
     6 stmt: IF '(' expr ')' M stmt N ELSE L stmt L .
 
     $default  reduce using rule 6 (stmt)
+
+
+state 104
+
+    9 stmt: FOR '(' expr ';' L expr M ';' expr ')' stmt N .
+
+    $default  reduce using rule 9 (stmt)

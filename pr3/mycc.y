@@ -51,15 +51,14 @@ stmt    : ';'
         | expr ';'      { emit(pop); /* do not leave a value on the stack */ }
         | IF '(' expr ')' M stmt
                         { backpatch($5, pc - $5); emit3(goto_, 3); }
-//                        { backpatch($5, pc - $5); emit3(goto_, 3); }
         | IF '(' expr ')' M stmt N ELSE L stmt L
                         { backpatch($5, $9 - $5); emit3(goto_, 3); backpatch($7, $11 - $7);}
         | WHILE '(' L expr ')' M stmt N
                         { backpatch($6, pc - $6); backpatch($8, $3-$8); }
         | DO L  stmt WHILE '(' expr ')' M N ';'
                         { backpatch($8, pc - $8);  backpatch($9, $2-$9);}
-        | FOR '(' expr ';' L expr M ';' expr ')' stmt N
-                        { backpatch($7, $12 - $7); backpatch($12, $5-$12);  }
+        | FOR '(' expr ';' L expr M ';' N expr N ')' L stmt N
+                        { backpatch($7, $15 - $7); backpatch($9, $13-$9); backpatch($15, $9-$15); backpatch($11, $7-$11); }
         | RETURN expr ';'
                         { emit(istore_2); /* return val goes in local var 2 */ }
         | BREAK ';'
