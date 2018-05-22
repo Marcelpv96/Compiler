@@ -58,8 +58,8 @@ stmt    : ';'
                         { backpatch($6, pc - $6); backpatch($8, $3-$8); }
         | DO L  stmt WHILE '(' expr ')' M N ';'
                         { backpatch($8, pc - $8);  backpatch($9, $2-$9);}
-        | FOR '(' expr ';' expr ';' expr ')' stmt
-                        { /* TODO: TO BE COMPLETED */ error("for-loop not implemented"); }
+        | FOR '(' expr ';' expr M ';' expr ')' stmt
+                        { error("break not implemented"); }
         | RETURN expr ';'
                         { emit(istore_2); /* return val goes in local var 2 */ }
         | BREAK ';'
@@ -69,20 +69,18 @@ stmt    : ';'
         ;
 
 expr    : ID   '=' expr { emit(dup); emit2(istore, $1->localvar); }
-        | expr OR  expr { /* TODO: TO BE COMPLETED */ error("|| operator not implemented"); }
-        | expr AN  expr { /* TODO: TO BE COMPLETED */ error("&& operator not implemented"); }
-        | expr '|' expr {  emit(ior); }
+        | expr OR  expr { emit(ior);  }
+        | expr AN  expr { emit(iand);  }
         | expr '^' expr { /* TODO: TO BE COMPLETED */ error("^ operator not implemented"); }
-        | expr '&' expr { emit(iand); }
         | expr EQ  expr { emit3(if_icmpeq, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
         | expr NE  expr { emit3(if_icmpne, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
         | expr '<' expr { emit3(if_icmplt, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
         | expr '>' expr { emit3(if_icmpgt, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
         | expr LE  expr { emit3(if_icmple, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
         | expr GE  expr { emit3(if_icmpge, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
-        | expr LS  expr { /* TODO: TO BE COMPLETED */ error("<< operator not implemented"); }
-        | expr RS  expr { /* TODO: TO BE COMPLETED */ error(">> operator not implemented"); }
         | expr '+' expr { emit(iadd); }
+        | expr PP ';'   { emit(iadd); emit(iconst_1);}
+        | expr NN ';'   { emit(isub); emit(iconst_1);}
         | expr '-' expr { emit(isub); }
         | expr '*' expr { emit(imul); }
         | expr '/' expr { emit(idiv); }
@@ -104,7 +102,7 @@ L       : /* empty */   { $$ = pc; }
         ;
 
 
-// On s'ha posat el equal
+// On s'ha posat el equal, ifeq succeeds if and only if value = 0
 M       : /* empty */   { $$ = pc;	/* location of inst. to backpatch */
 			  emit3(ifeq, 0);
 			}
