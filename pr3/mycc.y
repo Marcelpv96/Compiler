@@ -40,7 +40,7 @@ static struct ClassFile cf;
 /* Declare attribute types for marker nonterminals, such as L M and N */
 /* TODO: TO BE COMPLETED WITH ADDITIONAL NONMARKERS AS NECESSARY */
 %type <loc> L M N
-
+%nonassoc ELSE
 %%
 
 stmts   : stmts stmt
@@ -51,18 +51,18 @@ stmt    : ';'
         | expr ';'      { emit(pop); /* do not leave a value on the stack */ }
         | IF '(' expr ')' M stmt
                         { backpatch($5, pc - $5); emit3(goto_, 3); }
-        | IF '(' expr ')' M stmt N ELSE L stmt L
-                        { backpatch($5, $9 - $5); emit3(goto_, 3); backpatch($7, $11 - $7);}
+        | IF '(' expr ')' M stmt ELSE N L stmt 
+                        { backpatch($5, $9 - $5); emit3(goto_, 3); backpatch($8, pc - $8);}
         | WHILE '(' L expr ')' M stmt N
                         { backpatch($6, pc - $6); backpatch($8, $3-$8); }
         | DO L  stmt WHILE '(' expr ')' M N ';'
                         { backpatch($8, pc - $8);  backpatch($9, $2-$9);}
-        | FOR '(' expr ';' L expr M ';' N expr N ')' L stmt N
-                        { backpatch($7, $15 - $7); backpatch($9, $13-$9); backpatch($15, $9-$15); backpatch($11, $7-$11); }
+        | FOR '(' expr ';' L expr ';' M N L expr N ')' L stmt N 
+                        { backpatch($8, pc - $8); backpatch($9, $14 - $9); backpatch($16, $10-$16); backpatch($12, $5-$12); }
         | RETURN expr ';'
                         { emit(istore_2); /* return val goes in local var 2 */ }
-        | BREAK ';'
-                        { /* TODO: BONUS!!! */ error("break not implemented"); }
+        | L BREAK N';'
+                        { backpatch($3, $1-pc); }
         | '{' stmts '}'
         | error ';'     { yyerrok; }
         ;
@@ -117,11 +117,10 @@ N       : /* empty */   { $$ = pc;	/* location of inst. to backpatch */
 
 %%
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
 	int index1, index2, index3;
 	int label1, label2;
-
+	
 	// set up new class file structure
 	init_ClassFile(&cf);
 

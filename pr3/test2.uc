@@ -1,10 +1,5 @@
-m = 50;
-n = 20;
-if ( 3 < 5 ) {
-	m = 200;
-	n = 100;
-}else{
-    m = 0;
-    n= 0;
+b = 0;
+for(a = 0; a < 10; a++) {
+	b = a * 2;
 }
- return n + m;
+return b;

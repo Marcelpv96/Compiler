@@ -61,6 +61,8 @@ int             {digit}+
 [ \t\v\n\f\r]                  /* skip white space */
 
 "return"					   { return RETURN;}
+"if"						   { return IF;   }
+"else"                         { return ELSE; }
 {id}                           { return install_id(); }
 {int}                          { return install_int(); }
 "||"                           { return OR; }
@@ -69,8 +71,6 @@ int             {digit}+
 "!="                           { return NE; }
 "<="                           { return LE; }
 ">="                           { return GE; }
-"<<"                           { return LS; }
-">>"                           { return RS; }
 "++"                           { return PP; }
 "--"                           { return NN; }
 "->"                           { return AR; }

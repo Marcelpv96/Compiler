@@ -40,7 +40,7 @@ static struct ClassFile cf;
 /* Declare attribute types for marker nonterminals, such as L M and N */
 /* TODO: TO BE COMPLETED WITH ADDITIONAL NONMARKERS AS NECESSARY */
 %type <loc> L M N
-
+%nonassoc ELSE
 %%
 
 stmts   : stmts stmt
@@ -49,51 +49,42 @@ stmts   : stmts stmt
 
 stmt    : ';'
         | expr ';'      { emit(pop); /* do not leave a value on the stack */ }
-        | IF '(' expr ')' M stmt 
+        | IF '(' expr ')' M stmt
                         { backpatch($5, pc - $5); emit3(goto_, 3); }
-//                        { backpatch($5, pc - $5); emit3(goto_, 3); }
-        | IF '(' expr ')' M stmt L ELSE stmt 
-                        { backpatch($5, $7 - $5); emit3(goto_, 3);
-						  backpatch($7, pc - $7); emit3(goto_, 3);}
+        | IF '(' expr ')' M stmt ELSE N L stmt 
+                        { backpatch($5, $9 - $5); emit3(goto_, 3); backpatch($8, pc - $8);}
         | WHILE '(' L expr ')' M stmt N
                         { backpatch($6, pc - $6); backpatch($8, $3-$8); }
         | DO L  stmt WHILE '(' expr ')' M N ';'
-                        { backpatch($8, pc - $8);  backpatch($9, $1-$9);}
-        | FOR '(' expr ';' expr ';' expr ')' stmt
-                        { /* TODO: TO BE COMPLETED */ error("for-loop not implemented"); }
+                        { backpatch($8, pc - $8);  backpatch($9, $2-$9);}
+        | FOR '(' expr ';' L expr ';' M N L expr N ')' L stmt N 
+                        { backpatch($8, pc - $8); emit3(goto_, 3); backpatch($9, $14 - $9); backpatch($16, $10-$16); backpatch($12, $5-$12); }
         | RETURN expr ';'
                         { emit(istore_2); /* return val goes in local var 2 */ }
-        | BREAK ';'
-                        { /* TODO: BONUS!!! */ error("break not implemented"); }
+        | L BREAK N';'
+                        { backpatch($3, $1-pc); }
         | '{' stmts '}'
         | error ';'     { yyerrok; }
         ;
 
 expr    : ID   '=' expr { emit(dup); emit2(istore, $1->localvar); }
-        | expr OR  expr { /* TODO: TO BE COMPLETED */ error("|| operator not implemented"); }
-        | expr AN  expr { /* TODO: TO BE COMPLETED */ error("&& operator not implemented"); }
-        | expr '|' expr { /* TODO: TO BE COMPLETED */ error("| operator not implemented"); }
+        | expr OR  expr { emit(ior);  }
+        | expr AN  expr { emit(iand);  }
         | expr '^' expr { /* TODO: TO BE COMPLETED */ error("^ operator not implemented"); }
-        | expr '&' expr { /* TODO: TO BE COMPLETED */ error("& operator not implemented"); }
-        | expr EQ  expr { /* TODO: TO BE COMPLETED */ error("== operator not implemented"); }
-        | expr NE  expr { /* TODO: TO BE COMPLETED */ error("!= operator not implemented"); }
-        | expr '<' expr { emit3(if_icmpge, 7); emit(iconst_1); emit3(goto_, 4); emit(iconst_0); }
-        | expr '>' expr { emit3(if_icmple, 7); emit(iconst_1); emit3(goto_, 4); emit(iconst_0); }
-        | expr LE  expr { /* TODO: TO BE COMPLETED */ error("<= operator not implemented"); }
-        | expr GE  expr { /* TODO: TO BE COMPLETED */ error(">= operator not implemented"); }
-        | expr LS  expr { /* TODO: TO BE COMPLETED */ error("<< operator not implemented"); }
-        | expr RS  expr { /* TODO: TO BE COMPLETED */ error(">> operator not implemented"); }
+        | expr EQ  expr { emit3(if_icmpeq, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
+        | expr NE  expr { emit3(if_icmpne, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
+        | expr '<' expr { emit3(if_icmplt, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
+        | expr '>' expr { emit3(if_icmpgt, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
+        | expr LE  expr { emit3(if_icmple, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
+        | expr GE  expr { emit3(if_icmpge, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
         | expr '+' expr { emit(iadd); }
-        | expr '-' expr { /* TODO: TO BE COMPLETED */ error("- operator not implemented"); }
-        | expr '*' expr { /* TODO: TO BE COMPLETED */ error("* operator not implemented"); }
-        | expr '/' expr { /* TODO: TO BE COMPLETED */ error("/ operator not implemented"); }
+        | expr PP ';'   { emit(iadd); emit(iconst_1);}
+        | expr NN ';'   { emit(isub); emit(iconst_1);}
+        | expr '-' expr { emit(isub); }
+        | expr '*' expr { emit(imul); }
+        | expr '/' expr { emit(idiv); }
         | expr '%' expr { /* TODO: TO BE COMPLETED */ error("% operator not implemented"); }
-        | '!' expr      { /* TODO: TO BE COMPLETED */ error("! operator not implemented"); }
-        | '~' expr      { /* TODO: TO BE COMPLETED */ error("~ operator not implemented"); }
-        | '+' expr %prec '!' /* '+' at same precedence level as '!' */
-                        { /* TODO: TO BE COMPLETED */ error("unary + operator not implemented"); }
-        | '-' expr %prec '!' /* '-' at same precedence level as '!' */
-                        { /* TODO: TO BE COMPLETED */ error("unary - operator not implemented"); }
+        | '!' expr      { emit(ineg); }
         | '(' expr ')'
         | '$' INT8      { emit(aload_1); emit2(bipush, $2); emit(iaload); }
         | ID            { emit2(iload,  $1->localvar); }
@@ -110,7 +101,7 @@ L       : /* empty */   { $$ = pc; }
         ;
 
 
-// On s'ha posat el equal
+// On s'ha posat el equal, ifeq succeeds if and only if value = 0
 M       : /* empty */   { $$ = pc;	/* location of inst. to backpatch */
 			  emit3(ifeq, 0);
 			}
@@ -126,11 +117,10 @@ N       : /* empty */   { $$ = pc;	/* location of inst. to backpatch */
 
 %%
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
 	int index1, index2, index3;
 	int label1, label2;
-
+	
 	// set up new class file structure
 	init_ClassFile(&cf);
 
