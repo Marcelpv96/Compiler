@@ -8,10 +8,10 @@ COFLAGS=-g -O2
 CWFLAGS=-Wall -Wextra
 CFLAGS=$(CWFLAGS) $(COFLAGS)
 all:		mycc
-mycc:		mycc.c bytecode.o error.o init.o javaclass.o lex.yy.c symbol.o
-		$(CC) $(CFLAGS) -o mycc mycc.c bytecode.o error.o init.o javaclass.o lex.yy.c symbol.o 
+mycc:		mycc.c bytecode.o error.o init.o javaclass.o lex.yy.c symbol.o table.o type.o backpatch.o
+		$(CC) $(CFLAGS) -o mycc mycc.c bytecode.o error.o init.o javaclass.o lex.yy.c symbol.o table.o type.o backpatch.o 
 mycc.c lex.yy.c:		mycc.l mycc.y
-		$(LEX)--header-file=lex.yy.h mycc.l
+		$(LEX) --header-file=lex.yy.h mycc.l
 		$(YACC) -o mycc.c -d -v mycc.y
 .c.o:
 		$(CC) $(CFLAGS) -c $<
