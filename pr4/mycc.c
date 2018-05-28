@@ -1549,7 +1549,7 @@ yyreduce:
 #line 153 "mycc.y" /* yacc.c:1646  */
     { /* TASK 3: TO BE COMPLETED */
                 Table *table;
-  			  // the type of function is gived by $1 args by $6
+  			  // the type of function is gived by $1, args by $6
                 Type type = mkfun((yyvsp[-7].typ), (yyvsp[-2].typ));
                 // method has public access and is static
                 cf.methods[cf.method_count].access = (enum access_flags)(ACC_PUBLIC | ACC_STATIC);
@@ -1628,9 +1628,9 @@ yyreduce:
 #line 226 "mycc.y" /* yacc.c:1646  */
     { /* TASK 3: TO BE COMPLETED */
     // add code to create new table and push on tblptr and push offset 0
-              Table *table = mktable(top_tblptr);
-              push_tblptr(table);
-              push_offset(0);
+        Table * table = mktable(top_tblptr);
+        push_tblptr(table);
+        push_offset(0);
 			  init_code();
 			  is_in_main = 0;
 			}
@@ -1882,13 +1882,13 @@ yyreduce:
 
   case 58:
 #line 345 "mycc.y" /* yacc.c:1646  */
-    { error("pre ++ operator not implemented"); }
+    {  emit(iadd); emit(iconst_1); }
 #line 1887 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 59:
 #line 346 "mycc.y" /* yacc.c:1646  */
-    { error("pre -- operator not implemented"); }
+    { emit(isub); emit(iconst_1); }
 #line 1893 "mycc.c" /* yacc.c:1646  */
     break;
 

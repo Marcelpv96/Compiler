@@ -38,8 +38,8 @@ Rules useless in parser due to conflicts
    10 Margs: %empty
 
 
-State 23 conflicts: 4 shift/reduce
-State 137 conflicts: 1 shift/reduce
+Estat 23 conflictes: 4 canvi/reducció
+Estat 137 conflictes: 1 canvi/reducció
 
 
 Grammar

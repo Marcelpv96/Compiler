@@ -1,5 +1,6 @@
-test(){
+int test(int k){
 
+  return 1;
 }
 
 main(){
