@@ -547,8 +547,8 @@ static const yytype_uint16 yyrline[] =
      292,   294,   296,   298,   300,   302,   308,   311,   312,   315,
      316,   320,   321,   322,   323,   324,   325,   326,   327,   328,
      329,   330,   331,   332,   333,   334,   335,   336,   345,   346,
-     347,   348,   349,   350,   351,   352,   353,   354,   355,   364,
-     367,   372
+     347,   348,   349,   350,   351,   352,   353,   354,   355,   361,
+     364,   369
 };
 #endif
 
@@ -1554,7 +1554,7 @@ yyreduce:
                 // method has public access and is static
                 cf.methods[cf.method_count].access = (enum access_flags)(ACC_PUBLIC | ACC_STATIC);
                 // method name is "test"
-                cf.methods[cf.method_count].name = "test";
+                cf.methods[cf.method_count].name = (yyvsp[-5].sym)->lexptr;
                 cf.methods[cf.method_count].descriptor = type;
                 // local variables
                 cf.methods[cf.method_count].max_locals = top_offset;
@@ -1755,7 +1755,7 @@ yyreduce:
   case 35:
 #line 303 "mycc.y" /* yacc.c:1646  */
     { if (is_in_main)
-			  	emit(istore_2); /* TO BE COMPLETED */
+			  	                    emit(istore_2); /* TO BE COMPLETED */
 			  else
 			  	emit(ireturn);
 			}
@@ -1941,37 +1941,35 @@ yyreduce:
     break;
 
   case 68:
-#line 356 "mycc.y" /* yacc.c:1646  */
-    { /* TASK 3: TO BE COMPLETED */
-			  error("function call not implemented");
-			}
-#line 1949 "mycc.c" /* yacc.c:1646  */
+#line 355 "mycc.y" /* yacc.c:1646  */
+    { emit3(invokestatic, constant_pool_add_Methodref(&cf, cf.name, (yyvsp[-3].sym)->lexptr, gettype(top_tblptr, (yyvsp[-3].sym)))); }
+#line 1947 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 364 "mycc.y" /* yacc.c:1646  */
+#line 361 "mycc.y" /* yacc.c:1646  */
     { (yyval.loc) = pc; }
-#line 1955 "mycc.c" /* yacc.c:1646  */
+#line 1953 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 70:
-#line 367 "mycc.y" /* yacc.c:1646  */
+#line 364 "mycc.y" /* yacc.c:1646  */
     { (yyval.loc) = pc;	/* location of inst. to backpatch */
 			  emit3(ifeq, 0);
 			}
-#line 1963 "mycc.c" /* yacc.c:1646  */
+#line 1961 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 372 "mycc.y" /* yacc.c:1646  */
+#line 369 "mycc.y" /* yacc.c:1646  */
     { (yyval.loc) = pc;	/* location of inst. to backpatch */
 			  emit3(goto_, 0);
 			}
-#line 1971 "mycc.c" /* yacc.c:1646  */
+#line 1969 "mycc.c" /* yacc.c:1646  */
     break;
 
 
-#line 1975 "mycc.c" /* yacc.c:1646  */
+#line 1973 "mycc.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2199,7 +2197,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 380 "mycc.y" /* yacc.c:1906  */
+#line 377 "mycc.y" /* yacc.c:1906  */
 
 
 int main(int argc, char **argv)

@@ -157,7 +157,7 @@ func	: MAIN '(' ')' Mmain block
                 // method has public access and is static
                 cf.methods[cf.method_count].access = (enum access_flags)(ACC_PUBLIC | ACC_STATIC);
                 // method name is "test"
-                cf.methods[cf.method_count].name = "test";
+                cf.methods[cf.method_count].name = $3->lexptr;
                 cf.methods[cf.method_count].descriptor = type;
                 // local variables
                 cf.methods[cf.method_count].max_locals = top_offset;
@@ -301,7 +301,7 @@ stmt    : ';'
                         { backpatch($8, pc - $8); backpatch($8, $14 - $8); backpatch($16, $10-$16); backpatch($12, $5-$12  ); }
         | RETURN expr ';'
                         { if (is_in_main)
-			  	emit(istore_2); /* TO BE COMPLETED */
+			  	                    emit(istore_2); /* TO BE COMPLETED */
 			  else
 			  	emit(ireturn);
 			}
@@ -352,10 +352,7 @@ expr    : ID   '=' expr { emit(dup); emit2(istore, $1->localvar); }
         | INT32         { emit2(ldc, constant_pool_add_Integer(&cf, $1)); }
 	| FLT		{ emit2(ldc, constant_pool_add_Float(&cf, $1)); }
 	| STR		{ emit2(ldc, constant_pool_add_String(&cf, constant_pool_add_Utf8(&cf, $1))); }
-	| ID '(' exprs ')'
-			{ /* TASK 3: TO BE COMPLETED */
-			  error("function call not implemented");
-			}
+	| ID '(' exprs ')'{ emit3(invokestatic, constant_pool_add_Methodref(&cf, cf.name, $1->lexptr, gettype(top_tblptr, $1))); }
         ;
 
 K       : /* empty */   { $$ = pc; emit3(ifne, 0); }

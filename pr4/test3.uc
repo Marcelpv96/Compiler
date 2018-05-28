@@ -1,11 +1,6 @@
-// test functions
-int fac(int n)
-{ int fac;
-  fac = 1;
-  while (n > 0)
-    fac *= n--;
-  return fac;
+int test(int n){
+  return n;
 }
 main()
-{ return fac($0);
+{ return test($0);
 }
