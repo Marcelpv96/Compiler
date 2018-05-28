@@ -1,41 +1,41 @@
-Useless nonterminals
+Nonterminals useless in grammar
 
    K
    P
 
 
-Terminals which are not used
+Terminals unused in grammar
 
-   RA
-   LA
-   OA
-   XA
-   AA
-   MA
-   DA
-   TA
-   NA
    PA
+   NA
+   TA
+   DA
+   MA
+   AA
+   XA
+   OA
+   LA
+   RA
    '|'
    '^'
    '&'
-   RS
    LS
+   RS
    '~'
    '.'
    AR
 
 
-Useless rules
+Rules useless in grammar
 
-   71 K: /* empty */
+   71 K: %empty
 
-   72 P: /* empty */
+   72 P: %empty
 
 
-Rules never reduced
+Rules useless in parser due to conflicts
 
-   10 Margs: /* empty */
+   10 Margs: %empty
 
 
 State 23 conflicts: 4 shift/reduce
@@ -48,24 +48,24 @@ Grammar
 
     1 prog: Mprog exts
 
-    2 Mprog: /* empty */
+    2 Mprog: %empty
 
     3 exts: exts func
     4     | exts decl
-    5     | /* empty */
+    5     | %empty
 
     6 func: type ptr ID '(' args ')' block
     7     | MAIN '(' ')' Mmain block
     8     | type ptr ID '(' Margs args ')' block
 
-    9 Mmain: /* empty */
+    9 Mmain: %empty
 
-   10 Margs: /* empty */
+   10 Margs: %empty
 
    11 block: '{' decls stmts '}'
 
    12 decls: decls decl
-   13      | /* empty */
+   13      | %empty
 
    14 decl: list ';'
 
@@ -80,11 +80,11 @@ Grammar
    21 list: list ',' ptr ID
    22     | type ptr ID
 
-   23 ptr: /* empty */
+   23 ptr: %empty
    24    | '*'
 
    25 stmts: stmts stmt
-   26      | /* empty */
+   26      | %empty
 
    27 stmt: ';'
    28     | expr ';'
@@ -92,7 +92,7 @@ Grammar
    30     | IF '(' expr ')' M stmt ELSE N L stmt
    31     | WHILE '(' L expr ')' M stmt N
    32     | DO L stmt WHILE '(' expr ')' M N ';'
-   33     | FOR '(' expr ';' L expr ';' M N L expr N ')' L stmt N
+   33     | FOR '(' expr ';' L expr M N ';' L expr N ')' L stmt N
    34     | RETURN expr ';'
    35     | BREAK ';'
    36     | '{' stmts '}'
@@ -130,11 +130,11 @@ Grammar
    66     | STR
    67     | ID '(' exprs ')'
 
-   68 L: /* empty */
+   68 L: %empty
 
-   69 M: /* empty */
+   69 M: %empty
 
-   70 N: /* empty */
+   70 N: %empty
 
 
 Terminals, with rules where they appear
@@ -180,26 +180,26 @@ MAIN (272) 7
 RETURN (273) 34
 VOID (274) 15
 WHILE (275) 31 32
-RA (276)
-LA (277)
-OA (278)
-XA (279)
-AA (280)
-MA (281)
-DA (282)
-TA (283)
-NA (284)
-PA (285)
+PA (276)
+NA (277)
+TA (278)
+DA (279)
+MA (280)
+AA (281)
+XA (282)
+OA (283)
+LA (284)
+RA (285)
 OR (286) 41
 AN (287) 42
-GE (288) 48
-LE (289) 47
-NE (290) 44
-EQ (291) 43
-RS (292)
-LS (293)
-NN (294) 58 60
-PP (295) 57 59
+EQ (288) 43
+NE (289) 44
+LE (290) 47
+GE (291) 48
+LS (292)
+RS (293)
+PP (294) 57 59
+NN (295) 58 60
 AR (296)
 
 
@@ -252,7 +252,7 @@ N (83)
     on left: 70, on right: 30 31 32 33
 
 
-state 0
+State 0
 
     0 $accept: . prog $end
 
@@ -262,14 +262,14 @@ state 0
     Mprog  go to state 2
 
 
-state 1
+State 1
 
     0 $accept: prog . $end
 
     $end  shift, and go to state 3
 
 
-state 2
+State 2
 
     1 prog: Mprog . exts
 
@@ -278,14 +278,14 @@ state 2
     exts  go to state 4
 
 
-state 3
+State 3
 
     0 $accept: prog $end .
 
     $default  accept
 
 
-state 4
+State 4
 
     1 prog: Mprog exts .
     3 exts: exts . func
@@ -305,56 +305,56 @@ state 4
     list  go to state 13
 
 
-state 5
+State 5
 
    18 type: CHAR .
 
     $default  reduce using rule 18 (type)
 
 
-state 6
+State 6
 
    17 type: FLOAT .
 
     $default  reduce using rule 17 (type)
 
 
-state 7
+State 7
 
    16 type: INT .
 
     $default  reduce using rule 16 (type)
 
 
-state 8
+State 8
 
     7 func: MAIN . '(' ')' Mmain block
 
     '('  shift, and go to state 14
 
 
-state 9
+State 9
 
    15 type: VOID .
 
     $default  reduce using rule 15 (type)
 
 
-state 10
+State 10
 
     3 exts: exts func .
 
     $default  reduce using rule 3 (exts)
 
 
-state 11
+State 11
 
     4 exts: exts decl .
 
     $default  reduce using rule 4 (exts)
 
 
-state 12
+State 12
 
     6 func: type . ptr ID '(' args ')' block
     8     | type . ptr ID '(' Margs args ')' block
@@ -367,7 +367,7 @@ state 12
     ptr  go to state 16
 
 
-state 13
+State 13
 
    14 decl: list . ';'
    21 list: list . ',' ptr ID
@@ -376,21 +376,21 @@ state 13
     ','  shift, and go to state 18
 
 
-state 14
+State 14
 
     7 func: MAIN '(' . ')' Mmain block
 
     ')'  shift, and go to state 19
 
 
-state 15
+State 15
 
    24 ptr: '*' .
 
     $default  reduce using rule 24 (ptr)
 
 
-state 16
+State 16
 
     6 func: type ptr . ID '(' args ')' block
     8     | type ptr . ID '(' Margs args ')' block
@@ -399,14 +399,14 @@ state 16
     ID  shift, and go to state 20
 
 
-state 17
+State 17
 
    14 decl: list ';' .
 
     $default  reduce using rule 14 (decl)
 
 
-state 18
+State 18
 
    21 list: list ',' . ptr ID
 
@@ -417,7 +417,7 @@ state 18
     ptr  go to state 21
 
 
-state 19
+State 19
 
     7 func: MAIN '(' ')' . Mmain block
 
@@ -426,7 +426,7 @@ state 19
     Mmain  go to state 22
 
 
-state 20
+State 20
 
     6 func: type ptr ID . '(' args ')' block
     8     | type ptr ID . '(' Margs args ')' block
@@ -437,14 +437,14 @@ state 20
     $default  reduce using rule 22 (list)
 
 
-state 21
+State 21
 
    21 list: list ',' ptr . ID
 
     ID  shift, and go to state 24
 
 
-state 22
+State 22
 
     7 func: MAIN '(' ')' Mmain . block
 
@@ -453,7 +453,7 @@ state 22
     block  go to state 26
 
 
-state 23
+State 23
 
     6 func: type ptr ID '(' . args ')' block
     8     | type ptr ID '(' . Margs args ')' block
@@ -473,14 +473,14 @@ state 23
     args   go to state 29
 
 
-state 24
+State 24
 
    21 list: list ',' ptr ID .
 
     $default  reduce using rule 21 (list)
 
 
-state 25
+State 25
 
    11 block: '{' . decls stmts '}'
 
@@ -489,14 +489,14 @@ state 25
     decls  go to state 30
 
 
-state 26
+State 26
 
     7 func: MAIN '(' ')' Mmain block .
 
     $default  reduce using rule 7 (func)
 
 
-state 27
+State 27
 
     8 func: type ptr ID '(' Margs . args ')' block
 
@@ -509,7 +509,7 @@ state 27
     args  go to state 31
 
 
-state 28
+State 28
 
    20 args: type . ptr ID
 
@@ -520,7 +520,7 @@ state 28
     ptr  go to state 32
 
 
-state 29
+State 29
 
     6 func: type ptr ID '(' args . ')' block
    19 args: args . ',' type ptr ID
@@ -529,7 +529,7 @@ state 29
     ','  shift, and go to state 34
 
 
-state 30
+State 30
 
    11 block: '{' decls . stmts '}'
    12 decls: decls . decl
@@ -547,7 +547,7 @@ state 30
     stmts  go to state 37
 
 
-state 31
+State 31
 
     8 func: type ptr ID '(' Margs args . ')' block
    19 args: args . ',' type ptr ID
@@ -556,14 +556,14 @@ state 31
     ','  shift, and go to state 34
 
 
-state 32
+State 32
 
    20 args: type ptr . ID
 
     ID  shift, and go to state 39
 
 
-state 33
+State 33
 
     6 func: type ptr ID '(' args ')' . block
 
@@ -572,7 +572,7 @@ state 33
     block  go to state 40
 
 
-state 34
+State 34
 
    19 args: args ',' . type ptr ID
 
@@ -584,14 +584,14 @@ state 34
     type  go to state 41
 
 
-state 35
+State 35
 
    12 decls: decls decl .
 
     $default  reduce using rule 12 (decls)
 
 
-state 36
+State 36
 
    22 list: type . ptr ID
 
@@ -602,7 +602,7 @@ state 36
     ptr  go to state 42
 
 
-state 37
+State 37
 
    11 block: '{' decls stmts . '}'
    25 stmts: stmts . stmt
@@ -621,8 +621,8 @@ state 37
     RETURN  shift, and go to state 54
     WHILE   shift, and go to state 55
     '!'     shift, and go to state 56
-    NN      shift, and go to state 57
-    PP      shift, and go to state 58
+    PP      shift, and go to state 57
+    NN      shift, and go to state 58
     '('     shift, and go to state 59
     '{'     shift, and go to state 60
     '}'     shift, and go to state 61
@@ -633,7 +633,7 @@ state 37
     expr  go to state 65
 
 
-state 38
+State 38
 
     8 func: type ptr ID '(' Margs args ')' . block
 
@@ -642,21 +642,21 @@ state 38
     block  go to state 66
 
 
-state 39
+State 39
 
    20 args: type ptr ID .
 
     $default  reduce using rule 20 (args)
 
 
-state 40
+State 40
 
     6 func: type ptr ID '(' args ')' block .
 
     $default  reduce using rule 6 (func)
 
 
-state 41
+State 41
 
    19 args: args ',' type . ptr ID
 
@@ -667,21 +667,21 @@ state 41
     ptr  go to state 67
 
 
-state 42
+State 42
 
    22 list: type ptr . ID
 
     ID  shift, and go to state 68
 
 
-state 43
+State 43
 
    37 stmt: error . ';'
 
     ';'  shift, and go to state 69
 
 
-state 44
+State 44
 
    40 expr: ID . '=' expr
    59     | ID . PP
@@ -690,56 +690,56 @@ state 44
    67     | ID . '(' exprs ')'
 
     '='  shift, and go to state 70
-    NN   shift, and go to state 71
-    PP   shift, and go to state 72
+    PP   shift, and go to state 71
+    NN   shift, and go to state 72
     '('  shift, and go to state 73
 
     $default  reduce using rule 61 (expr)
 
 
-state 45
+State 45
 
    62 expr: INT8 .
 
     $default  reduce using rule 62 (expr)
 
 
-state 46
+State 46
 
    63 expr: INT16 .
 
     $default  reduce using rule 63 (expr)
 
 
-state 47
+State 47
 
    64 expr: INT32 .
 
     $default  reduce using rule 64 (expr)
 
 
-state 48
+State 48
 
    65 expr: FLT .
 
     $default  reduce using rule 65 (expr)
 
 
-state 49
+State 49
 
    66 expr: STR .
 
     $default  reduce using rule 66 (expr)
 
 
-state 50
+State 50
 
    35 stmt: BREAK . ';'
 
     ';'  shift, and go to state 74
 
 
-state 51
+State 51
 
    32 stmt: DO . L stmt WHILE '(' expr ')' M N ';'
 
@@ -748,14 +748,14 @@ state 51
     L  go to state 75
 
 
-state 52
+State 52
 
-   33 stmt: FOR . '(' expr ';' L expr ';' M N L expr N ')' L stmt N
+   33 stmt: FOR . '(' expr ';' L expr M N ';' L expr N ')' L stmt N
 
     '('  shift, and go to state 76
 
 
-state 53
+State 53
 
    29 stmt: IF . '(' expr ')' M stmt
    30     | IF . '(' expr ')' M stmt ELSE N L stmt
@@ -763,7 +763,7 @@ state 53
     '('  shift, and go to state 77
 
 
-state 54
+State 54
 
    34 stmt: RETURN . expr ';'
 
@@ -774,22 +774,22 @@ state 54
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 78
 
 
-state 55
+State 55
 
    31 stmt: WHILE . '(' L expr ')' M stmt N
 
     '('  shift, and go to state 79
 
 
-state 56
+State 56
 
    54 expr: '!' . expr
 
@@ -800,29 +800,29 @@ state 56
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 80
 
 
-state 57
+State 57
 
-   58 expr: NN . ID
+   57 expr: PP . ID
 
     ID  shift, and go to state 81
 
 
-state 58
+State 58
 
-   57 expr: PP . ID
+   58 expr: NN . ID
 
     ID  shift, and go to state 82
 
 
-state 59
+State 59
 
    55 expr: '(' . expr ')'
 
@@ -833,15 +833,15 @@ state 59
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 83
 
 
-state 60
+State 60
 
    36 stmt: '{' . stmts '}'
 
@@ -850,35 +850,35 @@ state 60
     stmts  go to state 84
 
 
-state 61
+State 61
 
    11 block: '{' decls stmts '}' .
 
     $default  reduce using rule 11 (block)
 
 
-state 62
+State 62
 
    27 stmt: ';' .
 
     $default  reduce using rule 27 (stmt)
 
 
-state 63
+State 63
 
    56 expr: '$' . INT8
 
     INT8  shift, and go to state 85
 
 
-state 64
+State 64
 
    25 stmts: stmts stmt .
 
     $default  reduce using rule 25 (stmts)
 
 
-state 65
+State 65
 
    28 stmt: expr . ';'
    41 expr: expr . OR expr
@@ -897,12 +897,12 @@ state 65
 
     OR   shift, and go to state 86
     AN   shift, and go to state 87
-    '<'  shift, and go to state 88
-    '>'  shift, and go to state 89
-    GE   shift, and go to state 90
-    LE   shift, and go to state 91
-    NE   shift, and go to state 92
-    EQ   shift, and go to state 93
+    EQ   shift, and go to state 88
+    NE   shift, and go to state 89
+    LE   shift, and go to state 90
+    '<'  shift, and go to state 91
+    GE   shift, and go to state 92
+    '>'  shift, and go to state 93
     '+'  shift, and go to state 94
     '-'  shift, and go to state 95
     '*'  shift, and go to state 96
@@ -911,35 +911,35 @@ state 65
     ';'  shift, and go to state 99
 
 
-state 66
+State 66
 
     8 func: type ptr ID '(' Margs args ')' block .
 
     $default  reduce using rule 8 (func)
 
 
-state 67
+State 67
 
    19 args: args ',' type ptr . ID
 
     ID  shift, and go to state 100
 
 
-state 68
+State 68
 
    22 list: type ptr ID .
 
     $default  reduce using rule 22 (list)
 
 
-state 69
+State 69
 
    37 stmt: error ';' .
 
     $default  reduce using rule 37 (stmt)
 
 
-state 70
+State 70
 
    40 expr: ID '=' . expr
 
@@ -950,29 +950,29 @@ state 70
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 101
 
 
-state 71
-
-   60 expr: ID NN .
-
-    $default  reduce using rule 60 (expr)
-
-
-state 72
+State 71
 
    59 expr: ID PP .
 
     $default  reduce using rule 59 (expr)
 
 
-state 73
+State 72
+
+   60 expr: ID NN .
+
+    $default  reduce using rule 60 (expr)
+
+
+State 73
 
    67 expr: ID '(' . exprs ')'
 
@@ -983,8 +983,8 @@ state 73
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
@@ -992,14 +992,14 @@ state 73
     expr   go to state 103
 
 
-state 74
+State 74
 
    35 stmt: BREAK ';' .
 
     $default  reduce using rule 35 (stmt)
 
 
-state 75
+State 75
 
    32 stmt: DO L . stmt WHILE '(' expr ')' M N ';'
 
@@ -1017,8 +1017,8 @@ state 75
     RETURN  shift, and go to state 54
     WHILE   shift, and go to state 55
     '!'     shift, and go to state 56
-    NN      shift, and go to state 57
-    PP      shift, and go to state 58
+    PP      shift, and go to state 57
+    NN      shift, and go to state 58
     '('     shift, and go to state 59
     '{'     shift, and go to state 60
     ';'     shift, and go to state 62
@@ -1028,9 +1028,9 @@ state 75
     expr  go to state 65
 
 
-state 76
+State 76
 
-   33 stmt: FOR '(' . expr ';' L expr ';' M N L expr N ')' L stmt N
+   33 stmt: FOR '(' . expr ';' L expr M N ';' L expr N ')' L stmt N
 
     ID     shift, and go to state 44
     INT8   shift, and go to state 45
@@ -1039,15 +1039,15 @@ state 76
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 105
 
 
-state 77
+State 77
 
    29 stmt: IF '(' . expr ')' M stmt
    30     | IF '(' . expr ')' M stmt ELSE N L stmt
@@ -1059,15 +1059,15 @@ state 77
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 106
 
 
-state 78
+State 78
 
    34 stmt: RETURN expr . ';'
    41 expr: expr . OR expr
@@ -1086,12 +1086,12 @@ state 78
 
     OR   shift, and go to state 86
     AN   shift, and go to state 87
-    '<'  shift, and go to state 88
-    '>'  shift, and go to state 89
-    GE   shift, and go to state 90
-    LE   shift, and go to state 91
-    NE   shift, and go to state 92
-    EQ   shift, and go to state 93
+    EQ   shift, and go to state 88
+    NE   shift, and go to state 89
+    LE   shift, and go to state 90
+    '<'  shift, and go to state 91
+    GE   shift, and go to state 92
+    '>'  shift, and go to state 93
     '+'  shift, and go to state 94
     '-'  shift, and go to state 95
     '*'  shift, and go to state 96
@@ -1100,7 +1100,7 @@ state 78
     ';'  shift, and go to state 107
 
 
-state 79
+State 79
 
    31 stmt: WHILE '(' . L expr ')' M stmt N
 
@@ -1109,7 +1109,7 @@ state 79
     L  go to state 108
 
 
-state 80
+State 80
 
    41 expr: expr . OR expr
    42     | expr . AN expr
@@ -1129,21 +1129,21 @@ state 80
     $default  reduce using rule 54 (expr)
 
 
-state 81
-
-   58 expr: NN ID .
-
-    $default  reduce using rule 58 (expr)
-
-
-state 82
+State 81
 
    57 expr: PP ID .
 
     $default  reduce using rule 57 (expr)
 
 
-state 83
+State 82
+
+   58 expr: NN ID .
+
+    $default  reduce using rule 58 (expr)
+
+
+State 83
 
    41 expr: expr . OR expr
    42     | expr . AN expr
@@ -1162,12 +1162,12 @@ state 83
 
     OR   shift, and go to state 86
     AN   shift, and go to state 87
-    '<'  shift, and go to state 88
-    '>'  shift, and go to state 89
-    GE   shift, and go to state 90
-    LE   shift, and go to state 91
-    NE   shift, and go to state 92
-    EQ   shift, and go to state 93
+    EQ   shift, and go to state 88
+    NE   shift, and go to state 89
+    LE   shift, and go to state 90
+    '<'  shift, and go to state 91
+    GE   shift, and go to state 92
+    '>'  shift, and go to state 93
     '+'  shift, and go to state 94
     '-'  shift, and go to state 95
     '*'  shift, and go to state 96
@@ -1176,7 +1176,7 @@ state 83
     ')'  shift, and go to state 109
 
 
-state 84
+State 84
 
    25 stmts: stmts . stmt
    36 stmt: '{' stmts . '}'
@@ -1195,8 +1195,8 @@ state 84
     RETURN  shift, and go to state 54
     WHILE   shift, and go to state 55
     '!'     shift, and go to state 56
-    NN      shift, and go to state 57
-    PP      shift, and go to state 58
+    PP      shift, and go to state 57
+    NN      shift, and go to state 58
     '('     shift, and go to state 59
     '{'     shift, and go to state 60
     '}'     shift, and go to state 110
@@ -1207,14 +1207,14 @@ state 84
     expr  go to state 65
 
 
-state 85
+State 85
 
    56 expr: '$' INT8 .
 
     $default  reduce using rule 56 (expr)
 
 
-state 86
+State 86
 
    41 expr: expr OR . expr
 
@@ -1225,15 +1225,15 @@ state 86
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 111
 
 
-state 87
+State 87
 
    42 expr: expr AN . expr
 
@@ -1244,110 +1244,15 @@ state 87
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 112
 
 
-state 88
-
-   45 expr: expr '<' . expr
-
-    ID     shift, and go to state 44
-    INT8   shift, and go to state 45
-    INT16  shift, and go to state 46
-    INT32  shift, and go to state 47
-    FLT    shift, and go to state 48
-    STR    shift, and go to state 49
-    '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
-    '('    shift, and go to state 59
-    '$'    shift, and go to state 63
-
-    expr  go to state 113
-
-
-state 89
-
-   46 expr: expr '>' . expr
-
-    ID     shift, and go to state 44
-    INT8   shift, and go to state 45
-    INT16  shift, and go to state 46
-    INT32  shift, and go to state 47
-    FLT    shift, and go to state 48
-    STR    shift, and go to state 49
-    '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
-    '('    shift, and go to state 59
-    '$'    shift, and go to state 63
-
-    expr  go to state 114
-
-
-state 90
-
-   48 expr: expr GE . expr
-
-    ID     shift, and go to state 44
-    INT8   shift, and go to state 45
-    INT16  shift, and go to state 46
-    INT32  shift, and go to state 47
-    FLT    shift, and go to state 48
-    STR    shift, and go to state 49
-    '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
-    '('    shift, and go to state 59
-    '$'    shift, and go to state 63
-
-    expr  go to state 115
-
-
-state 91
-
-   47 expr: expr LE . expr
-
-    ID     shift, and go to state 44
-    INT8   shift, and go to state 45
-    INT16  shift, and go to state 46
-    INT32  shift, and go to state 47
-    FLT    shift, and go to state 48
-    STR    shift, and go to state 49
-    '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
-    '('    shift, and go to state 59
-    '$'    shift, and go to state 63
-
-    expr  go to state 116
-
-
-state 92
-
-   44 expr: expr NE . expr
-
-    ID     shift, and go to state 44
-    INT8   shift, and go to state 45
-    INT16  shift, and go to state 46
-    INT32  shift, and go to state 47
-    FLT    shift, and go to state 48
-    STR    shift, and go to state 49
-    '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
-    '('    shift, and go to state 59
-    '$'    shift, and go to state 63
-
-    expr  go to state 117
-
-
-state 93
+State 88
 
    43 expr: expr EQ . expr
 
@@ -1358,15 +1263,110 @@ state 93
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
+    '('    shift, and go to state 59
+    '$'    shift, and go to state 63
+
+    expr  go to state 113
+
+
+State 89
+
+   44 expr: expr NE . expr
+
+    ID     shift, and go to state 44
+    INT8   shift, and go to state 45
+    INT16  shift, and go to state 46
+    INT32  shift, and go to state 47
+    FLT    shift, and go to state 48
+    STR    shift, and go to state 49
+    '!'    shift, and go to state 56
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
+    '('    shift, and go to state 59
+    '$'    shift, and go to state 63
+
+    expr  go to state 114
+
+
+State 90
+
+   47 expr: expr LE . expr
+
+    ID     shift, and go to state 44
+    INT8   shift, and go to state 45
+    INT16  shift, and go to state 46
+    INT32  shift, and go to state 47
+    FLT    shift, and go to state 48
+    STR    shift, and go to state 49
+    '!'    shift, and go to state 56
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
+    '('    shift, and go to state 59
+    '$'    shift, and go to state 63
+
+    expr  go to state 115
+
+
+State 91
+
+   45 expr: expr '<' . expr
+
+    ID     shift, and go to state 44
+    INT8   shift, and go to state 45
+    INT16  shift, and go to state 46
+    INT32  shift, and go to state 47
+    FLT    shift, and go to state 48
+    STR    shift, and go to state 49
+    '!'    shift, and go to state 56
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
+    '('    shift, and go to state 59
+    '$'    shift, and go to state 63
+
+    expr  go to state 116
+
+
+State 92
+
+   48 expr: expr GE . expr
+
+    ID     shift, and go to state 44
+    INT8   shift, and go to state 45
+    INT16  shift, and go to state 46
+    INT32  shift, and go to state 47
+    FLT    shift, and go to state 48
+    STR    shift, and go to state 49
+    '!'    shift, and go to state 56
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
+    '('    shift, and go to state 59
+    '$'    shift, and go to state 63
+
+    expr  go to state 117
+
+
+State 93
+
+   46 expr: expr '>' . expr
+
+    ID     shift, and go to state 44
+    INT8   shift, and go to state 45
+    INT16  shift, and go to state 46
+    INT32  shift, and go to state 47
+    FLT    shift, and go to state 48
+    STR    shift, and go to state 49
+    '!'    shift, and go to state 56
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 118
 
 
-state 94
+State 94
 
    49 expr: expr '+' . expr
 
@@ -1377,15 +1377,15 @@ state 94
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 119
 
 
-state 95
+State 95
 
    50 expr: expr '-' . expr
 
@@ -1396,15 +1396,15 @@ state 95
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 120
 
 
-state 96
+State 96
 
    51 expr: expr '*' . expr
 
@@ -1415,15 +1415,15 @@ state 96
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 121
 
 
-state 97
+State 97
 
    52 expr: expr '/' . expr
 
@@ -1434,15 +1434,15 @@ state 97
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 122
 
 
-state 98
+State 98
 
    53 expr: expr '%' . expr
 
@@ -1453,29 +1453,29 @@ state 98
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 123
 
 
-state 99
+State 99
 
    28 stmt: expr ';' .
 
     $default  reduce using rule 28 (stmt)
 
 
-state 100
+State 100
 
    19 args: args ',' type ptr ID .
 
     $default  reduce using rule 19 (args)
 
 
-state 101
+State 101
 
    40 expr: ID '=' expr .
    41     | expr . OR expr
@@ -1494,12 +1494,12 @@ state 101
 
     OR   shift, and go to state 86
     AN   shift, and go to state 87
-    '<'  shift, and go to state 88
-    '>'  shift, and go to state 89
-    GE   shift, and go to state 90
-    LE   shift, and go to state 91
-    NE   shift, and go to state 92
-    EQ   shift, and go to state 93
+    EQ   shift, and go to state 88
+    NE   shift, and go to state 89
+    LE   shift, and go to state 90
+    '<'  shift, and go to state 91
+    GE   shift, and go to state 92
+    '>'  shift, and go to state 93
     '+'  shift, and go to state 94
     '-'  shift, and go to state 95
     '*'  shift, and go to state 96
@@ -1509,7 +1509,7 @@ state 101
     $default  reduce using rule 40 (expr)
 
 
-state 102
+State 102
 
    38 exprs: exprs . ',' expr
    67 expr: ID '(' exprs . ')'
@@ -1518,7 +1518,7 @@ state 102
     ','  shift, and go to state 125
 
 
-state 103
+State 103
 
    39 exprs: expr .
    41 expr: expr . OR expr
@@ -1537,12 +1537,12 @@ state 103
 
     OR   shift, and go to state 86
     AN   shift, and go to state 87
-    '<'  shift, and go to state 88
-    '>'  shift, and go to state 89
-    GE   shift, and go to state 90
-    LE   shift, and go to state 91
-    NE   shift, and go to state 92
-    EQ   shift, and go to state 93
+    EQ   shift, and go to state 88
+    NE   shift, and go to state 89
+    LE   shift, and go to state 90
+    '<'  shift, and go to state 91
+    GE   shift, and go to state 92
+    '>'  shift, and go to state 93
     '+'  shift, and go to state 94
     '-'  shift, and go to state 95
     '*'  shift, and go to state 96
@@ -1552,16 +1552,16 @@ state 103
     $default  reduce using rule 39 (exprs)
 
 
-state 104
+State 104
 
    32 stmt: DO L stmt . WHILE '(' expr ')' M N ';'
 
     WHILE  shift, and go to state 126
 
 
-state 105
+State 105
 
-   33 stmt: FOR '(' expr . ';' L expr ';' M N L expr N ')' L stmt N
+   33 stmt: FOR '(' expr . ';' L expr M N ';' L expr N ')' L stmt N
    41 expr: expr . OR expr
    42     | expr . AN expr
    43     | expr . EQ expr
@@ -1578,12 +1578,12 @@ state 105
 
     OR   shift, and go to state 86
     AN   shift, and go to state 87
-    '<'  shift, and go to state 88
-    '>'  shift, and go to state 89
-    GE   shift, and go to state 90
-    LE   shift, and go to state 91
-    NE   shift, and go to state 92
-    EQ   shift, and go to state 93
+    EQ   shift, and go to state 88
+    NE   shift, and go to state 89
+    LE   shift, and go to state 90
+    '<'  shift, and go to state 91
+    GE   shift, and go to state 92
+    '>'  shift, and go to state 93
     '+'  shift, and go to state 94
     '-'  shift, and go to state 95
     '*'  shift, and go to state 96
@@ -1592,7 +1592,7 @@ state 105
     ';'  shift, and go to state 127
 
 
-state 106
+State 106
 
    29 stmt: IF '(' expr . ')' M stmt
    30     | IF '(' expr . ')' M stmt ELSE N L stmt
@@ -1612,12 +1612,12 @@ state 106
 
     OR   shift, and go to state 86
     AN   shift, and go to state 87
-    '<'  shift, and go to state 88
-    '>'  shift, and go to state 89
-    GE   shift, and go to state 90
-    LE   shift, and go to state 91
-    NE   shift, and go to state 92
-    EQ   shift, and go to state 93
+    EQ   shift, and go to state 88
+    NE   shift, and go to state 89
+    LE   shift, and go to state 90
+    '<'  shift, and go to state 91
+    GE   shift, and go to state 92
+    '>'  shift, and go to state 93
     '+'  shift, and go to state 94
     '-'  shift, and go to state 95
     '*'  shift, and go to state 96
@@ -1626,14 +1626,14 @@ state 106
     ')'  shift, and go to state 128
 
 
-state 107
+State 107
 
    34 stmt: RETURN expr ';' .
 
     $default  reduce using rule 34 (stmt)
 
 
-state 108
+State 108
 
    31 stmt: WHILE '(' L . expr ')' M stmt N
 
@@ -1644,29 +1644,29 @@ state 108
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 129
 
 
-state 109
+State 109
 
    55 expr: '(' expr ')' .
 
     $default  reduce using rule 55 (expr)
 
 
-state 110
+State 110
 
    36 stmt: '{' stmts '}' .
 
     $default  reduce using rule 36 (stmt)
 
 
-state 111
+State 111
 
    41 expr: expr . OR expr
    41     | expr OR expr .
@@ -1684,12 +1684,12 @@ state 111
    53     | expr . '%' expr
 
     AN   shift, and go to state 87
-    '<'  shift, and go to state 88
-    '>'  shift, and go to state 89
-    GE   shift, and go to state 90
-    LE   shift, and go to state 91
-    NE   shift, and go to state 92
-    EQ   shift, and go to state 93
+    EQ   shift, and go to state 88
+    NE   shift, and go to state 89
+    LE   shift, and go to state 90
+    '<'  shift, and go to state 91
+    GE   shift, and go to state 92
+    '>'  shift, and go to state 93
     '+'  shift, and go to state 94
     '-'  shift, and go to state 95
     '*'  shift, and go to state 96
@@ -1699,7 +1699,7 @@ state 111
     $default  reduce using rule 41 (expr)
 
 
-state 112
+State 112
 
    41 expr: expr . OR expr
    42     | expr . AN expr
@@ -1716,12 +1716,12 @@ state 112
    52     | expr . '/' expr
    53     | expr . '%' expr
 
-    '<'  shift, and go to state 88
-    '>'  shift, and go to state 89
-    GE   shift, and go to state 90
-    LE   shift, and go to state 91
-    NE   shift, and go to state 92
-    EQ   shift, and go to state 93
+    EQ   shift, and go to state 88
+    NE   shift, and go to state 89
+    LE   shift, and go to state 90
+    '<'  shift, and go to state 91
+    GE   shift, and go to state 92
+    '>'  shift, and go to state 93
     '+'  shift, and go to state 94
     '-'  shift, and go to state 95
     '*'  shift, and go to state 96
@@ -1731,137 +1731,7 @@ state 112
     $default  reduce using rule 42 (expr)
 
 
-state 113
-
-   41 expr: expr . OR expr
-   42     | expr . AN expr
-   43     | expr . EQ expr
-   44     | expr . NE expr
-   45     | expr . '<' expr
-   45     | expr '<' expr .
-   46     | expr . '>' expr
-   47     | expr . LE expr
-   48     | expr . GE expr
-   49     | expr . '+' expr
-   50     | expr . '-' expr
-   51     | expr . '*' expr
-   52     | expr . '/' expr
-   53     | expr . '%' expr
-
-    '+'  shift, and go to state 94
-    '-'  shift, and go to state 95
-    '*'  shift, and go to state 96
-    '/'  shift, and go to state 97
-    '%'  shift, and go to state 98
-
-    $default  reduce using rule 45 (expr)
-
-
-state 114
-
-   41 expr: expr . OR expr
-   42     | expr . AN expr
-   43     | expr . EQ expr
-   44     | expr . NE expr
-   45     | expr . '<' expr
-   46     | expr . '>' expr
-   46     | expr '>' expr .
-   47     | expr . LE expr
-   48     | expr . GE expr
-   49     | expr . '+' expr
-   50     | expr . '-' expr
-   51     | expr . '*' expr
-   52     | expr . '/' expr
-   53     | expr . '%' expr
-
-    '+'  shift, and go to state 94
-    '-'  shift, and go to state 95
-    '*'  shift, and go to state 96
-    '/'  shift, and go to state 97
-    '%'  shift, and go to state 98
-
-    $default  reduce using rule 46 (expr)
-
-
-state 115
-
-   41 expr: expr . OR expr
-   42     | expr . AN expr
-   43     | expr . EQ expr
-   44     | expr . NE expr
-   45     | expr . '<' expr
-   46     | expr . '>' expr
-   47     | expr . LE expr
-   48     | expr . GE expr
-   48     | expr GE expr .
-   49     | expr . '+' expr
-   50     | expr . '-' expr
-   51     | expr . '*' expr
-   52     | expr . '/' expr
-   53     | expr . '%' expr
-
-    '+'  shift, and go to state 94
-    '-'  shift, and go to state 95
-    '*'  shift, and go to state 96
-    '/'  shift, and go to state 97
-    '%'  shift, and go to state 98
-
-    $default  reduce using rule 48 (expr)
-
-
-state 116
-
-   41 expr: expr . OR expr
-   42     | expr . AN expr
-   43     | expr . EQ expr
-   44     | expr . NE expr
-   45     | expr . '<' expr
-   46     | expr . '>' expr
-   47     | expr . LE expr
-   47     | expr LE expr .
-   48     | expr . GE expr
-   49     | expr . '+' expr
-   50     | expr . '-' expr
-   51     | expr . '*' expr
-   52     | expr . '/' expr
-   53     | expr . '%' expr
-
-    '+'  shift, and go to state 94
-    '-'  shift, and go to state 95
-    '*'  shift, and go to state 96
-    '/'  shift, and go to state 97
-    '%'  shift, and go to state 98
-
-    $default  reduce using rule 47 (expr)
-
-
-state 117
-
-   41 expr: expr . OR expr
-   42     | expr . AN expr
-   43     | expr . EQ expr
-   44     | expr . NE expr
-   44     | expr NE expr .
-   45     | expr . '<' expr
-   46     | expr . '>' expr
-   47     | expr . LE expr
-   48     | expr . GE expr
-   49     | expr . '+' expr
-   50     | expr . '-' expr
-   51     | expr . '*' expr
-   52     | expr . '/' expr
-   53     | expr . '%' expr
-
-    '+'  shift, and go to state 94
-    '-'  shift, and go to state 95
-    '*'  shift, and go to state 96
-    '/'  shift, and go to state 97
-    '%'  shift, and go to state 98
-
-    $default  reduce using rule 44 (expr)
-
-
-state 118
+State 113
 
    41 expr: expr . OR expr
    42     | expr . AN expr
@@ -1887,7 +1757,137 @@ state 118
     $default  reduce using rule 43 (expr)
 
 
-state 119
+State 114
+
+   41 expr: expr . OR expr
+   42     | expr . AN expr
+   43     | expr . EQ expr
+   44     | expr . NE expr
+   44     | expr NE expr .
+   45     | expr . '<' expr
+   46     | expr . '>' expr
+   47     | expr . LE expr
+   48     | expr . GE expr
+   49     | expr . '+' expr
+   50     | expr . '-' expr
+   51     | expr . '*' expr
+   52     | expr . '/' expr
+   53     | expr . '%' expr
+
+    '+'  shift, and go to state 94
+    '-'  shift, and go to state 95
+    '*'  shift, and go to state 96
+    '/'  shift, and go to state 97
+    '%'  shift, and go to state 98
+
+    $default  reduce using rule 44 (expr)
+
+
+State 115
+
+   41 expr: expr . OR expr
+   42     | expr . AN expr
+   43     | expr . EQ expr
+   44     | expr . NE expr
+   45     | expr . '<' expr
+   46     | expr . '>' expr
+   47     | expr . LE expr
+   47     | expr LE expr .
+   48     | expr . GE expr
+   49     | expr . '+' expr
+   50     | expr . '-' expr
+   51     | expr . '*' expr
+   52     | expr . '/' expr
+   53     | expr . '%' expr
+
+    '+'  shift, and go to state 94
+    '-'  shift, and go to state 95
+    '*'  shift, and go to state 96
+    '/'  shift, and go to state 97
+    '%'  shift, and go to state 98
+
+    $default  reduce using rule 47 (expr)
+
+
+State 116
+
+   41 expr: expr . OR expr
+   42     | expr . AN expr
+   43     | expr . EQ expr
+   44     | expr . NE expr
+   45     | expr . '<' expr
+   45     | expr '<' expr .
+   46     | expr . '>' expr
+   47     | expr . LE expr
+   48     | expr . GE expr
+   49     | expr . '+' expr
+   50     | expr . '-' expr
+   51     | expr . '*' expr
+   52     | expr . '/' expr
+   53     | expr . '%' expr
+
+    '+'  shift, and go to state 94
+    '-'  shift, and go to state 95
+    '*'  shift, and go to state 96
+    '/'  shift, and go to state 97
+    '%'  shift, and go to state 98
+
+    $default  reduce using rule 45 (expr)
+
+
+State 117
+
+   41 expr: expr . OR expr
+   42     | expr . AN expr
+   43     | expr . EQ expr
+   44     | expr . NE expr
+   45     | expr . '<' expr
+   46     | expr . '>' expr
+   47     | expr . LE expr
+   48     | expr . GE expr
+   48     | expr GE expr .
+   49     | expr . '+' expr
+   50     | expr . '-' expr
+   51     | expr . '*' expr
+   52     | expr . '/' expr
+   53     | expr . '%' expr
+
+    '+'  shift, and go to state 94
+    '-'  shift, and go to state 95
+    '*'  shift, and go to state 96
+    '/'  shift, and go to state 97
+    '%'  shift, and go to state 98
+
+    $default  reduce using rule 48 (expr)
+
+
+State 118
+
+   41 expr: expr . OR expr
+   42     | expr . AN expr
+   43     | expr . EQ expr
+   44     | expr . NE expr
+   45     | expr . '<' expr
+   46     | expr . '>' expr
+   46     | expr '>' expr .
+   47     | expr . LE expr
+   48     | expr . GE expr
+   49     | expr . '+' expr
+   50     | expr . '-' expr
+   51     | expr . '*' expr
+   52     | expr . '/' expr
+   53     | expr . '%' expr
+
+    '+'  shift, and go to state 94
+    '-'  shift, and go to state 95
+    '*'  shift, and go to state 96
+    '/'  shift, and go to state 97
+    '%'  shift, and go to state 98
+
+    $default  reduce using rule 46 (expr)
+
+
+State 119
 
    41 expr: expr . OR expr
    42     | expr . AN expr
@@ -1911,7 +1911,7 @@ state 119
     $default  reduce using rule 49 (expr)
 
 
-state 120
+State 120
 
    41 expr: expr . OR expr
    42     | expr . AN expr
@@ -1935,7 +1935,7 @@ state 120
     $default  reduce using rule 50 (expr)
 
 
-state 121
+State 121
 
    41 expr: expr . OR expr
    42     | expr . AN expr
@@ -1955,7 +1955,7 @@ state 121
     $default  reduce using rule 51 (expr)
 
 
-state 122
+State 122
 
    41 expr: expr . OR expr
    42     | expr . AN expr
@@ -1975,7 +1975,7 @@ state 122
     $default  reduce using rule 52 (expr)
 
 
-state 123
+State 123
 
    41 expr: expr . OR expr
    42     | expr . AN expr
@@ -1995,14 +1995,14 @@ state 123
     $default  reduce using rule 53 (expr)
 
 
-state 124
+State 124
 
    67 expr: ID '(' exprs ')' .
 
     $default  reduce using rule 67 (expr)
 
 
-state 125
+State 125
 
    38 exprs: exprs ',' . expr
 
@@ -2013,31 +2013,31 @@ state 125
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 130
 
 
-state 126
+State 126
 
    32 stmt: DO L stmt WHILE . '(' expr ')' M N ';'
 
     '('  shift, and go to state 131
 
 
-state 127
+State 127
 
-   33 stmt: FOR '(' expr ';' . L expr ';' M N L expr N ')' L stmt N
+   33 stmt: FOR '(' expr ';' . L expr M N ';' L expr N ')' L stmt N
 
     $default  reduce using rule 68 (L)
 
     L  go to state 132
 
 
-state 128
+State 128
 
    29 stmt: IF '(' expr ')' . M stmt
    30     | IF '(' expr ')' . M stmt ELSE N L stmt
@@ -2047,7 +2047,7 @@ state 128
     M  go to state 133
 
 
-state 129
+State 129
 
    31 stmt: WHILE '(' L expr . ')' M stmt N
    41 expr: expr . OR expr
@@ -2066,12 +2066,12 @@ state 129
 
     OR   shift, and go to state 86
     AN   shift, and go to state 87
-    '<'  shift, and go to state 88
-    '>'  shift, and go to state 89
-    GE   shift, and go to state 90
-    LE   shift, and go to state 91
-    NE   shift, and go to state 92
-    EQ   shift, and go to state 93
+    EQ   shift, and go to state 88
+    NE   shift, and go to state 89
+    LE   shift, and go to state 90
+    '<'  shift, and go to state 91
+    GE   shift, and go to state 92
+    '>'  shift, and go to state 93
     '+'  shift, and go to state 94
     '-'  shift, and go to state 95
     '*'  shift, and go to state 96
@@ -2080,7 +2080,7 @@ state 129
     ')'  shift, and go to state 134
 
 
-state 130
+State 130
 
    38 exprs: exprs ',' expr .
    41 expr: expr . OR expr
@@ -2099,12 +2099,12 @@ state 130
 
     OR   shift, and go to state 86
     AN   shift, and go to state 87
-    '<'  shift, and go to state 88
-    '>'  shift, and go to state 89
-    GE   shift, and go to state 90
-    LE   shift, and go to state 91
-    NE   shift, and go to state 92
-    EQ   shift, and go to state 93
+    EQ   shift, and go to state 88
+    NE   shift, and go to state 89
+    LE   shift, and go to state 90
+    '<'  shift, and go to state 91
+    GE   shift, and go to state 92
+    '>'  shift, and go to state 93
     '+'  shift, and go to state 94
     '-'  shift, and go to state 95
     '*'  shift, and go to state 96
@@ -2114,7 +2114,7 @@ state 130
     $default  reduce using rule 38 (exprs)
 
 
-state 131
+State 131
 
    32 stmt: DO L stmt WHILE '(' . expr ')' M N ';'
 
@@ -2125,17 +2125,17 @@ state 131
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 135
 
 
-state 132
+State 132
 
-   33 stmt: FOR '(' expr ';' L . expr ';' M N L expr N ')' L stmt N
+   33 stmt: FOR '(' expr ';' L . expr M N ';' L expr N ')' L stmt N
 
     ID     shift, and go to state 44
     INT8   shift, and go to state 45
@@ -2144,15 +2144,15 @@ state 132
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 136
 
 
-state 133
+State 133
 
    29 stmt: IF '(' expr ')' M . stmt
    30     | IF '(' expr ')' M . stmt ELSE N L stmt
@@ -2171,8 +2171,8 @@ state 133
     RETURN  shift, and go to state 54
     WHILE   shift, and go to state 55
     '!'     shift, and go to state 56
-    NN      shift, and go to state 57
-    PP      shift, and go to state 58
+    PP      shift, and go to state 57
+    NN      shift, and go to state 58
     '('     shift, and go to state 59
     '{'     shift, and go to state 60
     ';'     shift, and go to state 62
@@ -2182,7 +2182,7 @@ state 133
     expr  go to state 65
 
 
-state 134
+State 134
 
    31 stmt: WHILE '(' L expr ')' . M stmt N
 
@@ -2191,7 +2191,7 @@ state 134
     M  go to state 138
 
 
-state 135
+State 135
 
    32 stmt: DO L stmt WHILE '(' expr . ')' M N ';'
    41 expr: expr . OR expr
@@ -2210,12 +2210,12 @@ state 135
 
     OR   shift, and go to state 86
     AN   shift, and go to state 87
-    '<'  shift, and go to state 88
-    '>'  shift, and go to state 89
-    GE   shift, and go to state 90
-    LE   shift, and go to state 91
-    NE   shift, and go to state 92
-    EQ   shift, and go to state 93
+    EQ   shift, and go to state 88
+    NE   shift, and go to state 89
+    LE   shift, and go to state 90
+    '<'  shift, and go to state 91
+    GE   shift, and go to state 92
+    '>'  shift, and go to state 93
     '+'  shift, and go to state 94
     '-'  shift, and go to state 95
     '*'  shift, and go to state 96
@@ -2224,9 +2224,9 @@ state 135
     ')'  shift, and go to state 139
 
 
-state 136
+State 136
 
-   33 stmt: FOR '(' expr ';' L expr . ';' M N L expr N ')' L stmt N
+   33 stmt: FOR '(' expr ';' L expr . M N ';' L expr N ')' L stmt N
    41 expr: expr . OR expr
    42     | expr . AN expr
    43     | expr . EQ expr
@@ -2243,21 +2243,24 @@ state 136
 
     OR   shift, and go to state 86
     AN   shift, and go to state 87
-    '<'  shift, and go to state 88
-    '>'  shift, and go to state 89
-    GE   shift, and go to state 90
-    LE   shift, and go to state 91
-    NE   shift, and go to state 92
-    EQ   shift, and go to state 93
+    EQ   shift, and go to state 88
+    NE   shift, and go to state 89
+    LE   shift, and go to state 90
+    '<'  shift, and go to state 91
+    GE   shift, and go to state 92
+    '>'  shift, and go to state 93
     '+'  shift, and go to state 94
     '-'  shift, and go to state 95
     '*'  shift, and go to state 96
     '/'  shift, and go to state 97
     '%'  shift, and go to state 98
-    ';'  shift, and go to state 140
+
+    $default  reduce using rule 69 (M)
+
+    M  go to state 140
 
 
-state 137
+State 137
 
    29 stmt: IF '(' expr ')' M stmt .
    30     | IF '(' expr ')' M stmt . ELSE N L stmt
@@ -2268,7 +2271,7 @@ state 137
     $default  reduce using rule 29 (stmt)
 
 
-state 138
+State 138
 
    31 stmt: WHILE '(' L expr ')' M . stmt N
 
@@ -2286,8 +2289,8 @@ state 138
     RETURN  shift, and go to state 54
     WHILE   shift, and go to state 55
     '!'     shift, and go to state 56
-    NN      shift, and go to state 57
-    PP      shift, and go to state 58
+    PP      shift, and go to state 57
+    NN      shift, and go to state 58
     '('     shift, and go to state 59
     '{'     shift, and go to state 60
     ';'     shift, and go to state 62
@@ -2297,7 +2300,7 @@ state 138
     expr  go to state 65
 
 
-state 139
+State 139
 
    32 stmt: DO L stmt WHILE '(' expr ')' . M N ';'
 
@@ -2306,16 +2309,16 @@ state 139
     M  go to state 143
 
 
-state 140
+State 140
 
-   33 stmt: FOR '(' expr ';' L expr ';' . M N L expr N ')' L stmt N
+   33 stmt: FOR '(' expr ';' L expr M . N ';' L expr N ')' L stmt N
 
-    $default  reduce using rule 69 (M)
+    $default  reduce using rule 70 (N)
 
-    M  go to state 144
+    N  go to state 144
 
 
-state 141
+State 141
 
    30 stmt: IF '(' expr ')' M stmt ELSE . N L stmt
 
@@ -2324,7 +2327,7 @@ state 141
     N  go to state 145
 
 
-state 142
+State 142
 
    31 stmt: WHILE '(' L expr ')' M stmt . N
 
@@ -2333,7 +2336,7 @@ state 142
     N  go to state 146
 
 
-state 143
+State 143
 
    32 stmt: DO L stmt WHILE '(' expr ')' M . N ';'
 
@@ -2342,16 +2345,14 @@ state 143
     N  go to state 147
 
 
-state 144
+State 144
 
-   33 stmt: FOR '(' expr ';' L expr ';' M . N L expr N ')' L stmt N
+   33 stmt: FOR '(' expr ';' L expr M N . ';' L expr N ')' L stmt N
 
-    $default  reduce using rule 70 (N)
-
-    N  go to state 148
+    ';'  shift, and go to state 148
 
 
-state 145
+State 145
 
    30 stmt: IF '(' expr ')' M stmt ELSE N . L stmt
 
@@ -2360,30 +2361,30 @@ state 145
     L  go to state 149
 
 
-state 146
+State 146
 
    31 stmt: WHILE '(' L expr ')' M stmt N .
 
     $default  reduce using rule 31 (stmt)
 
 
-state 147
+State 147
 
    32 stmt: DO L stmt WHILE '(' expr ')' M N . ';'
 
     ';'  shift, and go to state 150
 
 
-state 148
+State 148
 
-   33 stmt: FOR '(' expr ';' L expr ';' M N . L expr N ')' L stmt N
+   33 stmt: FOR '(' expr ';' L expr M N ';' . L expr N ')' L stmt N
 
     $default  reduce using rule 68 (L)
 
     L  go to state 151
 
 
-state 149
+State 149
 
    30 stmt: IF '(' expr ')' M stmt ELSE N L . stmt
 
@@ -2401,8 +2402,8 @@ state 149
     RETURN  shift, and go to state 54
     WHILE   shift, and go to state 55
     '!'     shift, and go to state 56
-    NN      shift, and go to state 57
-    PP      shift, and go to state 58
+    PP      shift, and go to state 57
+    NN      shift, and go to state 58
     '('     shift, and go to state 59
     '{'     shift, and go to state 60
     ';'     shift, and go to state 62
@@ -2412,16 +2413,16 @@ state 149
     expr  go to state 65
 
 
-state 150
+State 150
 
    32 stmt: DO L stmt WHILE '(' expr ')' M N ';' .
 
     $default  reduce using rule 32 (stmt)
 
 
-state 151
+State 151
 
-   33 stmt: FOR '(' expr ';' L expr ';' M N L . expr N ')' L stmt N
+   33 stmt: FOR '(' expr ';' L expr M N ';' L . expr N ')' L stmt N
 
     ID     shift, and go to state 44
     INT8   shift, and go to state 45
@@ -2430,24 +2431,24 @@ state 151
     FLT    shift, and go to state 48
     STR    shift, and go to state 49
     '!'    shift, and go to state 56
-    NN     shift, and go to state 57
-    PP     shift, and go to state 58
+    PP     shift, and go to state 57
+    NN     shift, and go to state 58
     '('    shift, and go to state 59
     '$'    shift, and go to state 63
 
     expr  go to state 153
 
 
-state 152
+State 152
 
    30 stmt: IF '(' expr ')' M stmt ELSE N L stmt .
 
     $default  reduce using rule 30 (stmt)
 
 
-state 153
+State 153
 
-   33 stmt: FOR '(' expr ';' L expr ';' M N L expr . N ')' L stmt N
+   33 stmt: FOR '(' expr ';' L expr M N ';' L expr . N ')' L stmt N
    41 expr: expr . OR expr
    42     | expr . AN expr
    43     | expr . EQ expr
@@ -2464,12 +2465,12 @@ state 153
 
     OR   shift, and go to state 86
     AN   shift, and go to state 87
-    '<'  shift, and go to state 88
-    '>'  shift, and go to state 89
-    GE   shift, and go to state 90
-    LE   shift, and go to state 91
-    NE   shift, and go to state 92
-    EQ   shift, and go to state 93
+    EQ   shift, and go to state 88
+    NE   shift, and go to state 89
+    LE   shift, and go to state 90
+    '<'  shift, and go to state 91
+    GE   shift, and go to state 92
+    '>'  shift, and go to state 93
     '+'  shift, and go to state 94
     '-'  shift, and go to state 95
     '*'  shift, and go to state 96
@@ -2481,25 +2482,25 @@ state 153
     N  go to state 154
 
 
-state 154
+State 154
 
-   33 stmt: FOR '(' expr ';' L expr ';' M N L expr N . ')' L stmt N
+   33 stmt: FOR '(' expr ';' L expr M N ';' L expr N . ')' L stmt N
 
     ')'  shift, and go to state 155
 
 
-state 155
+State 155
 
-   33 stmt: FOR '(' expr ';' L expr ';' M N L expr N ')' . L stmt N
+   33 stmt: FOR '(' expr ';' L expr M N ';' L expr N ')' . L stmt N
 
     $default  reduce using rule 68 (L)
 
     L  go to state 156
 
 
-state 156
+State 156
 
-   33 stmt: FOR '(' expr ';' L expr ';' M N L expr N ')' L . stmt N
+   33 stmt: FOR '(' expr ';' L expr M N ';' L expr N ')' L . stmt N
 
     error   shift, and go to state 43
     ID      shift, and go to state 44
@@ -2515,8 +2516,8 @@ state 156
     RETURN  shift, and go to state 54
     WHILE   shift, and go to state 55
     '!'     shift, and go to state 56
-    NN      shift, and go to state 57
-    PP      shift, and go to state 58
+    PP      shift, and go to state 57
+    NN      shift, and go to state 58
     '('     shift, and go to state 59
     '{'     shift, and go to state 60
     ';'     shift, and go to state 62
@@ -2526,17 +2527,17 @@ state 156
     expr  go to state 65
 
 
-state 157
+State 157
 
-   33 stmt: FOR '(' expr ';' L expr ';' M N L expr N ')' L stmt . N
+   33 stmt: FOR '(' expr ';' L expr M N ';' L expr N ')' L stmt . N
 
     $default  reduce using rule 70 (N)
 
     N  go to state 158
 
 
-state 158
+State 158
 
-   33 stmt: FOR '(' expr ';' L expr ';' M N L expr N ')' L stmt N .
+   33 stmt: FOR '(' expr ';' L expr M N ';' L expr N ')' L stmt N .
 
     $default  reduce using rule 33 (stmt)
