@@ -69,7 +69,7 @@ static int is_in_main = 0;
 %left '+' '-'
 %left '*' '/' '%'
 %right '!' '~'
-%left PP NN 
+%left PP NN
 %left '.' AR
 
 /* Declare attribute types for marker nonterminals, such as K L M and N */
@@ -151,6 +151,37 @@ func	: MAIN '(' ')' Mmain block
 			}
 	| type ptr ID '(' Margs args ')' block
 			{ /* TASK 3: TO BE COMPLETED */
+                Table *table;
+  			  // the type of function is gived by $1 args by $6
+                Type type = mkfun($1, $6);
+                // method has public access and is static
+                cf.methods[cf.method_count].access = (enum access_flags)(ACC_PUBLIC | ACC_STATIC);
+                // method name is "test"
+                cf.methods[cf.method_count].name = "test";
+                cf.methods[cf.method_count].descriptor = type;
+                // local variables
+                cf.methods[cf.method_count].max_locals = top_offset;
+                // max operand stack size of this method
+                cf.methods[cf.method_count].max_stack = 100;
+                // length of bytecode is in the emitter's pc variable
+                cf.methods[cf.method_count].code_length = pc;
+                // must copy code to make it persistent
+                cf.methods[cf.method_count].code = copy_code();
+                if (!cf.methods[cf.method_count].code)
+                  error("Out of memory");
+                // advance to next method to store in method array
+                cf.method_count++;
+                if (cf.method_count > MAXFUN)
+                  error("Max number of functions exceeded");
+                // add width information to table
+                addwidth(top_tblptr, top_offset);
+                // need this table of locals for enterproc
+                table = top_tblptr;
+                // exit the local scope by popping
+                pop_tblptr;
+                pop_offset;
+                // enter the function in the global table
+                enterproc(top_tblptr, $3, type, table);
 			}
 	;
 
@@ -193,7 +224,10 @@ Mmain	:		{ int label1, label2;
 	;
 
 Margs	:		{ /* TASK 3: TO BE COMPLETED */
-			  // Table *table =
+    // add code to create new table and push on tblptr and push offset 0
+              Table *table = mktable(top_tblptr);
+              push_tblptr(table);
+              push_offset(0);
 			  init_code();
 			  is_in_main = 0;
 			}
@@ -257,13 +291,13 @@ stmt    : ';'
         | expr ';'      { emit(pop); }
         | IF '(' expr ')' M stmt
                         { backpatch($5, pc - $5); emit3(goto_, 3); }
-        | IF '(' expr ')' M stmt ELSE N L stmt 
+        | IF '(' expr ')' M stmt ELSE N L stmt
                         { backpatch($5, $9 - $5); emit3(goto_, 3); backpatch($8, pc - $8);}
         | WHILE '(' L expr ')' M stmt N
                         { backpatch($6, pc - $6); backpatch($8, $3-$8); }
         | DO L  stmt WHILE '(' expr ')' M N ';'
                         { backpatch($8, pc - $8);  backpatch($9, $2-$9);}
-        | FOR '(' expr ';' L expr ';' M N L expr N ')' L stmt N 
+        | FOR '(' expr ';' L expr ';' M N L expr N ')' L stmt N
                         { backpatch($8, pc - $8); backpatch($9, $14 - $9); backpatch($16, $10-$16); backpatch($12, $5-$12); }
         | RETURN expr ';'
                         { if (is_in_main)
@@ -284,40 +318,20 @@ exprs	: exprs ',' expr
 
 /* TASK 1: TO BE COMPLETED (use pr3 code, then work on assign operators): */
 expr    : ID   '=' expr { emit(dup); emit2(istore, $1->localvar); }
-        | ID   PA  expr { error("+= operator not implemented"); }
-        | ID   NA  expr { error("-= operator not implemented"); }
-        | ID   TA  expr { error("*= operator not implemented"); }
-        | ID   DA  expr { error("/= operator not implemented"); }
-        | ID   MA  expr { error("%= operator not implemented"); }
-        | ID   AA  expr { error("&= operator not implemented"); }
-        | ID   XA  expr { error("^= operator not implemented"); }
-        | ID   OA  expr { error("|= operator not implemented"); }
-        | ID   LA  expr { error("<<= operator not implemented"); }
-        | ID   RA  expr { error(">>= operator not implemented"); }
         | expr OR  expr { emit(ior);  }
         | expr AN  expr { emit(iand);  }
-        | expr '|' expr { error("| operator not implemented"); }
-        | expr '^' expr { error("^ operator not implemented"); }
-        | expr '&' expr { error("& operator not implemented"); }
         | expr EQ  expr { emit3(if_icmpeq, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
         | expr NE  expr { emit3(if_icmpne, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
         | expr '<' expr { emit3(if_icmplt, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
         | expr '>' expr { emit3(if_icmpgt, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
         | expr LE  expr { emit3(if_icmple, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
         | expr GE  expr { emit3(if_icmpge, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
-        | expr LS  expr { error("<< operator not implemented"); }
-        | expr RS  expr { error(">> operator not implemented"); }
         | expr '+' expr { emit(iadd); }
         | expr '-' expr { emit(isub); }
         | expr '*' expr { emit(imul); }
         | expr '/' expr { emit(idiv); }
         | expr '%' expr { /* TODO: TO BE COMPLETED */ error("% operator not implemented"); }
         | '!' expr      { emit(ineg); }
-        | '~' expr      { error("~ operator not implemented"); }
-        | '+' expr %prec '!'
-                        { error("unary + operator not implemented"); }
-        | '-' expr %prec '!'
-                        { error("unary - operator not implemented"); }
         | '(' expr ')'
         | '$' INT8      { // check that we are in main()
 			  if (is_in_main)
@@ -408,4 +422,3 @@ int main(int argc, char **argv)
 
 	return 0;
 }
-
