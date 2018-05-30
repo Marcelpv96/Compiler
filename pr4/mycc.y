@@ -156,7 +156,7 @@ func	: MAIN '(' ')' Mmain block
                 Type type = mkfun($1, $6);
                 // method has public access and is static
                 cf.methods[cf.method_count].access = (enum access_flags)(ACC_PUBLIC | ACC_STATIC);
-                // method name is "test"
+                // method name is "test
                 cf.methods[cf.method_count].name = "test";
                 cf.methods[cf.method_count].descriptor = type;
                 // local variables
