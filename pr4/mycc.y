@@ -98,17 +98,6 @@ exts	: exts func
 	| /* empty */
 	;
 
-func : type ptr ID '(' args ')' block {
-
-			Table *table;
-			table = mktable(top_tblptr);
-			push_tblptr(table);
-			//push_offset(0);
-			init_code(); // to store statements
-
-			is_in_main = 0;
-		}
-
 func	: MAIN '(' ')' Mmain block
 			{ // need a temporary table pointer
 			  Table *table;
@@ -153,7 +142,7 @@ func	: MAIN '(' ')' Mmain block
 			{ /* TASK 3: TO BE COMPLETED */
                 Table *table;
   			  // the type of function is gived by $1, args by $6
-                Type type = mkfun($1, $6);
+                Type type = mkfun($6, $1);
                 // method has public access and is static
                 cf.methods[cf.method_count].access = (enum access_flags)(ACC_PUBLIC | ACC_STATIC);
                 // method name is "test"
