@@ -152,12 +152,17 @@ func	: MAIN '(' ')' Mmain block
 	| type ptr ID '(' Margs args ')' block
 			{ /* TASK 3: TO BE COMPLETED */
                 Table *table;
-  			  // the type of function is gived by $1 args by $6
+  			  // the type of function is gived by $1, args by $6
                 Type type = mkfun($1, $6);
                 // method has public access and is static
                 cf.methods[cf.method_count].access = (enum access_flags)(ACC_PUBLIC | ACC_STATIC);
+<<<<<<< HEAD
                 // method name is "test
                 cf.methods[cf.method_count].name = "test";
+=======
+                // method name is "test"
+                cf.methods[cf.method_count].name = $3->lexptr;
+>>>>>>> e80bc2df60be205eec506790d68f18d2fe5b596f
                 cf.methods[cf.method_count].descriptor = type;
                 // local variables
                 cf.methods[cf.method_count].max_locals = top_offset;
@@ -225,9 +230,9 @@ Mmain	:		{ int label1, label2;
 
 Margs	:		{ /* TASK 3: TO BE COMPLETED */
     // add code to create new table and push on tblptr and push offset 0
-              Table *table = mktable(top_tblptr);
-              push_tblptr(table);
-              push_offset(0);
+        Table * table = mktable(top_tblptr);
+        push_tblptr(table);
+        push_offset(0);
 			  init_code();
 			  is_in_main = 0;
 			}
@@ -297,11 +302,11 @@ stmt    : ';'
                         { backpatch($6, pc - $6); backpatch($8, $3-$8); }
         | DO L  stmt WHILE '(' expr ')' M N ';'
                         { backpatch($8, pc - $8);  backpatch($9, $2-$9);}
-        | FOR '(' expr ';' L expr ';' M N L expr N ')' L stmt N
-                        { backpatch($8, pc - $8); backpatch($9, $14 - $9); backpatch($16, $10-$16); backpatch($12, $5-$12); }
+        | FOR '(' expr ';' L expr M N ';'  L expr N ')' L stmt N
+                        { backpatch($8, pc - $8); backpatch($8, $14 - $8); backpatch($16, $10-$16); backpatch($12, $5-$12  ); }
         | RETURN expr ';'
                         { if (is_in_main)
-			  	emit(istore_2); /* TO BE COMPLETED */
+			  	                    emit(istore_2); /* TO BE COMPLETED */
 			  else
 			  	emit(ireturn);
 			}
@@ -342,20 +347,17 @@ expr    : ID   '=' expr { emit(dup); emit2(istore, $1->localvar); }
 			  else
 			  	error("invalid use of $# in function");
 			}
-        | PP ID         { error("pre ++ operator not implemented"); }
-        | NN ID         { error("pre -- operator not implemented"); }
-        | ID PP         { error("post ++ operator not implemented"); }
-        | ID NN         { error("post -- operator not implemented"); }
+        | PP ID         {  emit(iadd); emit(iconst_1); }
+        | NN ID         { emit(isub); emit(iconst_1); }
+        | ID PP         { emit(iadd); emit(iconst_1); }
+        | ID NN         { emit(isub); emit(iconst_1);}
         | ID            { emit2(iload,  getplace(top_tblptr, $1)); }
         | INT8          { emit2(bipush, $1); }
         | INT16         { emit3(sipush, $1); }
         | INT32         { emit2(ldc, constant_pool_add_Integer(&cf, $1)); }
 	| FLT		{ emit2(ldc, constant_pool_add_Float(&cf, $1)); }
 	| STR		{ emit2(ldc, constant_pool_add_String(&cf, constant_pool_add_Utf8(&cf, $1))); }
-	| ID '(' exprs ')'
-			{ /* TASK 3: TO BE COMPLETED */
-			  error("function call not implemented");
-			}
+	| ID '(' exprs ')'{ emit3(invokestatic, constant_pool_add_Methodref(&cf, cf.name, $1->lexptr, gettype(top_tblptr, $1))); }
         ;
 
 K       : /* empty */   { $$ = pc; emit3(ifne, 0); }
