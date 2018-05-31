@@ -245,8 +245,8 @@ args	: args ',' type ptr ID
 			  $$ = mkpair($1, $3);
 			}
 	| type ptr ID	{ if ($2 && ischar($1))
-				enter(top_tblptr, $3, mkstr(), top_offset++);
-			  else
+				    enter(top_tblptr, $3, mkstr(), top_offset++);
+			 else
 				enter(top_tblptr, $3, $1, top_offset++);
 			  $$ = $1;
 			}
@@ -308,7 +308,24 @@ exprs	: exprs ',' expr
 	;
 
 /* TASK 1: TO BE COMPLETED (use pr3 code, then work on assign operators): */
-expr    : ID   '=' expr { emit(dup); emit2(istore, $1->localvar); }
+expr    : ID   '=' expr {   int place;
+                            Type type;
+                            if(getlevel(top_tblptr, $1) == 1){
+                                place = getplace(top_tblptr, $1);
+                                type = gettype(top_tblptr, $1);
+                                if(isint(type)){emit(dup);emit2(istore, place);}
+                                if(isfloat(type)){emit(dup);emit2(fstore, place);}
+                            }
+                        }
+        | ID {int place;
+              Type type;
+              if(getlevel(top_tblptr, $1) == 1){
+                  place = getplace(top_tblptr, $1);
+                  type = gettype(top_tblptr, $1);
+                  if(isint(type)){emit2(iload, place);}
+                  if(isfloat(type)){emit2(fload, place);}
+              }
+        }
         | expr OR  expr { emit(ior);  }
         | expr AN  expr { emit(iand);  }
         | expr EQ  expr { emit3(if_icmpeq, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
