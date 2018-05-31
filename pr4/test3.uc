@@ -1,5 +1,7 @@
 int test(int n){
-  return n;
+  	int x;
+	x = 1;
+	return n+x;
 }
 main()
 { return test($0);

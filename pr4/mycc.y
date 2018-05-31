@@ -145,13 +145,7 @@ func	: MAIN '(' ')' Mmain block
                 Type type = mkfun($6, $1);
                 // method has public access and is static
                 cf.methods[cf.method_count].access = (enum access_flags)(ACC_PUBLIC | ACC_STATIC);
-<<<<<<< HEAD
-                // method name is "test
-                cf.methods[cf.method_count].name = "test";
-=======
-                // method name is "test"
                 cf.methods[cf.method_count].name = $3->lexptr;
->>>>>>> e80bc2df60be205eec506790d68f18d2fe5b596f
                 cf.methods[cf.method_count].descriptor = type;
                 // local variables
                 cf.methods[cf.method_count].max_locals = top_offset;
@@ -262,6 +256,9 @@ list	: list ',' ptr ID
 			{ /* TASK 1 and 4: TO BE COMPLETED */
 			  /* $1 is the type */
 			  /* $3 == 1 means pointer type for ID, e.g. char* so use mkstr() */
+        /* Entry *enter(Table *table, Symbol *sym, Type type, int place)*/
+        // add code to enter variable ID in table with type and place
+        // for local variables, use offset as place and increment offset
 			  enter(top_tblptr, $4, $1, top_offset++);
 			  $$ = $1;
 			}
