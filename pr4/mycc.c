@@ -545,12 +545,12 @@ static const yytype_uint16 yyrline[] =
 {
        0,    85,    85,    91,    96,    97,    98,   101,   141,   176,
      214,   224,   227,   228,   231,   234,   235,   236,   237,   240,
-     247,   255,   265,   272,   273,   276,   277,   281,   282,   283,
-     285,   287,   289,   291,   293,   299,   302,   303,   306,   307,
-     311,   320,   329,   330,   331,   332,   333,   334,   335,   336,
-     337,   338,   339,   340,   341,   342,   343,   344,   353,   354,
-     355,   356,   357,   358,   359,   360,   361,   362,   363,   369,
-     372,   377
+     247,   255,   267,   282,   283,   286,   287,   291,   292,   293,
+     295,   297,   299,   301,   303,   309,   312,   313,   316,   317,
+     321,   334,   346,   347,   348,   349,   350,   351,   352,   353,
+     354,   355,   356,   357,   358,   359,   360,   361,   370,   371,
+     372,   373,   374,   375,   376,   377,   378,   379,   380,   386,
+     389,   394
 };
 #endif
 
@@ -1790,68 +1790,78 @@ yyreduce:
 
   case 21:
 #line 256 "mycc.y"
-    { /* TASK 1 and 4: TO BE COMPLETED */
-			  /* $1 is the type */
-			  /* $3 == 1 means pointer type for ID, e.g. char* so use mkstr() */
-        /* Entry *enter(Table *table, Symbol *sym, Type type, int place)*/
-        // add code to enter variable ID in table with type and place
-        // for local variables, use offset as place and increment offset
-			  enter(top_tblptr, (yyvsp[(4) - (4)].sym), (yyvsp[(1) - (4)].typ), top_offset++);
-			  (yyval.typ) = (yyvsp[(1) - (4)].typ);
+    { if (top_tblptr->level == 0){
+                    cf.fields[cf.field_count].access = ACC_STATIC;
+                    cf.fields[cf.field_count].name = (yyvsp[(4) - (4)].sym)->lexptr;
+                    cf.fields[cf.field_count].descriptor = (yyvsp[(1) - (4)].typ);
+                    cf.field_count++;
+                    enter(top_tblptr, (yyvsp[(4) - (4)].sym), (yyvsp[(1) - (4)].typ), constant_pool_add_Fieldref(&cf, cf.name, (yyvsp[(4) - (4)].sym)->lexptr, (yyvsp[(1) - (4)].typ)));
+              }else{
+                  enter(top_tblptr, (yyvsp[(4) - (4)].sym), (yyvsp[(1) - (4)].typ), top_offset++);
+			      (yyval.typ) = (yyvsp[(1) - (4)].typ);
+              }
 			}
     break;
 
   case 22:
-#line 265 "mycc.y"
-    { /* TASK 1 and 4: TO BE COMPLETED */
-			  /* $2 == 1 means pointer type for ID, e.g. char* so use mkstr() */
-			  enter(top_tblptr, (yyvsp[(3) - (3)].sym), (yyvsp[(1) - (3)].typ), top_offset++);
-			  (yyval.typ) = (yyvsp[(1) - (3)].typ);
-			}
+#line 267 "mycc.y"
+    {
+        if (top_tblptr->level == 0){
+            cf.fields[cf.field_count].access = ACC_STATIC;
+            cf.fields[cf.field_count].name = (yyvsp[(3) - (3)].sym)->lexptr;
+            cf.fields[cf.field_count].descriptor = (yyvsp[(1) - (3)].typ);
+            cf.field_count++;
+            enter(top_tblptr, (yyvsp[(3) - (3)].sym), (yyvsp[(1) - (3)].typ), constant_pool_add_Fieldref(&cf, cf.name, (yyvsp[(3) - (3)].sym)->lexptr, (yyvsp[(1) - (3)].typ)));
+        }
+	    else{
+            enter(top_tblptr, (yyvsp[(3) - (3)].sym), (yyvsp[(1) - (3)].typ), top_offset++);
+            (yyval.typ) = (yyvsp[(1) - (3)].typ);
+        }
+	}
     break;
 
   case 23:
-#line 272 "mycc.y"
+#line 282 "mycc.y"
     { (yyval.num) = 0; }
     break;
 
   case 24:
-#line 273 "mycc.y"
+#line 283 "mycc.y"
     { (yyval.num) = 1; }
     break;
 
   case 28:
-#line 282 "mycc.y"
+#line 292 "mycc.y"
     { emit(pop); }
     break;
 
   case 29:
-#line 284 "mycc.y"
+#line 294 "mycc.y"
     { backpatch((yyvsp[(5) - (6)].loc), pc - (yyvsp[(5) - (6)].loc)); emit3(goto_, 3); }
     break;
 
   case 30:
-#line 286 "mycc.y"
+#line 296 "mycc.y"
     { backpatch((yyvsp[(5) - (10)].loc), (yyvsp[(9) - (10)].loc) - (yyvsp[(5) - (10)].loc)); emit3(goto_, 3); backpatch((yyvsp[(8) - (10)].loc), pc - (yyvsp[(8) - (10)].loc));}
     break;
 
   case 31:
-#line 288 "mycc.y"
+#line 298 "mycc.y"
     { backpatch((yyvsp[(6) - (8)].loc), pc - (yyvsp[(6) - (8)].loc)); backpatch((yyvsp[(8) - (8)].loc), (yyvsp[(3) - (8)].loc)-(yyvsp[(8) - (8)].loc)); }
     break;
 
   case 32:
-#line 290 "mycc.y"
+#line 300 "mycc.y"
     { backpatch((yyvsp[(8) - (10)].loc), pc - (yyvsp[(8) - (10)].loc));  backpatch((yyvsp[(9) - (10)].loc), (yyvsp[(2) - (10)].loc)-(yyvsp[(9) - (10)].loc));}
     break;
 
   case 33:
-#line 292 "mycc.y"
+#line 302 "mycc.y"
     { backpatch((yyvsp[(8) - (16)].loc), pc - (yyvsp[(8) - (16)].loc)); backpatch((yyvsp[(8) - (16)].loc), (yyvsp[(14) - (16)].loc) - (yyvsp[(8) - (16)].loc)); backpatch((yyvsp[(16) - (16)].loc), (yyvsp[(10) - (16)].loc)-(yyvsp[(16) - (16)].loc)); backpatch((yyvsp[(12) - (16)].loc), (yyvsp[(5) - (16)].loc)-(yyvsp[(12) - (16)].loc)  ); }
     break;
 
   case 34:
-#line 294 "mycc.y"
+#line 304 "mycc.y"
     { if (is_in_main)
 			  	                    emit(istore_2); /* TO BE COMPLETED */
 			  else
@@ -1860,21 +1870,25 @@ yyreduce:
     break;
 
   case 35:
-#line 299 "mycc.y"
+#line 309 "mycc.y"
     { /* BREAK is optional to implement (see Pr3) */
 			  error("break not implemented");
 			}
     break;
 
   case 37:
-#line 303 "mycc.y"
+#line 313 "mycc.y"
     { yyerrok; }
     break;
 
   case 40:
-#line 311 "mycc.y"
+#line 321 "mycc.y"
     {   int place;
                             Type type;
+                            if (getlevel(top_tblptr, (yyvsp[(1) - (3)].sym)) == 0){
+                                emit(dup);
+                                emit3(putstatic, getplace(top_tblptr, (yyvsp[(1) - (3)].sym)));
+                            }
                             if(getlevel(top_tblptr, (yyvsp[(1) - (3)].sym)) == 1){
                                 place = getplace(top_tblptr, (yyvsp[(1) - (3)].sym));
                                 type = gettype(top_tblptr, (yyvsp[(1) - (3)].sym));
@@ -1885,9 +1899,12 @@ yyreduce:
     break;
 
   case 41:
-#line 320 "mycc.y"
+#line 334 "mycc.y"
     {int place;
               Type type;
+              if (getlevel(top_tblptr, (yyvsp[(1) - (1)].sym)) == 0){
+                  emit3(getstatic, getplace(top_tblptr, (yyvsp[(1) - (1)].sym)));
+              }
               if(getlevel(top_tblptr, (yyvsp[(1) - (1)].sym)) == 1){
                   place = getplace(top_tblptr, (yyvsp[(1) - (1)].sym));
                   type = gettype(top_tblptr, (yyvsp[(1) - (1)].sym));
@@ -1898,77 +1915,77 @@ yyreduce:
     break;
 
   case 42:
-#line 329 "mycc.y"
+#line 346 "mycc.y"
     { emit(ior);  }
     break;
 
   case 43:
-#line 330 "mycc.y"
+#line 347 "mycc.y"
     { emit(iand);  }
     break;
 
   case 44:
-#line 331 "mycc.y"
+#line 348 "mycc.y"
     { emit3(if_icmpeq, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
     break;
 
   case 45:
-#line 332 "mycc.y"
+#line 349 "mycc.y"
     { emit3(if_icmpne, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
     break;
 
   case 46:
-#line 333 "mycc.y"
+#line 350 "mycc.y"
     { emit3(if_icmplt, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
     break;
 
   case 47:
-#line 334 "mycc.y"
+#line 351 "mycc.y"
     { emit3(if_icmpgt, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
     break;
 
   case 48:
-#line 335 "mycc.y"
+#line 352 "mycc.y"
     { emit3(if_icmple, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
     break;
 
   case 49:
-#line 336 "mycc.y"
+#line 353 "mycc.y"
     { emit3(if_icmpge, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
     break;
 
   case 50:
-#line 337 "mycc.y"
+#line 354 "mycc.y"
     { emit(iadd); }
     break;
 
   case 51:
-#line 338 "mycc.y"
+#line 355 "mycc.y"
     { emit(isub); }
     break;
 
   case 52:
-#line 339 "mycc.y"
+#line 356 "mycc.y"
     { emit(imul); }
     break;
 
   case 53:
-#line 340 "mycc.y"
+#line 357 "mycc.y"
     { emit(idiv); }
     break;
 
   case 54:
-#line 341 "mycc.y"
+#line 358 "mycc.y"
     { /* TODO: TO BE COMPLETED */ error("% operator not implemented"); }
     break;
 
   case 55:
-#line 342 "mycc.y"
+#line 359 "mycc.y"
     { emit(ineg); }
     break;
 
   case 57:
-#line 344 "mycc.y"
+#line 361 "mycc.y"
     { // check that we are in main()
 			  if (is_in_main)
 			  {	emit(aload_1);
@@ -1981,74 +1998,74 @@ yyreduce:
     break;
 
   case 58:
-#line 353 "mycc.y"
+#line 370 "mycc.y"
     {  emit(iadd); emit(iconst_1); }
     break;
 
   case 59:
-#line 354 "mycc.y"
+#line 371 "mycc.y"
     { emit(isub); emit(iconst_1); }
     break;
 
   case 60:
-#line 355 "mycc.y"
+#line 372 "mycc.y"
     { emit(iadd); emit(iconst_1); }
     break;
 
   case 61:
-#line 356 "mycc.y"
+#line 373 "mycc.y"
     { emit(isub); emit(iconst_1);}
     break;
 
   case 62:
-#line 357 "mycc.y"
+#line 374 "mycc.y"
     { emit2(iload,  getplace(top_tblptr, (yyvsp[(1) - (1)].sym))); }
     break;
 
   case 63:
-#line 358 "mycc.y"
+#line 375 "mycc.y"
     { emit2(bipush, (yyvsp[(1) - (1)].num)); }
     break;
 
   case 64:
-#line 359 "mycc.y"
+#line 376 "mycc.y"
     { emit3(sipush, (yyvsp[(1) - (1)].num)); }
     break;
 
   case 65:
-#line 360 "mycc.y"
+#line 377 "mycc.y"
     { emit2(ldc, constant_pool_add_Integer(&cf, (yyvsp[(1) - (1)].num))); }
     break;
 
   case 66:
-#line 361 "mycc.y"
+#line 378 "mycc.y"
     { emit2(ldc, constant_pool_add_Float(&cf, (yyvsp[(1) - (1)].flt))); }
     break;
 
   case 67:
-#line 362 "mycc.y"
+#line 379 "mycc.y"
     { emit2(ldc, constant_pool_add_String(&cf, constant_pool_add_Utf8(&cf, (yyvsp[(1) - (1)].str)))); }
     break;
 
   case 68:
-#line 363 "mycc.y"
+#line 380 "mycc.y"
     { emit3(invokestatic, constant_pool_add_Methodref(&cf, cf.name, (yyvsp[(1) - (4)].sym)->lexptr, gettype(top_tblptr, (yyvsp[(1) - (4)].sym)))); }
     break;
 
   case 69:
-#line 369 "mycc.y"
+#line 386 "mycc.y"
     { (yyval.loc) = pc; }
     break;
 
   case 70:
-#line 372 "mycc.y"
+#line 389 "mycc.y"
     { (yyval.loc) = pc;	/* location of inst. to backpatch */
 			  emit3(ifeq, 0);
 			}
     break;
 
   case 71:
-#line 377 "mycc.y"
+#line 394 "mycc.y"
     { (yyval.loc) = pc;	/* location of inst. to backpatch */
 			  emit3(goto_, 0);
 			}
@@ -2056,7 +2073,7 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
-#line 2060 "mycc.c"
+#line 2077 "mycc.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2270,7 +2287,7 @@ yyreturn:
 }
 
 
-#line 385 "mycc.y"
+#line 402 "mycc.y"
 
 
 int main(int argc, char **argv)

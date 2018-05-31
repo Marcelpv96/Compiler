@@ -1,8 +1,5 @@
-int test(int n){
-  	int x;
-	x = 1;
-	return n+x;
-}
 main()
-{ return test($0);
+{ float x;
+  x = 1.0;
+  return x;
 }

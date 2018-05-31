@@ -1,9 +1,10 @@
-// test global variables and functions
 int counter;
 int add(int val)
-{ return counter += val;
+{
+    counter = counter +3;
+    return counter;
 }
 main()
-{ add(2);
-  return add(-1);
+{
+    return add(1);
 }

@@ -253,20 +253,30 @@ args	: args ',' type ptr ID
 	;
 
 list	: list ',' ptr ID
-			{ /* TASK 1 and 4: TO BE COMPLETED */
-			  /* $1 is the type */
-			  /* $3 == 1 means pointer type for ID, e.g. char* so use mkstr() */
-        /* Entry *enter(Table *table, Symbol *sym, Type type, int place)*/
-        // add code to enter variable ID in table with type and place
-        // for local variables, use offset as place and increment offset
-			  enter(top_tblptr, $4, $1, top_offset++);
-			  $$ = $1;
+			{ if (top_tblptr->level == 0){
+                    cf.fields[cf.field_count].access = ACC_STATIC;
+                    cf.fields[cf.field_count].name = $4->lexptr;
+                    cf.fields[cf.field_count].descriptor = $1;
+                    cf.field_count++;
+                    enter(top_tblptr, $4, $1, constant_pool_add_Fieldref(&cf, cf.name, $4->lexptr, $1));
+              }else{
+                  enter(top_tblptr, $4, $1, top_offset++);
+			      $$ = $1;
+              }
 			}
-	| type ptr ID	{ /* TASK 1 and 4: TO BE COMPLETED */
-			  /* $2 == 1 means pointer type for ID, e.g. char* so use mkstr() */
-			  enter(top_tblptr, $3, $1, top_offset++);
-			  $$ = $1;
-			}
+	| type ptr ID	{
+        if (top_tblptr->level == 0){
+            cf.fields[cf.field_count].access = ACC_STATIC;
+            cf.fields[cf.field_count].name = $3->lexptr;
+            cf.fields[cf.field_count].descriptor = $1;
+            cf.field_count++;
+            enter(top_tblptr, $3, $1, constant_pool_add_Fieldref(&cf, cf.name, $3->lexptr, $1));
+        }
+	    else{
+            enter(top_tblptr, $3, $1, top_offset++);
+            $$ = $1;
+        }
+	}
 	;
 
 ptr	: /* empty */	{ $$ = 0; }
@@ -310,6 +320,10 @@ exprs	: exprs ',' expr
 /* TASK 1: TO BE COMPLETED (use pr3 code, then work on assign operators): */
 expr    : ID   '=' expr {   int place;
                             Type type;
+                            if (getlevel(top_tblptr, $1) == 0){
+                                emit(dup);
+                                emit3(putstatic, getplace(top_tblptr, $1));
+                            }
                             if(getlevel(top_tblptr, $1) == 1){
                                 place = getplace(top_tblptr, $1);
                                 type = gettype(top_tblptr, $1);
@@ -319,6 +333,9 @@ expr    : ID   '=' expr {   int place;
                         }
         | ID {int place;
               Type type;
+              if (getlevel(top_tblptr, $1) == 0){
+                  emit3(getstatic, getplace(top_tblptr, $1));
+              }
               if(getlevel(top_tblptr, $1) == 1){
                   place = getplace(top_tblptr, $1);
                   type = gettype(top_tblptr, $1);
