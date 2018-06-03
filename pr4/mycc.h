@@ -126,16 +126,17 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 36 "mycc.y"
+#line 37 "mycc.y"
 { Symbol *sym;  /* token value yylval.sym is the symbol table entry of an ID */
   unsigned num; /* token value yylval.num is the value of an int constant */
   float flt;    /* token value yylval.flt is the value of a float constant */
   char *str;    /* token value yylval.str is the value of a string constant */
   unsigned loc; /* location of instruction to backpatch */
   Type typ;	/* type descriptor */
+  Expr exp;
 }
 /* Line 1529 of yacc.c.  */
-#line 139 "mycc.h"
+#line 140 "mycc.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

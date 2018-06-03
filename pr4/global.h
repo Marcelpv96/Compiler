@@ -13,6 +13,8 @@ struct Symbol
 
 typedef struct Symbol Symbol;
 
+
+
 typedef const char *Type;	/* a type descriptor (JVM) */
 
 struct Entry
@@ -35,6 +37,14 @@ struct Table
 };
 
 typedef struct Table Table;
+
+struct Expr
+{
+    Type type;
+};
+
+typedef struct Expr Expr;
+
 
 extern Symbol *lookup(const char*);
 extern Symbol *insert(const char*, int);

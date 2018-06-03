@@ -1,0 +1,14 @@
+
+
+if (is_in_main)
+{   emit(istore_2);
+    emit3(goto, 0); // and backpatch!
+}
+else if (isint(return_type) && isint($2.type))
+    emit(ireturn);
+else if (isfloat(return_type) && isfloat($2.type))
+    emit(freturn);
+else if (isstr(return_type) && isstr($2.type))
+    emit(areturn);
+else
+error("Type error");
