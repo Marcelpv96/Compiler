@@ -2,7 +2,7 @@
 
 ## Introducció
 
-> Compilador realitzat per l'assignatura de Processadors de llenguatge de la Universitat de Lleida. Aquest compilador ha estat programat utilitzant bison per l'analisio sintactic, i flex per lanailsi lexic.
+Compilador realitzat per l'assignatura de Processadors de llenguatge de la Universitat de Lleida. Aquest compilador ha estat programat utilitzant bison per l'analisio sintactic, i flex per lanailsi lexic.
 
 ## Funcionalitats implementades
 
@@ -33,4 +33,4 @@
   > make
 
 - Execució:
-> ./mycc file.uc
+    > ./mycc file.uc
