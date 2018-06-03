@@ -315,7 +315,6 @@ stmt    : ';'
                             {
                                 emit(dup);
                                 emit(istore_2);
-                                emit3(goto_, 0);
                             }
                             else if (isint(return_type) && isint($2.type)){
                                 emit(ireturn);
@@ -380,12 +379,11 @@ expr    : ID   '=' expr {   int place;
                             else
                                 error("Type error");
                             $$.type = $3.type;
-
-
                         }
         | ID {int place;
               Type type;
               if (getlevel(top_tblptr, $1) == 0){
+                  type = gettype(top_tblptr, $1);
                   emit3(getstatic, getplace(top_tblptr, $1));
               }
               if(getlevel(top_tblptr, $1) == 1){
@@ -393,8 +391,9 @@ expr    : ID   '=' expr {   int place;
                   type = gettype(top_tblptr, $1);
                   if(isint(type)){emit2(iload, place);}
                   if(isfloat(type)){emit2(fload, place);}
+                  if(isstr(type)){emit2(aload, place);}
               }
-        }
+            }
         | expr OR  expr { emit(ior);  }
         | expr AN  expr { emit(iand);  }
         | expr EQ  expr { emit3(if_icmpeq, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
@@ -435,11 +434,11 @@ expr    : ID   '=' expr {   int place;
         | ID PP         { emit(iadd); emit(iconst_1); }
         | ID NN         { emit(isub); emit(iconst_1);}
         | ID            { emit2(iload,  getplace(top_tblptr, $1)); }
-        | INT8          { emit2(bipush, $1); }
-        | INT16         { emit3(sipush, $1); }
-        | INT32         { emit2(ldc, constant_pool_add_Integer(&cf, $1)); }
-	| FLT		{ emit2(ldc, constant_pool_add_Float(&cf, $1)); }
-	| STR		{ emit2(ldc, constant_pool_add_String(&cf, constant_pool_add_Utf8(&cf, $1))); }
+        | INT8          { emit2(bipush, $1); $$.type = mkint();}
+        | INT16         { emit3(sipush, $1); $$.type = mkint();}
+        | INT32         { emit2(ldc, constant_pool_add_Integer(&cf, $1)); $$.type = mkint();}
+	| FLT		{ emit2(ldc, constant_pool_add_Float(&cf, $1)); $$.type = mkfloat();}
+	| STR		{ emit2(ldc, constant_pool_add_String(&cf, constant_pool_add_Utf8(&cf, $1))); $$.type = mkchar(); }
 	| ID '(' exprs ')'{$$.type = mkret(gettype(top_tblptr, $1)); emit3(invokestatic, constant_pool_add_Methodref(&cf, cf.name, $1->lexptr, gettype(top_tblptr, $1))); }
         ;
 
