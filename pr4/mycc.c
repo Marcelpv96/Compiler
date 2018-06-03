@@ -545,12 +545,12 @@ static const yytype_uint16 yyrline[] =
 {
        0,    91,    91,    97,   102,   103,   104,   108,   148,   183,
      221,   223,   233,   236,   237,   240,   243,   244,   245,   246,
-     249,   256,   264,   276,   291,   292,   295,   296,   300,   301,
-     302,   304,   306,   308,   310,   312,   329,   332,   333,   336,
-     337,   341,   383,   397,   398,   399,   400,   401,   402,   403,
-     404,   405,   417,   418,   419,   420,   421,   422,   423,   432,
-     433,   434,   435,   436,   437,   438,   439,   440,   441,   442,
-     448,   451,   456
+     249,   256,   264,   277,   293,   294,   297,   298,   302,   303,
+     304,   306,   308,   310,   312,   314,   331,   334,   335,   338,
+     339,   343,   385,   399,   400,   401,   402,   403,   404,   405,
+     406,   407,   419,   420,   421,   422,   423,   424,   425,   434,
+     435,   436,   437,   438,   439,   440,   441,   442,   443,   444,
+     450,   453,   458
 };
 #endif
 
@@ -1683,16 +1683,17 @@ yyreduce:
                     cf.fields[cf.field_count].descriptor = (yyvsp[-3].typ);
                     cf.field_count++;
                     enter(top_tblptr, (yyvsp[0].sym), (yyvsp[-3].typ), constant_pool_add_Fieldref(&cf, cf.name, (yyvsp[0].sym)->lexptr, (yyvsp[-3].typ)));
-              }else{
+          }else{
                   enter(top_tblptr, (yyvsp[0].sym), (yyvsp[-3].typ), top_offset++);
-			      (yyval.typ) = (yyvsp[-3].typ);
-              }
+          }
+          (yyval.typ) = (yyvsp[-3].typ);
+
 			}
-#line 1692 "mycc.c" /* yacc.c:1646  */
+#line 1693 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 276 "mycc.y" /* yacc.c:1646  */
+#line 277 "mycc.y" /* yacc.c:1646  */
     {
         if (top_tblptr->level == 0){
             cf.fields[cf.field_count].access = ACC_STATIC;
@@ -1700,65 +1701,66 @@ yyreduce:
             cf.fields[cf.field_count].descriptor = (yyvsp[-2].typ);
             cf.field_count++;
             enter(top_tblptr, (yyvsp[0].sym), (yyvsp[-2].typ), constant_pool_add_Fieldref(&cf, cf.name, (yyvsp[0].sym)->lexptr, (yyvsp[-2].typ)));
-        }
-	    else{
+          }
+	       else{
             enter(top_tblptr, (yyvsp[0].sym), (yyvsp[-2].typ), top_offset++);
-            (yyval.typ) = (yyvsp[-2].typ);
         }
+        (yyval.typ) = (yyvsp[-2].typ);
+
 	}
-#line 1710 "mycc.c" /* yacc.c:1646  */
+#line 1712 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 291 "mycc.y" /* yacc.c:1646  */
+#line 293 "mycc.y" /* yacc.c:1646  */
     { (yyval.num) = 0; }
-#line 1716 "mycc.c" /* yacc.c:1646  */
+#line 1718 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 292 "mycc.y" /* yacc.c:1646  */
+#line 294 "mycc.y" /* yacc.c:1646  */
     { (yyval.num) = 1; }
-#line 1722 "mycc.c" /* yacc.c:1646  */
+#line 1724 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 301 "mycc.y" /* yacc.c:1646  */
+#line 303 "mycc.y" /* yacc.c:1646  */
     { emit(pop); }
-#line 1728 "mycc.c" /* yacc.c:1646  */
+#line 1730 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 303 "mycc.y" /* yacc.c:1646  */
+#line 305 "mycc.y" /* yacc.c:1646  */
     { backpatch((yyvsp[-1].loc), pc - (yyvsp[-1].loc)); emit3(goto_, 3); }
-#line 1734 "mycc.c" /* yacc.c:1646  */
+#line 1736 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 305 "mycc.y" /* yacc.c:1646  */
+#line 307 "mycc.y" /* yacc.c:1646  */
     { backpatch((yyvsp[-5].loc), (yyvsp[-1].loc) - (yyvsp[-5].loc)); emit3(goto_, 3); backpatch((yyvsp[-2].loc), pc - (yyvsp[-2].loc));}
-#line 1740 "mycc.c" /* yacc.c:1646  */
+#line 1742 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 307 "mycc.y" /* yacc.c:1646  */
+#line 309 "mycc.y" /* yacc.c:1646  */
     { backpatch((yyvsp[-2].loc), pc - (yyvsp[-2].loc)); backpatch((yyvsp[0].loc), (yyvsp[-5].loc)-(yyvsp[0].loc)); }
-#line 1746 "mycc.c" /* yacc.c:1646  */
+#line 1748 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 309 "mycc.y" /* yacc.c:1646  */
+#line 311 "mycc.y" /* yacc.c:1646  */
     { backpatch((yyvsp[-2].loc), pc - (yyvsp[-2].loc));  backpatch((yyvsp[-1].loc), (yyvsp[-8].loc)-(yyvsp[-1].loc));}
-#line 1752 "mycc.c" /* yacc.c:1646  */
+#line 1754 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 311 "mycc.y" /* yacc.c:1646  */
+#line 313 "mycc.y" /* yacc.c:1646  */
     { backpatch((yyvsp[-8].loc), pc - (yyvsp[-8].loc)); backpatch((yyvsp[-8].loc), (yyvsp[-2].loc) - (yyvsp[-8].loc)); backpatch((yyvsp[0].loc), (yyvsp[-6].loc)-(yyvsp[0].loc)); backpatch((yyvsp[-4].loc), (yyvsp[-11].loc)-(yyvsp[-4].loc)  ); }
-#line 1758 "mycc.c" /* yacc.c:1646  */
+#line 1760 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 313 "mycc.y" /* yacc.c:1646  */
+#line 315 "mycc.y" /* yacc.c:1646  */
     {
                             if (is_in_main)
                             {
@@ -1775,25 +1777,25 @@ yyreduce:
                                 error("Type error");
                             }
                         }
-#line 1779 "mycc.c" /* yacc.c:1646  */
+#line 1781 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 329 "mycc.y" /* yacc.c:1646  */
+#line 331 "mycc.y" /* yacc.c:1646  */
     { /* BREAK is optional to implement (see Pr3) */
 			  error("break not implemented");
 			}
-#line 1787 "mycc.c" /* yacc.c:1646  */
+#line 1789 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 333 "mycc.y" /* yacc.c:1646  */
+#line 335 "mycc.y" /* yacc.c:1646  */
     { yyerrok; }
-#line 1793 "mycc.c" /* yacc.c:1646  */
+#line 1795 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 341 "mycc.y" /* yacc.c:1646  */
+#line 343 "mycc.y" /* yacc.c:1646  */
     {   int place;
                             Type type;
                             place = getplace(top_tblptr, (yyvsp[-2].sym));
@@ -1836,11 +1838,11 @@ yyreduce:
                                 error("Type error");
                             (yyval.exp).type = (yyvsp[0].exp).type;
                         }
-#line 1840 "mycc.c" /* yacc.c:1646  */
+#line 1842 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 383 "mycc.y" /* yacc.c:1646  */
+#line 385 "mycc.y" /* yacc.c:1646  */
     {int place;
               Type type;
               if (getlevel(top_tblptr, (yyvsp[0].sym)) == 0){
@@ -1855,59 +1857,59 @@ yyreduce:
                   if(isstr(type)){emit2(aload, place);}
               }
             }
-#line 1859 "mycc.c" /* yacc.c:1646  */
+#line 1861 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 397 "mycc.y" /* yacc.c:1646  */
+#line 399 "mycc.y" /* yacc.c:1646  */
     { emit(ior);  }
-#line 1865 "mycc.c" /* yacc.c:1646  */
+#line 1867 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 398 "mycc.y" /* yacc.c:1646  */
+#line 400 "mycc.y" /* yacc.c:1646  */
     { emit(iand);  }
-#line 1871 "mycc.c" /* yacc.c:1646  */
+#line 1873 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 399 "mycc.y" /* yacc.c:1646  */
+#line 401 "mycc.y" /* yacc.c:1646  */
     { emit3(if_icmpeq, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
-#line 1877 "mycc.c" /* yacc.c:1646  */
+#line 1879 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 400 "mycc.y" /* yacc.c:1646  */
+#line 402 "mycc.y" /* yacc.c:1646  */
     { emit3(if_icmpne, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
-#line 1883 "mycc.c" /* yacc.c:1646  */
+#line 1885 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 401 "mycc.y" /* yacc.c:1646  */
+#line 403 "mycc.y" /* yacc.c:1646  */
     { emit3(if_icmplt, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
-#line 1889 "mycc.c" /* yacc.c:1646  */
+#line 1891 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 402 "mycc.y" /* yacc.c:1646  */
+#line 404 "mycc.y" /* yacc.c:1646  */
     { emit3(if_icmpgt, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
-#line 1895 "mycc.c" /* yacc.c:1646  */
+#line 1897 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 403 "mycc.y" /* yacc.c:1646  */
+#line 405 "mycc.y" /* yacc.c:1646  */
     { emit3(if_icmple, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
-#line 1901 "mycc.c" /* yacc.c:1646  */
+#line 1903 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 404 "mycc.y" /* yacc.c:1646  */
+#line 406 "mycc.y" /* yacc.c:1646  */
     { emit3(if_icmpge, 7); emit(iconst_0); emit3(goto_, 4); emit(iconst_1); }
-#line 1907 "mycc.c" /* yacc.c:1646  */
+#line 1909 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 405 "mycc.y" /* yacc.c:1646  */
+#line 407 "mycc.y" /* yacc.c:1646  */
     {
             if (iseq((yyvsp[-2].exp).type, (yyvsp[0].exp).type))
             {
@@ -1920,41 +1922,41 @@ yyreduce:
                 error("Type error");
             (yyval.exp).type = (yyvsp[-2].exp).type;
         }
-#line 1924 "mycc.c" /* yacc.c:1646  */
+#line 1926 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 417 "mycc.y" /* yacc.c:1646  */
+#line 419 "mycc.y" /* yacc.c:1646  */
     { emit(isub); }
-#line 1930 "mycc.c" /* yacc.c:1646  */
+#line 1932 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 418 "mycc.y" /* yacc.c:1646  */
+#line 420 "mycc.y" /* yacc.c:1646  */
     { emit(imul); }
-#line 1936 "mycc.c" /* yacc.c:1646  */
+#line 1938 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 419 "mycc.y" /* yacc.c:1646  */
+#line 421 "mycc.y" /* yacc.c:1646  */
     { emit(idiv); }
-#line 1942 "mycc.c" /* yacc.c:1646  */
+#line 1944 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 420 "mycc.y" /* yacc.c:1646  */
+#line 422 "mycc.y" /* yacc.c:1646  */
     { /* TODO: TO BE COMPLETED */ error("% operator not implemented"); }
-#line 1948 "mycc.c" /* yacc.c:1646  */
+#line 1950 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 421 "mycc.y" /* yacc.c:1646  */
+#line 423 "mycc.y" /* yacc.c:1646  */
     { emit(ineg); }
-#line 1954 "mycc.c" /* yacc.c:1646  */
+#line 1956 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 423 "mycc.y" /* yacc.c:1646  */
+#line 425 "mycc.y" /* yacc.c:1646  */
     { // check that we are in main()
 			  if (is_in_main)
 			  {	emit(aload_1);
@@ -1964,99 +1966,99 @@ yyreduce:
 			  else
 			  	error("invalid use of $# in function");
 			}
-#line 1968 "mycc.c" /* yacc.c:1646  */
+#line 1970 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 432 "mycc.y" /* yacc.c:1646  */
+#line 434 "mycc.y" /* yacc.c:1646  */
     {  emit(iadd); emit(iconst_1); }
-#line 1974 "mycc.c" /* yacc.c:1646  */
+#line 1976 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 433 "mycc.y" /* yacc.c:1646  */
+#line 435 "mycc.y" /* yacc.c:1646  */
     { emit(isub); emit(iconst_1); }
-#line 1980 "mycc.c" /* yacc.c:1646  */
+#line 1982 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 434 "mycc.y" /* yacc.c:1646  */
+#line 436 "mycc.y" /* yacc.c:1646  */
     { emit(iadd); emit(iconst_1); }
-#line 1986 "mycc.c" /* yacc.c:1646  */
+#line 1988 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 435 "mycc.y" /* yacc.c:1646  */
+#line 437 "mycc.y" /* yacc.c:1646  */
     { emit(isub); emit(iconst_1);}
-#line 1992 "mycc.c" /* yacc.c:1646  */
+#line 1994 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 436 "mycc.y" /* yacc.c:1646  */
+#line 438 "mycc.y" /* yacc.c:1646  */
     { emit2(iload,  getplace(top_tblptr, (yyvsp[0].sym))); }
-#line 1998 "mycc.c" /* yacc.c:1646  */
+#line 2000 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 437 "mycc.y" /* yacc.c:1646  */
+#line 439 "mycc.y" /* yacc.c:1646  */
     { emit2(bipush, (yyvsp[0].num)); (yyval.exp).type = mkint();}
-#line 2004 "mycc.c" /* yacc.c:1646  */
+#line 2006 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 438 "mycc.y" /* yacc.c:1646  */
+#line 440 "mycc.y" /* yacc.c:1646  */
     { emit3(sipush, (yyvsp[0].num)); (yyval.exp).type = mkint();}
-#line 2010 "mycc.c" /* yacc.c:1646  */
+#line 2012 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 439 "mycc.y" /* yacc.c:1646  */
+#line 441 "mycc.y" /* yacc.c:1646  */
     { emit2(ldc, constant_pool_add_Integer(&cf, (yyvsp[0].num))); (yyval.exp).type = mkint();}
-#line 2016 "mycc.c" /* yacc.c:1646  */
+#line 2018 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 440 "mycc.y" /* yacc.c:1646  */
+#line 442 "mycc.y" /* yacc.c:1646  */
     { emit2(ldc, constant_pool_add_Float(&cf, (yyvsp[0].flt))); (yyval.exp).type = mkfloat();}
-#line 2022 "mycc.c" /* yacc.c:1646  */
+#line 2024 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 441 "mycc.y" /* yacc.c:1646  */
+#line 443 "mycc.y" /* yacc.c:1646  */
     { emit2(ldc, constant_pool_add_String(&cf, constant_pool_add_Utf8(&cf, (yyvsp[0].str)))); (yyval.exp).type = mkchar(); }
-#line 2028 "mycc.c" /* yacc.c:1646  */
+#line 2030 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 442 "mycc.y" /* yacc.c:1646  */
+#line 444 "mycc.y" /* yacc.c:1646  */
     {(yyval.exp).type = mkret(gettype(top_tblptr, (yyvsp[-3].sym))); emit3(invokestatic, constant_pool_add_Methodref(&cf, cf.name, (yyvsp[-3].sym)->lexptr, gettype(top_tblptr, (yyvsp[-3].sym)))); }
-#line 2034 "mycc.c" /* yacc.c:1646  */
+#line 2036 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 70:
-#line 448 "mycc.y" /* yacc.c:1646  */
+#line 450 "mycc.y" /* yacc.c:1646  */
     { (yyval.loc) = pc; }
-#line 2040 "mycc.c" /* yacc.c:1646  */
+#line 2042 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 451 "mycc.y" /* yacc.c:1646  */
+#line 453 "mycc.y" /* yacc.c:1646  */
     { (yyval.loc) = pc;	/* location of inst. to backpatch */
 			  emit3(ifeq, 0);
 			}
-#line 2048 "mycc.c" /* yacc.c:1646  */
+#line 2050 "mycc.c" /* yacc.c:1646  */
     break;
 
   case 72:
-#line 456 "mycc.y" /* yacc.c:1646  */
+#line 458 "mycc.y" /* yacc.c:1646  */
     { (yyval.loc) = pc;	/* location of inst. to backpatch */
 			  emit3(goto_, 0);
 			}
-#line 2056 "mycc.c" /* yacc.c:1646  */
+#line 2058 "mycc.c" /* yacc.c:1646  */
     break;
 
 
-#line 2060 "mycc.c" /* yacc.c:1646  */
+#line 2062 "mycc.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2284,7 +2286,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 464 "mycc.y" /* yacc.c:1906  */
+#line 466 "mycc.y" /* yacc.c:1906  */
 
 
 int main(int argc, char **argv)

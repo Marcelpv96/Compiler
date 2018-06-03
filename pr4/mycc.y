@@ -268,24 +268,25 @@ list	: list ',' ptr ID
                     cf.fields[cf.field_count].descriptor = $1;
                     cf.field_count++;
                     enter(top_tblptr, $4, $1, constant_pool_add_Fieldref(&cf, cf.name, $4->lexptr, $1));
-              }else{
+          }else{
                   enter(top_tblptr, $4, $1, top_offset++);
-			      $$ = $1;
-              }
+          }
+          $$ = $1;
+
 			}
-	| type ptr ID	{
-        if (top_tblptr->level == 0){
+	     | type ptr ID	{
+         if (top_tblptr->level == 0){
             cf.fields[cf.field_count].access = ACC_STATIC;
             cf.fields[cf.field_count].name = $3->lexptr;
             cf.fields[cf.field_count].descriptor = $1;
             cf.field_count++;
             enter(top_tblptr, $3, $1, constant_pool_add_Fieldref(&cf, cf.name, $3->lexptr, $1));
-        }
-	    else{
+          }
+	       else{
             enter(top_tblptr, $3, $1, top_offset++);
-            $$ = $1;
-        }
-	}
+          }
+          $$ = $1;
+	     }
 	;
 
 ptr	: /* empty */	{ $$ = 0; }
