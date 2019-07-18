@@ -1,21 +1,22 @@
 # Compiler &mu;C
 
-## Introducció
+## Introduction
 
-Compilador realitzat per l'assignatura de Processadors de llenguatge de la Universitat de Lleida. Aquest compilador ha estat programat utilitzant bison per l'anàlisi sintàctic, i flex per l'anàlisi lexic.
+Compiler developed as final project of Compilers subject of Computer Engineering, University of Lleida. This compiler has been done using 'bison' for the syntactic analysis and Flex for the lexical analysis.
 
-## Funcionalitats implementades
 
--  Declaració de variables locals de qualsevol tipus.
--  Estructures de control bàsiques
+## functionalities
+
+-  Declare local variables of all types
+-  Basic control structures
     - If.. else
     - While
     - Do.. While
     - For
-- Funcions.
-- Declaració de variables globals.
+- Functions
+- Declare global variables of all types
 
-## Instalació i ús
+## Installation 
 
 - Flex:
     > sudo apt install flex
@@ -29,8 +30,10 @@ Compilador realitzat per l'assignatura de Processadors de llenguatge de la Unive
 - g++:
     > sudo apt install g++
 
-- Compilació:
+- Compile the project:
   > make
 
-- Execució:
-    > ./mycc file.uc
+## Usage
+
+- Execute, file.uc will be the file you want to compile:
+    > ./mycc file.uc 
